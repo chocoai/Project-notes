@@ -1,0 +1,19 @@
+
+1.整个页面所有的右击事件
+
+document.oncontextmenu = function(){
+　　return false;
+}
+
+如果想阻止个别的  就上面的基础上使用事件委托进行判断在return
+ 
+document.getElementById("test").onmousedown = function(e){
+　　if(e.button ==2){
+　　　　alert("你点了右键");
+　　}else if(e.button ==0){
+　　　　alert("你点了左键");
+　　}else if(e.button ==1){
+　　　　alert("你点了滚轮");
+　　}
+}
+然后判断当前点击的按钮是那个按钮
