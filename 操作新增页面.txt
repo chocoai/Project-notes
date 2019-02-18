@@ -1,0 +1,8 @@
+var popup = window.open('', '');
+   
+                     popup.location.href=response.url;
+         
+               setTimeout(function() {popup.close();}, 3000);
+
+
+打开新页面   改变URL   3s后关闭

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 199px;
+            background-color: red;
+            height: 100px;
+            border: 1px solid yellow;
+            overflow: hidden;
+        }
+        nav {
+            width: 200px;
+            background-color: red;
+            height: 100px;
+        }
+        .scrollBbar_conent {
+          position: relative;
+        }
+        .scrollBbar_track {
+          width: 12px;
+          height: 100%;
+          top: 0;
+          right: 0;
+          margin-right: 1px;
+          margin-left: 1px;
+          background-color: blue;
+          position: absolute;
+          overflow: hidden;
+        }
+        .scrollBbarBox {
+          width: 8px;
+          background-color: yellow;
+          margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <nav>
+          1 <br>
+          2 <br>
+          3 <br>
+          4 <br>
+          5 <br>
+          6 <br>
+          7 <br>
+          8 <br>
+          9 <br>
+        </nav>
+        <nav></nav>
+    </div>
+</body>
+<script>
+
+
+
+
+// function ScrollBbar (DOM) {
+//   this.Dom = DOM
+//   this.scrollBbar()
+// }
+
+// ScrollBbar.prototype.DOMnode = function (DOM) {
+//   if (window.addEventListener)//FF,火狐浏览器会识别该方法
+//     DOM.addEventListener('DOMMouseScroll', this.wheel, false);
+//   DOM.onmousewheel = DOM.onmousewheel = this.wheel;//W3C
+// }
+
+// ScrollBbar.prototype.wheel = function (event){
+//   var delta = 0;
+//   if (!event) event = window.event;
+//   if (event.wheelDelta) {//IE、chrome浏览器使用的是wheelDelta，并且值为“正负120”
+//     delta = event.wheelDelta/120; 
+//     if (window.opera) delta = -delta;//因为IE、chrome等向下滚动是负值，FF是正值，为了处理一致性，在此取反处理
+//   } else if (event.detail) {//FF浏览器使用的是detail,其值为“正负3”
+//     delta = -event.detail/3;
+//   }
+//   if (delta)
+//     this.handle(delta, event);
+// }
+
+// ScrollBbar.prototype.handle = function (delta, event) {
+//   if (delta <0){//向下滚动
+//     console.log(event)
+//   }else{//向上滚动
+//     console.log('上')
+//   }
+// }
+// ScrollBbar.prototype.scrollBbar = function (parentDOMnode) {
+//   // parentDOMnode 可以选中父节点的  ID  class 标签都可以
+//   DOM = document.querySelector(parentDOMnode)
+//   // 获取子元素
+//   let childNodes = DOM.children
+//   // 所有子元素高度
+//   let childHeight = 0
+//   // 获取父元素高度
+//   let parentHeight = getDOMheight(DOM)
+//   // 计算所有子元素高度
+//   for (let i = 0; i < childNodes.length; i++) {
+//     childHeight += getDOMheight(childNodes[0])
+//   }
+//   // 计算父子元素比
+//   let ratio = parentHeight / childHeight
+//   console.log(ratio)
+//   // 判断比值
+//   if (ratio > 1) {
+//     return;
+//   }
+//   // 给父元素绑定点击事件
+//   DOMnode(DOM)
+//   console.log('绑定成功')
+//   // 创建滚动条轨道
+//   let scrollBbar_track = document.createElement('div')
+//   // 给父元素增加相对定位
+//   DOM.classList.add('scrollBbar_conent')
+//   // 给轨道绑定样式
+//   scrollBbar_track.classList.add('scrollBbar_track')
+//   // 将轨道放入父盒子中
+//   DOM.appendChild(scrollBbar_track)
+//   // 创建滚动条
+//   let scrollBbarBox = document.createElement('div')
+//   // 给滚动条设置高度
+//   scrollBbarBox.style.height = parentHeight * ratio + 'px'
+//   // 给滚动条增加样式
+//   scrollBbarBox.classList.add('scrollBbarBox')
+//   // 追加到轨道中
+//   scrollBbar_track.appendChild(scrollBbarBox)
+// }
+
+// // 获取DOM高度
+// ScrollBbar.prototype.getDOMheight = function (DOMheight) {
+//   return DOMheight.offsetHeight
+// }
+// // 获取父盒子卷曲高度
+// ScrollBbar.prototype.getscrollTop = function (DOMscrollTop) {
+//   return DOMscrollTop.scrollTop
+// }
+
+// new ScrollBbar('.box')
+
+
+
+
+
+//兼容性写法，该函数也是网上别人写的，不过找不到出处了，蛮好的，所有我也没有必要修改了
+//判断鼠标滚轮滚动方向
+// function DOMnode(DOM) {
+  
+//   if (window.addEventListener)//FF,火狐浏览器会识别该方法
+//     DOM.addEventListener('DOMMouseScroll', wheel, false);
+//   DOM.onmousewheel = DOM.onmousewheel = wheel;//W3C
+// }
+
+// DOMnode(document)
+//统一处理滚轮滚动事件
+// function wheel(event){
+//   var delta = 0;
+//   if (!event) event = window.event;
+//   if (event.wheelDelta) {//IE、chrome浏览器使用的是wheelDelta，并且值为“正负120”
+//     delta = event.wheelDelta/120; 
+//     if (window.opera) delta = -delta;//因为IE、chrome等向下滚动是负值，FF是正值，为了处理一致性，在此取反处理
+//   } else if (event.detail) {//FF浏览器使用的是detail,其值为“正负3”
+//     delta = -event.detail/3;
+//   }
+//   if (delta)
+//     handle(delta, event);
+// }
+//上下滚动时的具体处理函数
+// function handle(delta, event) {
+//   if (delta <0){//向下滚动
+
+//     console.log(event)
+//   }else{//向上滚动
+//     console.log('上')
+//   }
+// }
+// function scrollBbar (parentDOMnode) {
+//   // parentDOMnode 可以选中父节点的  ID  class 标签都可以
+//   DOM = document.querySelector(parentDOMnode)
+//   // 获取子元素
+//   let childNodes = DOM.children
+//   // 所有子元素高度
+//   let childHeight = 0
+//   // 获取父元素高度
+//   let parentHeight = getDOMheight(DOM)
+//   // 计算所有子元素高度
+//   for (let i = 0; i < childNodes.length; i++) {
+//     childHeight += getDOMheight(childNodes[0])
+//   }
+//   // 计算父子元素比
+//   let ratio = parentHeight / childHeight
+//   console.log(ratio)
+//   // 判断比值
+//   if (ratio > 1) {
+//     return;
+//   }
+//   // 给父元素绑定点击事件
+//   DOMnode(DOM)
+//   console.log('绑定成功')
+//   // 创建滚动条轨道
+//   let scrollBbar_track = document.createElement('div')
+//   // 给父元素增加相对定位
+//   DOM.classList.add('scrollBbar_conent')
+//   // 给轨道绑定样式
+//   scrollBbar_track.classList.add('scrollBbar_track')
+//   // 将轨道放入父盒子中
+//   DOM.appendChild(scrollBbar_track)
+//   // 创建滚动条
+//   let scrollBbarBox = document.createElement('div')
+//   // 给滚动条设置高度
+//   scrollBbarBox.style.height = parentHeight * ratio + 'px'
+//   // 给滚动条增加样式
+//   scrollBbarBox.classList.add('scrollBbarBox')
+//   // 追加到轨道中
+//   scrollBbar_track.appendChild(scrollBbarBox)
+// }
+// // 获取DOM高度
+// function getDOMheight(DOMheight) {
+//   return DOMheight.offsetHeight
+// }
+// // 获取父盒子卷曲高度
+// function getscrollTop(DOMscrollTop) {
+//   return DOMscrollTop.scrollTop
+// }
+
+
+
+
+// scrollBbar('.box')
+</script>
+</html>
