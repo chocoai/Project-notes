@@ -5,4 +5,4 @@ var popup = window.open('', '');
                setTimeout(function() {popup.close();}, 3000);
 
 
-´ò¿ªĞÂÒ³Ãæ   ¸Ä±äURL   3sºó¹Ø±Õ
+æ‰“å¼€æ–°é¡µé¢   æ”¹å˜URL   3såå…³é—­

@@ -7,7 +7,7 @@
 
 <meta charset="utf-8" />
 
-<title>��DIV��ǩ�е�P��ǩˮƽ�ʹ�ֱ������</title>
+<title>让DIV标签中的P标签水平和垂直都居中</title>
 
 <style type="text/css">
 
@@ -37,9 +37,9 @@
 
 <div>
 	
-<p>���Ƕ����ı�����Ҫˮƽ�ʹ�ֱ�����С�</p>
+<p>我是多行文本，我要水平和垂直都居中。</p>
 
-	<p>��Ҫ��ȫ����ff��ie�����Ƕ����ı�����Ҫˮƽ�ʹ�ֱ�����С���Ҫ��ȫ����ff��ie��</p>
+	<p>且要完全兼容ff和ie。我是多行文本，我要水平和垂直都居中。且要完全兼容ff和ie。</p>
 
 </div>
  
