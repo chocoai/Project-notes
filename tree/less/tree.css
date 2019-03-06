@@ -1,0 +1,25 @@
+#zygTree div {
+  box-sizing: border-box;
+}
+#zygTree span {
+  line-height: 30px;
+  display: block;
+}
+#zygTree .Treehover:hover {
+  background-color: aquamarine;
+}
+#zygTree .treeroot.treenode {
+  background-image: url(../images/close.png);
+  background-repeat: no-repeat;
+  background-position-y: 8px;
+}
+#zygTree .treeroot {
+  background-image: url(../images/nochild.png);
+  background-repeat: no-repeat;
+  background-position-y: 8px;
+}
+.trees {
+  width: 200px;
+  height: 400px;
+  overflow: auto;
+}

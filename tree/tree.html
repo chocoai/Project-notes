@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./less/tree.css">
+  <title>Document</title>
+</head>
+<body>
+<!-- <div class="trees"> -->
+  <div id="zygTree">
+
+  </div>
+<!-- </div> -->
+
+<script>
+var tabledata =
+[{
+	"field_name": "报告类型",
+	"id": "5c3866ee5f627d4bd5aac6ef",
+	"children": [{
+			"field_name": "111111111111",
+			"id": "5c3867265f627d4bd5aac6f8",
+			"children": [{
+					"field_name": "222222222",
+					"id": "5c3867265f627d4bd5aac6f8",
+					"children": [{
+							"field_name": "333333333",
+							"id": "5c3867265f627d4bd5aac6f8",
+							"children": []
+						},
+						{
+							"field_name": "333333333333",
+							"id": "5c38672b5f627d4bd5aac6f9",
+							"children": []
+						}
+					]
+				},
+				{
+					"field_name": "2222222222",
+					"id": "5c38672b5f627d4bd5aac6f9",
+					"children": []
+				}
+			]
+		},
+		{
+			"field_name": "1111111111111111111",
+			"id": "5c38672b5f627d4bd5aac6f9",
+			"children": []
+		},
+		{
+			"field_name": "111111111111111111",
+			"id": "5c3867345f627d4bd5aac6fa",
+			"children": []
+		}
+	]
+}, {
+	"field_name": "报告类别",
+	"id": "5c3866f45f627d4bd5aac6f2",
+	"children": [{
+			"field_name": "个别报表",
+			"id": "5c3869885f627d4ca29d29c7",
+			"children": []
+		},
+		{
+			"field_name": "合并报表",
+			"id": "5c3869905f627d4ca29d29c8",
+			"children": []
+		}
+	]
+}, {
+	"field_name": "业务类型",
+	"id": "5c3866fd5f627d4bd5aac6f4",
+	"children": [{
+			"field_name": "整合审计",
+			"id": "5c3869ae5f627d4ca29d29c9",
+			"children": []
+		},
+		{
+			"field_name": "非整合审计",
+			"id": "5c3869b15f627d4ca29d29ca",
+			"children": []
+		}
+	]
+}, {
+	"field_name": "意见类型",
+	"id": "5c3867045f627d4bd5aac6f6",
+	"children": [{
+			"field_name": "无保留意见",
+			"id": "5c3869c55f627d4ca29d29cb",
+			"children": [{
+					"field_name": "标准无保留意见",
+					"id": "5c3869f65f627d4ca29d29cf",
+					"children": []
+				},
+				{
+					"field_name": "强调事项段",
+					"id": "5c386a0b5f627d4ca29d29d1",
+					"children": []
+				},
+				{
+					"field_name": "其他事项段",
+					"id": "5c386a115f627d4ca29d29d2",
+					"children": []
+				}
+			]
+		},
+		{
+			"field_name": "保留意见",
+			"id": "5c3869cd5f627d4ca29d29cc",
+			"children": []
+		},
+		{
+			"field_name": "否定意见",
+			"id": "5c3869d05f627d4ca29d29cd",
+			"children": []
+		},
+		{
+			"field_name": "无法表示意见",
+			"id": "5c3869d55f627d4ca29d29ce",
+			"children": []
+		}
+	]
+}]
+
+function treeRecursion ( {treeBox, data, treekey, treeValue, treechild} ) {
+  for (let i = 0; i < data.length; i++) {
+
+    let treeRoot = document.createElement('div')
+
+    let treeTitlediv = document.createElement('div')
+    treeTitlediv.classList.add('Treehover')
+    let treeTitlespan = document.createElement('span')
+    // treeTitlespan.style.paddingLeft = '30px'
+    treeTitlediv.appendChild(treeTitlespan)
+    treeRoot.classList.add('treeroot')
+
+    treeBox.appendChild(treeRoot)
+
+    treeRoot.appendChild(treeTitlediv)
+
+    treeTitlespan.innerText = data[i][treeValue]
+	
+
+  
+	// if (parentdiv) {
+    // parentdiv.childNodes[0].childNodes[0].style
+
+
+
+
+
+		// if (treeTitlespan.parentNode.parentNode.previousSibling.childNodes[0].nodeName === 'SPAN') {
+		// let parentLeft = Number(treeTitlespan.parentNode.parentNode.previousSibling.childNodes[0].style.paddingLeft.replace('px', ''))
+		// let childLeft = Number(treeTitlespan.style.paddingLeft.replace('px', ''))
+		// treeTitlespan.style.paddingLeft = childLeft + parentLeft + 18 + 'px'
+		// }
+	// }
+
+	  
+    if (data[i][treechild].length) {
+      treeRoot.classList.add('treenode')
+      // console.log(treeTitlespan.parentNode.parentNode.previousSibling.childNodes[0])
+      let parendiv = spanRecursion(treeTitlespan)
+      if (treeTitlespan === parendiv.childNodes[0].childNodes[0]) {
+        parendiv = spanRecursion(parendiv)
+      }
+      
+      console.log(parendiv)
+      if (parendiv) {
+        let parentleft = Number(parendiv.childNodes[0].childNodes[0].style.paddingLeft.replace('px', ''))
+				let parentPositionX = Number(parendiv.childNodes[0].childNodes[0].style.backgroundPositionX.replace('px', ''))
+        console.log(parentPositionX)
+        treeTitlespan.style.paddingLeft = parentleft + 30 + 'px'
+				treeTitlespan.style.backgroundPositionX = parentPositionX + 28 + 'px'
+      }
+      
+      treeRecursion( {treeBox: treeRoot, data: data[i][treechild], treekey, treeValue, treechild} )
+		} else {
+			// let spans = document.querySelectorAll('#zygTree span')
+			// // console.log(spans)
+			// for (let i = 0; i < spans.length; i++) {
+			//   let parendiv = spanRecursion(spans[i])
+			//   console.log(parendiv)
+			// }
+			let parendiv = spanRecursion(treeTitlespan)
+			let parentleft = Number(parendiv.childNodes[0].childNodes[0].style.paddingLeft.replace('px', ''))
+			let parentPositionX = Number(parendiv.childNodes[0].childNodes[0].style.backgroundPositionX.replace('px', ''))
+		console.log(parentleft)
+		treeTitlespan.style.paddingLeft = parentleft + 30 + 'px'
+		treeTitlespan.style.backgroundPositionX = parentPositionX + 28 + 'px'
+		} 
+      // console.log(treeRoot)
+  }
+  
+}
+treeRecursion({
+  treeBox: document.querySelector('#zygTree'),
+  data: tabledata,
+  treekey: 'id',
+  treeValue: 'field_name',
+  treechild: 'children'
+})
+// js是单线程 可以将要在回调之后立马执行的函数写成自调用函数  然后写到回调函数调用之后
+function spanRecursion (treeTitlespan) {
+  if (treeTitlespan.parentNode == null) {
+    return undefined
+  } else if (treeTitlespan.parentNode.className == 'treeroot treenode') {
+    return treeTitlespan.parentNode
+  } else {
+    return spanRecursion(treeTitlespan.parentNode)
+  }
+}
+
+</script>
+</body>
+</html>
