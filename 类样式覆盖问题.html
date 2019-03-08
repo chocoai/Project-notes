@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+                /* 对于相同类型选择器制定的样式，在样式表文件中，越靠后的优先级越高
+                注意，这里是样式表文件中越靠后的优先级越高，而不是在元素class出现的顺序。比如.class2 在样式表中出现在.class1之后： */
+        .class1 {
+            position: absolute;
+            background-color: red;
+        }
+
+        .class2 {
+            background-color: green;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="navigator" class="class1 class2" > 显示为绿色</div>
+<!-- 而某个元素指定class时采用 class="class2 class1"这种方式指定，此时虽然class1在元素中指定时排在class2的后面，但因为在样式表文件中class1处于class2前面，此时仍然是class2的优先级更高。 -->
+</body>
+</html>
