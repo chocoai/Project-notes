@@ -4,3 +4,12 @@ input {
         outline: none; // 去除选中状态边框
         background-color: rgba(0, 0, 0, 0);// 透明背景
  
+}
+
+改变轮廓线
+
+
+input:focus {
+    outline:none;
+    border: 1px solid red;
+}

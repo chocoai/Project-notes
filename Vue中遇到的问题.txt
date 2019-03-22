@@ -1,0 +1,17 @@
+1. Vue的设计模式是MVVM  数据驱动视图， 所以在Vue中不建议操作DOM   而且实际的替换DOM和操作  一般会失效  而且类样式会不起作用   建议使用v-if 写两套
+
+
+
+
+2. 使用element弹窗的时候   遮罩在弹窗的上面   给弹窗下面的自定义属性设置
+:modal-append-to-body="false"
+
+
+
+3. 中三元表达式
+:style="{'margin-right':(index == 3 || index == 4?'38px':(index == 5 || index == 11?'0px':'30px'))}"
+
+
+
+4. scoped  作用 
+原理就是把 .headers变成.headers[name=xxxxx]了，所以只对当前这个name生效，其他的都不生效。
