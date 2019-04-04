@@ -15,3 +15,21 @@
 
 4. scoped  作用 
 原理就是把 .headers变成.headers[name=xxxxx]了，所以只对当前这个name生效，其他的都不生效。
+
+
+
+5. 脚手架vue-cli3.0 修改端口号
+目录： node_modules\@vue\cli-service\lib\commands
+需要修改的文件：serve.js
+
+
+6. 刷新组件
+给要刷新的组件一个  给这个组件  一个  key值  然后改变key的值
+  
+
+
+7. 事件获取当前元素
+@click="fn($event)"
+fn (e) {
+    console.log(e.target)
+}

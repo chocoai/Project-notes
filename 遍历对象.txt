@@ -1,7 +1,6 @@
 var obj = {'0': {'cc': 123},'1':'b','2':'c'};
 function foreach_obj (obj) {
   Object.keys(obj).forEach(function(key){
-
     console.log(key,obj[key]);
     if (obj[key] === '什么公司？') {
       console.log(key)
