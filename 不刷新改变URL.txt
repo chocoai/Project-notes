@@ -1,0 +1,4 @@
+var stateObject = {}
+        var title = 'Wow Title'
+        var newUrl = 'www.individtax.com'
+        history.pushState(stateObject, title, newUrl)

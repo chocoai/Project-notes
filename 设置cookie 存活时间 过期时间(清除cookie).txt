@@ -1,0 +1,10 @@
+// 设置cookie存活时间
+var exdate = new Date()
+exdate.setDate(exdate.getDate() + 1)
+document.cookie = 'token = ' + urlObj.token + ((1 == null) ? '' : ';expires=' + exdate.toGMTString())
+
+
+清除指定cookie
+var exdate = new Date()
+exdate.setDate(exdate.getDate() + 1)
+document.cookie = 'token = ' + urlObj.token + ((1 == null) ? '' : ';expires=' + exdate.toGMTString())
