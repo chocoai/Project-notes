@@ -8,3 +8,8 @@ document.cookie = 'token = ' + urlObj.token + ((1 == null) ? '' : ';expires=' + 
 var exdate = new Date()
 exdate.setDate(exdate.getDate() + 1)
 document.cookie = 'token = ' + urlObj.token + ((1 == null) ? '' : ';expires=' + exdate.toGMTString())
+
+
+sessionStrong存储的数据是暂时的，浏览器关掉后，存储下来的数据就会被清除。
+
+localStorage存储的数据是长期的，浏览器关掉后，存储下来的数据还是会保存在浏览器中。
