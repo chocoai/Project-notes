@@ -10,7 +10,8 @@ Http.install = function (Vue) {
   }
   // 设置请求体
   // axios.defaults.headers = {
-  //   'Content-Type': 'application/x-www-form-urlencoded'
+  //   'Content-Type': 'application/x-www-form-urlencoded'  fromdata
+  // 'Content-Type': 'application/json',  将数据放到请求体中
   // }
   // 请求拦截
   axios.interceptors.request.use(function (config) {

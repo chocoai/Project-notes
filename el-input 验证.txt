@@ -1,0 +1,35 @@
+<el-form :model="numberValidateForm" :rules="rules">
+    <el-form-item prop="assets_stat" >
+    <el-input type="text" v-model="numberValidateForm.assets_stat" autocomplete="off"></el-input>
+    </el-form-item>
+</el-form>
+
+
+
+data: {
+    numberValidateForm: {
+        age: 0,
+        assets_stat: 0
+    },
+    rules: {
+        assets_stat: [
+          {
+            validator (rule, value, callback) {
+              // value = Number(value)
+              console.log((parseFloat(value)))
+              value = parseFloat(value) + ''
+              console.log(this)
+              this.numberValidateForm.assets_stat = value
+              let reg = /^[1-9]\d*(.\d{1,2,3})?$/
+              if (reg.test(value)) {
+                callback()
+              } else {
+                value.replace(/hello/g,'')
+                callback(new Error())
+              }
+            },
+            trigger: 'blur'
+          }
+        ]
+    }
+}

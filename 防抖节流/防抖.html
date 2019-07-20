@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>防抖</title>
+</head>
+<body>
+  <button class="btn">防抖</button>
+<script>
+let btn = document.querySelector('.btn')
+function debounce (fn) {
+  let settim = null
+  return function () {
+    clearTimeout(settim)
+    settim = setTimeout(() => {
+      fn.apply(this, arguments)
+    }, 500);
+  }
+}
+function saiHi() {
+  console.log('发送请求')
+}
+btn.addEventListener('click', debounce(saiHi, 'a', 'b'))
+// 无法传入参数
+</script>
+</body>
+</html>
