@@ -1,8 +1,0 @@
-1.
-function test (x,y,z) {
-  console.log(test.length);
-  console.log(arguments.length); 
-  console.log(arguments.callee === test);
-  console.log(arguments[2])
-}
-test(10, 20)

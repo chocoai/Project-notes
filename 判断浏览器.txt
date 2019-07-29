@@ -1,0 +1,12 @@
+(function (window) {
+  function judgeBrowser () {
+    var userAgent = navigator.userAgent
+    if (userAgent.indexOf("Opera") > -1) return "Opera"
+    if (userAgent.indexOf("Firefox") > -1) return "Firefox"
+    if (userAgent.indexOf("Chrome") > -1) return "Chrome"
+    if (userAgent.indexOf("Safari") > -1) return "Safari"
+    if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") || userAgent.indexOf('Trident')) return "IE"
+    if (userAgent.indexOf("Trident") > -1) return "Edge"
+  }
+  window.judgeBrowser = judgeBrowser
+})(window)
