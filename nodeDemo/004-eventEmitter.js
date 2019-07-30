@@ -82,4 +82,10 @@ eventsEmitter.emit('eventGet_cb')
 // eventsEmitter.emit('some_event')
 
 // 6. 默认情况下， EventEmitters 如果你添加的监听器超过 10 个就会输出警告信息。 setMaxListeners 函数用于提高监听器的默认限制的数量
-setMaxListeners(n)
+// setMaxListeners(n)
+
+// 7. 返回指定事件的所有监听器
+// console.log(eventsEmitter.listeners('eventGet_cb'))
+
+// 8. 按监听器的顺序执行执行每个监听器，如果事件有注册监听返回 true，否则返回 false。
+// eventsEmitter.emit('eventGet_cb')
