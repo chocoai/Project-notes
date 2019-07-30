@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title></title>
+      <style>
+      #content {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      #info{
+        position: fixed;
+        top: 0;
+      }
+
+      #target {
+        width: 100px;
+        height: 100px;
+        background: red;
+      }
+    </style>      
+  </head>
+  <body>
+    <div id="info">我藏在页面底部，请向下滚动</div>
+    <div id="content"></div>
+    <div id="target">
+      <img src="" alt="" id="imgs">
+    </div>      
+  </body>
+<script type="text/javascript">
+// IE 11 兼容性不太好
+
+  let observer = new IntersectionObserver(function(entries){
+    console.log(entries)
+    entries.forEach( function(element, index) {
+      // element是当前元素的一些参数   具体如下
+      // intersectionRatio         ->   当前元素进入视图的百分比  不是精确的
+      // isIntersecting            ->   当前元素是否进入到规定的百分比  boolean
+      if (element.isIntersecting ) {
+        // info 是当前的DOM元素  可以直接通过ID去获取DOM
+        info.textContent = "我出来了";
+        if (!imgs.getAttribute('src')) {
+          imgs.setAttribute('src', './img.jpg')
+        }
+      } else {
+        info.textContent = "我藏在页面底部，请向下滚动"
+        // imgs.setAttribute('src', '')
+      }
+    });
+  
+  }, {
+    root: null,
+    // 当检测的元素分别在视口出现的0%   50%   100% 的时候触发回调函数
+    threshold: [0, 0.5, 1]
+  })
+  observer.observe(document.querySelectorAll('#target')[0])
+</script>
+
+</html>
