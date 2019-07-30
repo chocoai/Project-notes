@@ -84,8 +84,36 @@ eventsEmitter.emit('eventGet_cb')
 // 6. 默认情况下， EventEmitters 如果你添加的监听器超过 10 个就会输出警告信息。 setMaxListeners 函数用于提高监听器的默认限制的数量
 // setMaxListeners(n)
 
-// 7. 返回指定事件的所有监听器
+// 7. 返回指定事件的所有监听器, 名字   函数
 // console.log(eventsEmitter.listeners('eventGet_cb'))
 
 // 8. 按监听器的顺序执行执行每个监听器，如果事件有注册监听返回 true，否则返回 false。
 // eventsEmitter.emit('eventGet_cb')
+
+
+
+
+// 类方法
+// 1. 返回指定事件的监听器      数量
+// console.log(eventsEmitter.listenerCount('eventGet_cb'))
+
+
+
+
+
+// 事件
+// 1. newListener
+// 该事件在添加新监听器时被触发。
+// *   event - 字符串，事件名称
+
+// *   listener - 处理事件函数
+
+
+// error 事件
+// EventEmitter 定义了一个特殊的事件 error，它包含了错误的语义，我们在遇到 异常的时候通常会触发 error 事件。
+
+// 当 error 被触发时，EventEmitter 规定如果没有响 应的监听器，Node.js 会把它当作异常，退出程序并输出错误信息。
+
+// 我们一般要为会触发 error 事件的对象设置监听器，避免遇到错误后整个程序崩溃。例如：
+
+eventsEmitter.emit('error'); 
