@@ -7,10 +7,6 @@ let MongoClint = require('mongodb').MongoClient
 let url = `mongodb://127.0.0.1:27017/`
 // console.log(MongoClint)
 
-
-
-
-
 req({
   url: `https://youhui.pinduoduo.com/search/landing?catId=18`,
   encoding: 'UTF8',
