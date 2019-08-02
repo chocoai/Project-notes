@@ -3,23 +3,24 @@
 let req = require('request')
 // 可以向jQuery一样操作DOM
 let cheerio = require('cheerio')
+// 引入node中操作mongod的包
 let MongoClint = require('mongodb').MongoClient
+// 本地mongo服务地址
 let url = `mongodb://127.0.0.1:27017/`
-// console.log(MongoClint)
 
+// 发送请求
 req({
   url: `https://youhui.pinduoduo.com/search/landing?catId=18`,
   encoding: 'UTF8',
-  // url: `https://www.baidu.com/`,
   method: 'get'
 }, (err, res, body) => {
+  // 请求成功的时候
   if (!err && res.statusCode == 200) {
     let _$ = cheerio.load(body)
+    // 创建一个新的数组 接收数据
     let pushArr = []
-    // console.log(_$('.card-wrapper').html())
+    // 清洗数据
     _$('.card-wrapper').children().map(function () {
-      // let url = _$(this).find('.goods-detail-card-wrapper').attr('href')
-      // console.log(_$(tclshis).html())
       let url = 'https:' + _$(this).attr('href')
       let imgurl = 'https:' + _$(this).find('img').attr('src')
       let name = _$(this).children().find('.double-line-desc').text()
@@ -30,18 +31,18 @@ req({
         name,
         price
       })
-      // console.log(url, imgurl, name, price)
     })
+    // 链接mongo
     MongoClint.connect(url, {useNewUrlParser: true}, function (err, client) {
-      // console.log(client)
+      // 要链接的数据库名
       let db = client.db('zyg')
-      // console.log(db)
+      // 要链接的表名
       let collection = db.collection('JD')
+      // 插入数据
       collection.insertMany(pushArr, function (err, result) {
         console.log(result)
       })
     })
-    // console.log(a)
   } else {
     console.log(err, 222)
   }
