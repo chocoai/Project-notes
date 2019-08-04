@@ -78,7 +78,19 @@ let newWrite = fs.createWriteStream('./test/write.txt')
 newRead.pipe(newWrite)
 console.log('管道流程序执行完成')
 // 管道流写入文件问题： 将读取的文件写入另一个文件  会覆盖之前文件的内容
-// 解决思路 现将要写的文件内容读取存储  之后也一起放进去
+// 解决思路 现将要写的文件内容读取存储  之后也一起放进去 或者因该有控制的API
 
 
+// 4.链式流
+// 链式是通过连接输出流到另外一个流并创建多个流操作链的机制。链式流一般用于管道操作。
+// 接下来我们就是用管道和链式来压缩和解压文件。
 
+let zlib = require('zlib')
+fs.createReadStream('./test/test.txt').pipe(zlib.createGzip()).pipe(fs.createWriteStream('input.txt.gz'))
+console.log('文件压缩完成')
+
+
+fs.createReadStream('input.txt.gz').pipe(zlib.createGunzip()).pipe(fs.createWriteStream('./test.txt'))
+console.log('文件解压完成')
+
+// 压缩和解压不能同时进行哦  
