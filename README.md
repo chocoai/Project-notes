@@ -4,7 +4,7 @@
 
 #1.  项目一  adtrpt  审计报告正文自动生成
 
-## 项目时间 2018-01-14  ----   2018-01-29
+## 项目时间 2019-01-14  ----   2019-01-29
 
 ## 项目过程
 页面功能基本完成， 节前测试bug  节后修改bug + 维护
@@ -17,7 +17,7 @@ JavaScript+JQuery+art-template
 
 #2.  项目二   coffice  合并报表RPA前端重构
 
-## 项目时间 2018-01-30  ----   2018-2-15
+## 项目时间 2019-01-30  ----   2019-2-15
 
 ## 项目过程
 页面功能完成 布局的问题 
@@ -28,7 +28,7 @@ vue+JavaScript
 
 #3.  项目三   Taxation_frontend  税务系统
 
-## 项目时间 2018-02-18  ----   2018-3-5
+## 项目时间 2019-02-18  ----   2019-3-5
 
 ## 项目过程
 vue+JavaScript+布局-媒体查询
@@ -38,7 +38,7 @@ vue+JavaScript+布局-媒体查询
 
 #4.  项目四   INDIVIDTAX_frontend  个人所得税计算
 
-## 项目时间 2018-03-8  ----   2018-4-10
+## 项目时间 2019-03-8  ----   2019-4-10
 
 ## 项目过程
 Vue-cli, Vue-router, axios, elenemtUI, less
@@ -48,8 +48,8 @@ Vue-cli, Vue-router, axios, elenemtUI, less
 
 #5.  项目五   KAMS-II  KAMS二期
 
-## 项目时间 2018-04-20  ----   2018-5-10
-## 项目时间 2018-07-3  ----   2018-7-15
+## 项目时间 2019-04-20  ----   2019-5-10
+## 项目时间 2019-07-3  ----   2019-7-15
 
 ## 项目过程
 Vue-cli, Vue-router, axios, elenemtUI, echarts, icon, less, mock
@@ -65,7 +65,7 @@ Vue-cli, Vue-router, axios, elenemtUI, echarts, icon, less, mock
 
 #5.  项目六   ExpM_front  费用管理
 
-## 项目时间 2018-07-15  ----   至今
+## 项目时间 2019-07-15  ----  2019-7-31
 
 ## 项目过程
 vue-cli, vue-router, axios, elementUI
@@ -77,3 +77,4 @@ vue-cli, vue-router, axios, elementUI
 > 5. 手写可点选三级tree列表 实现不同tab切换状态保留
 > 6. 实现动态渲染input输入记录值
 > 7. 页面刷新阻止
+> 8. 配置了config文件夹 通过process.env.NODE_ENV去判断是生产环境还是开发环境 然后在package.json中配置打包命令 
