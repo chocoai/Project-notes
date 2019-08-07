@@ -1,8 +1,7 @@
 项目笔记 + 遇到的各种问题和处理方案
 =================================
 
-
-#1.  项目一  adtrpt  审计报告正文自动生成
+# 1.  项目一  adtrpt  审计报告正文自动生成
 
 ## 项目时间 2019-01-14  ----   2019-01-29
 
@@ -15,7 +14,7 @@ JavaScript+JQuery+art-template
 ###
 
 
-#2.  项目二   coffice  合并报表RPA前端重构
+# 2.  项目二   coffice  合并报表RPA前端重构
 
 ## 项目时间 2019-01-30  ----   2019-2-15
 
@@ -26,7 +25,7 @@ vue+JavaScript
 ###
 
 
-#3.  项目三   Taxation_frontend  税务系统
+# 3.  项目三   Taxation_frontend  税务系统
 
 ## 项目时间 2019-02-18  ----   2019-3-5
 
@@ -36,7 +35,7 @@ vue+JavaScript+布局-媒体查询
 ###
 
 
-#4.  项目四   INDIVIDTAX_frontend  个人所得税计算
+# 4.  项目四   INDIVIDTAX_frontend  个人所得税计算
 
 ## 项目时间 2019-03-8  ----   2019-4-10
 
@@ -46,10 +45,9 @@ Vue-cli, Vue-router, axios, elenemtUI, less
 > 1. elementUi 样式的修改-覆盖
 > 2. 组件传值  父->(prope)子   子->(事件 emit)父
 
-#5.  项目五   KAMS-II  KAMS二期
+# 5.  项目五   KAMS-II  KAMS二期
 
-## 项目时间 2019-04-20  ----   2019-5-10
-## 项目时间 2019-07-3  ----   2019-7-15
+## 项目时间 2019-04-20  ----   2019-5-10 2019-07-3  ----   2019-7-15
 
 ## 项目过程
 Vue-cli, Vue-router, axios, elenemtUI, echarts, icon, less, mock
@@ -63,7 +61,7 @@ Vue-cli, Vue-router, axios, elenemtUI, echarts, icon, less, mock
 > 7. 参照github的vue-admin-template模板，重写项目目录，分配更加合理
 > 8. mockjs实现数据加护
 
-#5.  项目六   ExpM_front  费用管理
+# 5.  项目六   ExpM_front  费用管理
 
 ## 项目时间 2019-07-15  ----  2019-7-31
 
