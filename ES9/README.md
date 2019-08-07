@@ -43,3 +43,12 @@ ES2015中添加的最有趣的特性之一是spread操作符。你可以用它�
         a: 30
     }
     console.log(obj2)   // {b: 20, a: 30}
+> 同时，Spread操作符可以作为Object.assign() 的一个替代方案进行对象融合:
+---------
+    const obj1 = {a: 10}
+    const obj2 = {b: 10}
+    const obj3 = {c: 10}
+    // ES 2018
+    console.log({...obj1, ...obj2, ...obj3})  // {a: 10, b: 10, c: 10}
+    // ES 2015
+    console.log(Object.assign({}, obj1, obj2, obj3))
