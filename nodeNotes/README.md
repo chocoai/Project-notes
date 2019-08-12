@@ -13,3 +13,14 @@
     "serve": "supervisor app.js"
   },
 ```
+**&#x1F381;  body-parser 将请求体转换成可以获取的内容**
++ &#x1F6EB;  npm install
+```txt 
+  npm install body-parser
+```
++ &#x1F6EB;  app.js
+```js 
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+```
