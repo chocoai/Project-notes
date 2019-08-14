@@ -54,3 +54,8 @@ p {
 .sepia {
   filter: sepia(50%);
 }
+
+/* filter: url(); */
+.svg1 {
+  filter: url(#change);
+}
