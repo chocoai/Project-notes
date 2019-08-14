@@ -1,0 +1,56 @@
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+img {
+  display: block;
+  margin: 140px auto 0px;
+}
+p {
+  text-align: center;
+}
+
+
+
+/* blur(px)     高斯模糊 length值越大，图像越模糊 */
+.blur {
+  filter: blur(2px);
+}
+
+/* brightness(%) 线性乘法 可以让图片看起来更亮或者更暗 */
+.brightness {
+  filter: brightness(200%);
+}
+
+/* contrast(%) 对比度 调整图像的对比度 */
+.contrast {
+  filter: contrast(200%);
+}
+
+/* drop-shadow(h-shadow v-shadow blur spread color) */
+.drop-shadow {
+  filter: drop-shadow(486px 10px 0px red);
+}
+
+/* hue-rotate(deg) 色相旋转 */
+.hue-rotate {
+  filter: hue-rotate(180deg);
+}
+
+/* invert(%) 反转  这个函数的作用是反转输入图像，有点像曝光的效果 */
+.invert {
+  filter: invert(100%);
+}
+
+/* grayscale(%) 将图像转换为灰度图像 */
+.grayscale {
+  filter: grayscale(100%);
+}
+
+/* sepia(%) 将图像转换为深褐色 */
+.sepia {
+  filter: sepia(50%);
+}
