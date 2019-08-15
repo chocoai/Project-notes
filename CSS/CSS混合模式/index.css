@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.test1 {
+  width: 100%;
+  height: 200px;
+  color: #000;
+  background: linear-gradient(90deg, #fff 50.9%, #000 51%);
+}
+h1 {
+  text-align: center;  
+  line-height: 200px;
+  color: #fff;
+  /* 差值模式 */
+  /* 查看每个通道中的颜色信息，从图像中基色的亮度值减去混合色的亮度值，如果结果为负，则取正值，产生反相效果 */
+  mix-blend-mode: difference;
+}
+
+.test2 {
+  width: 100%;
+  height: 500px;
+  position: relative;
+}
+.img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url('./1.jpg') no-repeat;
+  background-position: center;
+}
+.txt {
+  width: 100%;
+  height: 100%;
+  line-height: 500px;
+  position: absolute;
+  text-align: center; 
+  top: 50%;
+  left: 50%;
+  font-size: 100px;
+  font-weight: 900;
+  transform: translateX(-50%) translateY(-50%);
+  mix-blend-mode: lighten;
+  background-color: #fff;
+}
