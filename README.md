@@ -10,6 +10,7 @@
 
 JavaScript+JQuery+art-template
 >  &#x1F3C5; 1. 递归完成select下拉的动态渲染
+
 >  &#x1F3C5; 2. 下载文件打开一个新的页面 并且在2s以后关闭新页面
 ###
 
@@ -43,6 +44,7 @@ vue+JavaScript+布局-媒体查询
 Vue-cli, Vue-router, axios, elenemtUI, less
 页面功能完成->修改了element的样式
 >  &#x1F3C5; 1. elementUi 样式的修改-覆盖
+
 >  &#x1F3C5; 2. 组件传值  父->(prope)子   子->(事件 emit)父
 
 #  5.  &#x1F9EE; 项目五   KAMS-II  KAMS二期
@@ -53,12 +55,19 @@ Vue-cli, Vue-router, axios, elenemtUI, less
 Vue-cli, Vue-router, axios, elenemtUI, echarts, icon, less, mock
 页面功能完成->修改了element的样式(想怎么改就怎么改)
 >  &#x1F3C5; 1. elementUi 修改了element的样式(想怎么改就怎么改)
+
 >  &#x1F3C5; 2. axios二次封装-实现了请求和业务的分离
+
 >  &#x1F3C5; 3. echarts的使用，动态渲染echarts，搭配不同的主题，echarts跳转携带参数
+
 >  &#x1F3C5; 4. 组件传值
+
 >  &#x1F3C5; 5. icon的使用和替换
+
 >  &#x1F3C5; 6. 实现了一个可以左右滚动，侧边栏不动，上下滚动，header不动的盒子 动态渲染 并且计算每一行最大高度 从而使所有的盒子都沾满
+
 >  &#x1F3C5; 7. 参照github的vue-admin-template模板，重写项目目录，分配更加合理
+
 >  &#x1F3C5; 8. mockjs实现数据加护
 
 #  &#x1F3C5; 6.  &#x1F9EE; 项目六   ExpM_front  费用管理
@@ -69,10 +78,17 @@ Vue-cli, Vue-router, axios, elenemtUI, echarts, icon, less, mock
 vue-cli, vue-router, axios, elementUI
 页面功能完成
 >  &#x1F3C5; 1. 引入我自己定义的icon
+
 >  &#x1F3C5; 2. axios的二次封装
+
 >  &#x1F3C5; 3. 发开， 生产环境vue-cli不同的配置
+
 >  &#x1F3C5; 4. 组件传值->ref 父组件调用子组件的方法
+
 >  &#x1F3C5; 5. 手写可点选三级tree列表 实现不同tab切换状态保留
+
 >  &#x1F3C5; 6. 实现动态渲染input输入记录值
+
 >  &#x1F3C5; 7. 页面刷新阻止
+
 >  &#x1F3C5; 8. 配置了config文件夹 通过process.env.NODE_ENV去判断是生产环境还是开发环境 然后在package.json中配置打包命令 
