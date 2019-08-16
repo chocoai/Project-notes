@@ -1,7 +1,7 @@
 # &#x1F6A6; CSS3 notes
 + &#x1F6A9; filter
 ```css
-  filter: blur(px); /* 高斯模糊 */
+  filter: blur(px); /* 高斯模糊 可以实现毛玻璃的效果*/
 
   filter: brightness(%); /* 线性乘法 */
 
