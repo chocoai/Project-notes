@@ -78,7 +78,9 @@ app.use(bodyParser.urlencoded({extended: false}))
 
   // 这样的路径就是就会到image文件夹下面
   let dataPath = path.resolve(__dirname, '../public', '\image') + `/${new Date().getTime()}` + '.png'
-  public/image 
+  // public/image 
+
+  //  ../ 可以返回到上一级
 ```
 
 
