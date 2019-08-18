@@ -24,3 +24,17 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 ```
+**&#x1F381; formidable 获取上传文件**
++ &#x1F6EB;  npm install formidable
+```js
+  const formidable = require('formidable')
+  module.exports = (request, response, err) => {
+    console.log(request.body)
+    var form = new formidable.IncomingForm()
+    form.parse(request, function(err, fields, files) {
+      console.log(fields)
+      console.log(files)
+      new Date().getTime()
+    })
+  }
+```
