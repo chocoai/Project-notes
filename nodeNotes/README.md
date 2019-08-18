@@ -69,3 +69,10 @@ app.use(bodyParser.urlencoded({extended: false}))
     })
   }
 ```
+
+**&#x1F381; path.resolve 获取路径/设置路径**
++ &#x1F6EB;  path.resolve
+```js
+  path.resolve('bar', 'baz', 'foo')
+  // 'C:\Users\liangliang17\Desktop\Node_study\Node\5.path\bar\baz\foo'
+```
