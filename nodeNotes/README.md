@@ -75,4 +75,10 @@ app.use(bodyParser.urlencoded({extended: false}))
 ```js
   path.resolve('bar', 'baz', 'foo')
   // 'C:\Users\liangliang17\Desktop\Node_study\Node\5.path\bar\baz\foo'
+
+  // 这样的路径就是就会到image文件夹下面
+  let dataPath = path.resolve(__dirname, '../public', '\image') + `/${new Date().getTime()}` + '.png'
+  public/image 
 ```
+
+
