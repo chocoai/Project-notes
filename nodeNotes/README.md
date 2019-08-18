@@ -87,6 +87,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 **&#x1F381; path.join 获取路径/设置路径**
 + &#x1F6EB;  path.join
 ```js
+  // paths string类型
   path.join(__dirname, './02art-template.js');
   // 'C:\Users\liangliang17\Desktop\Node_study\Node\5.path\02.art-template.js'
 
