@@ -38,3 +38,34 @@ app.use(bodyParser.urlencoded({extended: false}))
     })
   }
 ```
+
+**&#x1F381; new Date().getTime() 获取时间戳**
++ &#x1F6EB;  new Date().getTime()
+```js
+  new Date().getTime()
+```
+
+**&#x1F381; 利用管道流将前端formdata上传的文件流写入指定目录**
++ &#x1F6EB;  Stream
+```js
+  const formidable = require('formidable')
+  const path = require('path)
+  module.exports = (request, response, err) => {
+    var form = new formidable.IncomingForm()
+    form.parse(request, function(err, fields, files) {
+      // files 是上传的文件列表
+
+      // 设置保存路径   
+      // __dirname 当前文件所在的目录
+      // ${new Date().getTime()}  设置时间戳作为文件的名字
+      let dataPath = path.resolve(__dirname, '../public/image/') + `${new Date().getTime()}` + '.png'
+
+      // 创建可读流
+      let newRead = fs.createReadStream(files.file_bj.path)
+      // 创建可写流
+      let newWrite = fs.createWriteStream(dataPath)
+      // 利用管道写入文件
+      newRead.pipe(newWrite)
+    })
+  }
+```
