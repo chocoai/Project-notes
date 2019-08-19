@@ -16,6 +16,8 @@
   filter: grayscale(%); /* 灰度图像 */
 
   filter: sepia(%); /* 暖色调  褐色 */
+
+  filter: alpha(opacity，finishopacity，style，startX，startY，finishX，finishY); /* 设置透明度 */
 ```
 + &#x1F6A9; css混合模式
 ```css
