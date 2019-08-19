@@ -13,6 +13,7 @@
     "serve": "supervisor app.js"
   },
 ```
+
 **&#x1F381;  body-parser 将请求体转换成可以获取的内容**
 + &#x1F6EB;  npm install
 ```txt 
@@ -24,6 +25,7 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 ```
+
 **&#x1F381; formidable 获取上传文件**
 + &#x1F6EB;  npm install formidable
 ```js
@@ -126,3 +128,40 @@ app.use(bodyParser.urlencoded({extended: false}))
   // '/foo/bar'
 ```
 
+
+**&#x1F381; 前后端不分离node模板引擎 express-art-template**
++ &#x1F6EB;  npm install express-art-template
+```js
+  // 配置模板引擎和body
+  app.engine('html', require('express-art-template'))
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({extended: false}))
+
+  // 公开第三方资源
+  app.use('/public', express.static('./public'))
+  app.use('/node_modules', express.static('./node_modules'))
+
+  // 使用    默认会去views下面找文件  将aboutUser.html 返回  并且传入projectList和is_shows 两个参数
+  response.render('aboutUser.html', {
+    projectList: projectList.productSetup,
+    is_shows: ['', '', '', 'click']
+  })
+```
+```html
+  <!-- // 在html中获取数据  并且遍历-->
+  <ul class="j1_box">
+    {{ each projectList}}
+      <li onclick="getClick(2, 'kams')"><a href="/public/{{$value.name}}">{{ $value.name }}</a></li>
+    {{ /each }}
+  </ul>
+```
+```html
+  <!-- 重复模块的使用 -->
+  <!-- 比如我的header模块 -->
+
+  <!-- 在指定的位置导入 -->
+  {{include './_includes/headers.html'}}
+
+  <!-- headers.html -->
+  这个文件中只需要写公共部分的HTML  别的什么都不用写   不过模板传进来的数据也可以在这里使用
+```
