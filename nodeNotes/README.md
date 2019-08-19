@@ -45,7 +45,7 @@ app.use(bodyParser.urlencoded({extended: false}))
   new Date().getTime()
 ```
 
-**&#x1F381; 利用管道流将前端formdata上传的文件流写入指定目录**
+**&#x1F381; 利用管道流将前端formdata上传的文件流写入指定目录(适用于单文件，而且不能连续多次的上传，会有缓存问题)**
 + &#x1F6EB;  Stream
 ```js
   const formidable = require('formidable')
@@ -81,6 +81,23 @@ app.use(bodyParser.urlencoded({extended: false}))
   // public/image 
 
   //  ../ 可以返回到上一级
+```
+
+
+**&#x1F381; fs.renameSync(oldPath, newPath, callback)(适合多文件上传一次性保存到本地)**
++ &#x1F6EB;  同步地将 oldPath 上的文件重命名为 newPath 提供的路径名。 如果 newPath 已存在，则覆盖它。 除了可能的异常，完成回调没有其他参数。
+```js
+  function fileWrite (datapaths) {
+    // datapaths 上传文件的path 遍历上传的文件列表 每次调用这个函数进行保存
+
+    // 利用时间戳命名
+    let RelativeDataPath = `/${new Date().getTime()}.png`
+    // 获取要保存文件的目标地址
+    let dataPath = path.resolve(__dirname, '../public', '\image') + RelativeDataPath
+    // 将获取的文件路径和目标路径传入 
+    fs.renameSync(datapaths, dataPath, () => false)
+    return RelativeDataPath
+  }
 ```
 
 
