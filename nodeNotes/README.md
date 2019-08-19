@@ -39,10 +39,21 @@ app.use(bodyParser.urlencoded({extended: false}))
   }
 ```
 
-**&#x1F381; new Date().getTime() 获取时间戳**
-+ &#x1F6EB;  new Date().getTime()
+**&#x1F381; 获取时间戳**
++ &#x1F6EB;  node 获取时间戳
 ```js
+  // 获取时间戳
   new Date().getTime()
+
+  // 获取时间戳 性能比上面的好
+  Date.now()
+
+  // 这种方式是根据任意取的一个过去的时间点，距离现在的时间来获取一个精确的时间戳对象：[秒, 纳秒]
+  process.hrtime()
+
+  // 此函数是通过nodejs启动运行时间来得到一个秒数时间戳，精确到毫秒 适用于高频计算时间差的场合
+  process.uptime()
+
 ```
 
 **&#x1F381; 利用管道流将前端formdata上传的文件流写入指定目录(适用于单文件，而且不能连续多次的上传，会有缓存问题)**
