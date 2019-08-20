@@ -165,3 +165,13 @@ app.use(bodyParser.urlencoded({extended: false}))
   <!-- headers.html -->
   这个文件中只需要写公共部分的HTML  别的什么都不用写   不过模板传进来的数据也可以在这里使用
 ```
+
+**&#x1F381; .get(`/public/:templateName`)动态路由获取参数**
++ &#x1F6EB;  .get(`/public/:templateName`)
+```js
+  // 动态路由捕获
+  .get(`/public/:templateName`)
+  
+  // 获取动态路由的参数
+  const templateName = request.params.templateName
+```
