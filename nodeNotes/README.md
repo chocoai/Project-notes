@@ -175,3 +175,9 @@ app.use(bodyParser.urlencoded({extended: false}))
   // 获取动态路由的参数
   const templateName = request.params.templateName
 ```
+
+
+**&#x1F381; node-打包-部署**
++ &#x1F6EB;  .get(`/public/:templateName`)
+```js
+```
