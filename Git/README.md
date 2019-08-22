@@ -89,7 +89,6 @@
   ```
 **&#x1F381; `git revert` 和 `git reset` 的区别**
 
-+ 
   `git revert` | `git reset`
   ------------ | -----------
   用一次新的commit来回滚之前的commit | 是直接删除指定的commit
@@ -97,3 +96,15 @@
   HEAD继续前进，只是新的commit的内容和要revert的内容正好相反，能够抵消要被revert的内容 | 把HEAD向后移动了一下
 
 **&#x1F381; 常用命令**
++ &#x1F3A8; 初始开发 `git` 操作流程
+  + 克隆最新主分支项目代码 `git clone 地址`
+  + 创建本地分支 `git branch 分支名`
+  + 查看本地分支 `git branch`
+  + 查看远程分支 `git branch -a`
+  + 切换分支  `git checkout 分支名` (一般修改未提交则无法切换，大小写问题经常会有，可强制切换  `git checkout 分支名 -f`  非必须慎用)
+  + 将本地分支推送到远程分支 git push <远程仓库> <本地分支>:<远程分支>
+
++ &#x1F3A8; git fetch
++ &#x1F3A8; git pull
++ &#x1F3A8; git push
++ &#x1F3A8; 分支操作
