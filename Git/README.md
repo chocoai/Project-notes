@@ -102,9 +102,15 @@
   + 查看本地分支 `git branch`
   + 查看远程分支 `git branch -a`
   + 切换分支  `git checkout 分支名` (一般修改未提交则无法切换，大小写问题经常会有，可强制切换  `git checkout 分支名 -f`  非必须慎用)
-  + 将本地分支推送到远程分支 `git push --set-upstream origin <本地分支>`
+  + 将本地分支推送到远程分支 `git push <远程仓库> <本地分支>:<远程分支>`
 
-+ &#x1F3A8; git fetch
-+ &#x1F3A8; git pull
-+ &#x1F3A8; git push
++ &#x1F3A8; `git fetch`
+  + 将某个远程主机的更新，全部/分支 取回本地（此时之更新了Repository）它取回的代码对你本地的开发代码没有影响，如需彻底更新需合并或使用git pull
+
++ &#x1F3A8; `git pull`
+  + 拉取远程主机某分支的更新，再与本地的指定分支合并（相当与fetch加上了合并分支功能的操作）
+
++ &#x1F3A8; `git push`
+  + 将本地分支的更新，推送到远程主机，其命令格式与git pull相似
+  
 + &#x1F3A8; 分支操作
