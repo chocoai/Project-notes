@@ -115,4 +115,21 @@
 
 + &#x1F3A8; 分支操作
   + 使用 Git 下载指定分支命令为：`git clone -b 分支名仓库地址`
-  + 使用 Git 下载指定分支命令为：`git clone -b 分支名仓库地址`
+  + 拉取远程新分支：`git checkout -b 本地分支 origin/远程分支`
+  + 合并本地分支 `git merge dev（将dev合并到当前分支）`
+  + 合并远程分支 `git merge origin/dev`
+  + 删除本地分支 `git branch -D dev`
+  + 删除远程分支 `git push origin --delete dev`
+  + 上传新命名的本地分支 `git push origin newName`
+  + 创建新分支 `git branch newName`
+  + 切换分支 `git checkout newName`
+  + 创建并切换分支 `git checkout -b newName(创建并切换到newName 分支)`
+  + 查看本地分支  `git beanch`
+  + 查看远程仓库所有分支 `git branch -a`
+  + 本地分支重命名 `git branch -m oldName newName`
+  + 重命名远程分支对应的本地分支 `git branch -m oldName newName`
+  + 把修改过的本地分支与远程分支关联 `git branch --set-upstream origin/newName`
+
+
+
+
