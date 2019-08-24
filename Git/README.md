@@ -130,6 +130,9 @@
   + 重命名远程分支对应的本地分支 `git branch -m oldName newName`
   + 把修改过的本地分支与远程分支关联 `git branch --set-upstream origin/newName`
 
+**&#x1F381; 优化操作**
++ &#x1F3A8; 合并代码 `merge --no-ff`
+  + as
 
 
 
