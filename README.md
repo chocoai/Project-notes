@@ -158,6 +158,48 @@ vue+JavaScript
         ```txt
           每次新生成的input:file 都设定一个Name值，这个Name值后面加索引值
 
-          将新建的
+          将新建的input:file name属性通过索引赋值
+          并将这个索引存到一个数组一起发送给后端
         ```
     + 后端
+      > 通过获取的数组去动态获取文件
+
+        ```txt
+          将获取的文件保存本地 并更新数据文件
+        ```
++  部署  pm2 
+    + 进入服务器
+      + ssh root@11.111.11.11
+    + 生成ssh公匙
+      + cd .ssh/
+      + ssh-keygen  // 一路回车
+      + cat id_rsa.pub  // 查看公匙 复制到代码管理工具 配置公匙
+    + 安装node
+      + apt install node // 
+    + 安装npm 
+      + apt install npm   // 
+    + 安装npm淘宝镜像
+      + npm install -g cnpm --registry=https://registry.npm.taobao.org  // 
+    + 拉取代码
+      + git clone =====================
+    + 安装依赖
+      + cnpm install
+    + 安装pm2
+      + cnpm install pm2@latest -g
+    + 启动pm2 
+      + pm2 start proccesses.json
+
++  proccesses.json
+```json
+  {
+  "apps": [{
+      "name"       : "digital",
+      "script"     : "./app.js", // 入口文件
+      "instances"  : "4",        // 进程数量
+      "log_date_format"  : "YYYY-MM-DD",
+      "exec_mode"  : "cluster_mode",
+      "port"       : 10011       // 端口号
+    }
+  ]
+}
+```
