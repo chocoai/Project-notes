@@ -78,4 +78,86 @@ vue+JavaScript
 >  8. 配置了config文件夹 通过process.env.NODE_ENV去判断是生产环境还是开发环境 然后在package.json中配置打包命令 
 
 
-# 7.  &#x1F9EE; 项目七   digitalWebsite  官网前端和后端（node）
+# 7.  &#x1F9EE; 项目七   digitalWebsite  官网、官网管理端（node）
+
+## 项目时间 2019-08-15  ----  2019-8-27
+## &#x1F3A8; 项目过程
+&#x1F3C5; node, express, pm2 
++ 整体设计
+>  1. node做后端，搭建服务，使用json存储数据
+>  2. express-art-template 模板引擎 对应的接口返回模板页面
+>  3. 公开第三方资源好
+>  4. 配置路由和404
+>  5. MVC-设计模式
+>  6. json 数据的读取使用fs模块去读取 不使用require读取
+>  7. json 写入 `JSON.stringify(config, null, 2) 缩颈2个字符
+>  8. 文件的删除和存储
++ 接收文件并保存到指定目录，更新删除原文件
+>  1. 使用formidable 去接收字段和文件
+  ```js
+    const formidable = require('formidable')
+    const form = new formidable.IncomingForm()
+    form.parse(request, function(err, fields, files) {}
+    // fields字段对象
+    // files 文件对象
+  ```
+>  2. 用时间戳作为文件名字
+  ```js
+    let name = `${new Date().getTime()}.png`
+  ``` 
+>  3. 文件写入
+  ```js
+    // 文件写入开始使用管道流 后来发现多文件上传写入的时候写入不完整
+    // 之后使用 
+
+    // datapaths    前端发送的文件 可以获取到一个path 
+    // dataPath     文件要保存的路径
+    // __dirname    当前文件所在的路径  
+    // path.resolve 获取到指定路径
+    let dataPath = path.resolve(__dirname, '../public', '\image') + RelativeDataPath
+    fs.renameSync(datapaths, dataPath, () => false)
+  ```
+>  4. 文件删除
+  ```js
+  // 参数一是要删除的文件 这里是获取路径
+    fs.unlink(path.resolve(__dirname, '../'), (err, data) => false)
+  ```
++ 模板引擎的使用
+>  1. 模板渲染
+  ```js
+    // 响应对应的模板  resObj会被传入模板渲染
+    response.render('updateProductSetup.html', {
+      resObj
+    })
+  ```
+  ```html
+  <!-- 模板语法 for  -->
+    {{ each resObj.Carousel }}
+      <div class="lb_list">
+        <h1>轮播图</h1>
+        <div class="center">
+          <div class="imgs_box">
+            <img src="{{ $value.lbbj }}" alt="" class="imgs">
+            <img src="/public/image/upload.png" alt="" class="upload">
+            <input type="file" name="lb{{$index}}" id="" class="files">
+          </div>
+          <div class="text">
+            <h1>标题</h1>
+            <input type="text" name="header{{$index}}" value="{{ $value.lbname }}">
+            <h1>内容</h1>
+            <textarea name="text{{$index}}" id="" maxlength="150">{{ $value.lbtext }}</textarea>
+          </div>
+        </div>
+      </div>
+    {{ /each }}
+  ```
++  前端文件不确定数量上传，后端拿到文件保存
+    + 前端
+      > 前端新增轮播图时通过一个数字去保存上一个新增的索引
+
+        ```txt
+          每次新生成的input:file 都设定一个Name值，这个Name值后面加索引值
+
+          将新建的
+        ```
+    + 后端
