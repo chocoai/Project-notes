@@ -177,7 +177,53 @@ app.use(bodyParser.urlencoded({extended: false}))
 ```
 
 
-**&#x1F381; node-打包-部署**
-+ &#x1F6EB;  .get(`/public/:templateName`)
+**&#x1F381; node-部署**
++ &#x1F6EB;  pm2 部署
 ```js
+  // 本地安装pm2 设置pm2 配置文件
+  npm install pm2
+
+  // create  在项目的根目录
+  processes.json
 ```
+```json
+  {
+    "apps": [{
+        // 项目名称
+        "name"       : "digital",
+        // 项目的入口文件
+        "script"     : "./app.js", 
+        // 项目运行占用的内核数量
+        "instances"  : "4",
+        "log_date_format"  : "YYYY-MM-DD",
+        "exec_mode"  : "cluster_mode",
+        // 端口号
+        "port"       : 10011
+      }
+    ]
+  }
+```
+```txt
+  <!-- 服务器 -->
+
+  <!-- 查看当前pm2 所有进程 -->
+  pm2 list 
+
+  <!-- 停止指定索引的进程 -->
+  pm2 stop 2
+
+  <!-- 停止所有进程 -->
+  pm2 stop all
+
+  <!-- 删除指定进程 -->
+  pm2 delete 2
+
+  <!-- 删除所有进程 -->
+  pm2 delete all
+
+  <!-- 启动pm2 -->
+  pm2 start processes.json
+
+  <!-- 每次项目更新之后需要重新删掉进程重新部署 -->
+```
+
