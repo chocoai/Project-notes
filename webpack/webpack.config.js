@@ -9,7 +9,7 @@ module.exports = {
       template: './views/index.html'
     })
   ],
-  // 出口文件
+  // 出口文件 
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'my-first-webpack.bundle.js'
