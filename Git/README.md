@@ -149,6 +149,10 @@
   ```git
     git tag -d [tag]
   ```
+  + 删除远程tag
+  ```git
+    git push origin :refs/tags/[tagName]
+  ```
   + 查看tag信息
   ```git
     git show [tag]
