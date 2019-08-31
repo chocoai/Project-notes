@@ -129,10 +129,39 @@
   + 本地分支重命名 `git branch -m oldName newName`
   + 重命名远程分支对应的本地分支 `git branch -m oldName newName`
   + 把修改过的本地分支与远程分支关联 `git branch --set-upstream origin/newName`
+  + 切换到上一个分支  `git checkout -`
 
 **&#x1F381; 优化操作**
 + &#x1F3A8; 合并代码 `merge --no-ff`
   + 不同分支的合并会多出来一条路线图
 
-
-
+**&#x1F381; 标签**
++ &#x1F3A8; 标签
+  + 列出所有标签
+  ```git
+    git tag
+  ```
+  + 新建一个tag在当前commit
+  ```git
+    git tag [tag]
+  ```
+  + 删除本地tag
+  ```git
+    git tag -d [tag]
+  ```
+  + 查看tag信息
+  ```git
+    git show [tag]
+  ```
+  + 提交指定tag
+  ```git
+    git push [remote] [tag]
+  ```
+  + 提交所有tag
+  ```git
+    git push [remote] --tags
+  ```
+  + 新建一个分支，指向某个tag
+  ```git
+    git checkout -b [branch] [tag]
+  ```
