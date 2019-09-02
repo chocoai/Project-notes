@@ -221,3 +221,22 @@
   ```git
     git reflog
   ```
+
+**&#x1F381; 远程同步**
+  + &#x1F3A8; 远程同步
+    + 下载远程仓库所有变动
+    ```git
+      git fetch [remote]
+    ```
+    + 显示所有远程仓库
+    ```git
+      git remote -v
+    ```
+    + 取回远程仓库的变化 并合并和本地分支
+    ```git
+      git pull [remote] [branch]
+    ```
+    + 推送所有分支当远程仓库
+    ```git
+      git push [remote] --all
+    ```
