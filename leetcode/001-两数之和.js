@@ -8,6 +8,12 @@
 
 // 因为 nums[0] + nums[1] = 2 + 7 = 9
 // 所以返回 [0, 1]
+
+
+// 来源：力扣（LeetCode）
+// 链接：https://leetcode-cn.com/problems/add-two-numbers
+// 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
 var twoSum = function(nums, target) {
   // for (let i = 0; i < nums.length; i++) {
   //     for (let j = i + 1; j < nums.length; j++) {
