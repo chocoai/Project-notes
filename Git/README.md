@@ -240,8 +240,8 @@
     ```git
       git push [remote] --all
     ```
-**&#x1F381; 远程同步**
-  + &#x1F3A8; 远程同步
+**&#x1F381; 撤销**
+  + &#x1F3A8; 撤销
     + 恢复暂存区的指定文件到工作区
     ```
       git checkout [file]
