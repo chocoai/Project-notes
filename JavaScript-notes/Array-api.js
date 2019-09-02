@@ -2,9 +2,13 @@ let arr = [1, 2, 3]
 let arr_new = ['a', 'b', 'c']
 
 // 不改变原数组=======================================
-// ------ join --------
+// ------ join 将数组按照指定字符分割--------
 console.log(arr.join(','))
-
+// ------ concat 合并数组-------
+console.log(arr.concat(arr_new))
+// 扩展运算符合并
+console.log([...arr, ...arr_new])
+console.log([...arr_new, ...arr])
 // 改变原数组=========================================
 // ------ 栈方法 先进先出 ------
 arr.shift()
