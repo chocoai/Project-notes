@@ -169,3 +169,55 @@
   ```git
     git checkout -b [branch] [tag]
   ```
+
+**&#x1F381; 查看信息**
++ &#x1F3A8; 查看信息
+  + 显示有变更的文件
+  ```git
+    git status
+  ```
+  + 显示当前分支的版本历史
+  ```git
+    git log
+  ```
+  + 显示commit 历史 以及每次commit发生变更的文件
+  ```git
+    git log --stat
+  ```
+  + 搜索提交历史  根据关键词
+  ```git
+    git log -S [ketword]
+  ```
+  + 显示某个文件的版本历史  包括改名
+  ```git
+    git log --follow [file]
+    git whatchanged [file]
+  ```
+  + 显示过去3次的提交
+  ```git
+    git log -3 --pretty --oneline
+  ```
+  + 显示所有提交过的用户，按照提交顺序排序
+  ```git
+    git shortlog -sn
+  ```
+  + 显示指定文件是什么人在什么时间修改
+  ```git
+    git blame [file]
+  ```
+  + 显示暂存区和工作区的差异
+  ```git
+    git diff
+  ```
+  + 显示工作区与当前分支最新commit之间的差异
+  ```git
+    git diff HEAD
+  ```
+  + 显示你今天写了多少行代码
+  ```git
+    git diff --shortstat '@{0 day ago}'
+  ```
+  + 显示当前分支最新的几次提交
+  ```git
+    git reflog
+  ```
