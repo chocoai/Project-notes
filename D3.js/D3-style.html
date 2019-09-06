@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>D3-style</title>
+</head>
+<body>
+<div id="box"></div>
+
+<div id="box-text"></div>
+
+<div id="nodes"></div>
+<script src="./dist/d3.min.js"></script>
+<script>
+/* 
+  D3 对象
+  select 选择器
+*/
+console.log(d3)
+let box = d3.select('#box').append('svg')
+let w = 90, h = 40
+box.attr('width', w).attr('height', h)
+
+d3.select('#box-text').text('The Graph')
+
+/* 放置节点 */
+// 节点映射
+let nodes = [
+  {x: 30, y: 50},
+  {x: 50, y: 80},
+  {x: 90, y: 120}
+]
+var links = [
+  {source: nodes[0], target: nodes[1]},
+  {source: nodes[2], target: nodes[1]}
+]
+// 创建画布 映射数据
+let nodesBox = d3.select('#nodes')
+nodesBox
+  .append('svg')
+  .selectAll('circle .nodes')
+  .data(nodes)
+  .enter()
+  .append('svg:circle')
+  .attr('class', 'nodes')
+  .attr('cx', d => d.x)
+  .attr('cy', d => d.y)
+  .attr('r', '10px')
+  .attr('fill', 'black')
+  .selectAll(".line")
+  .data(links)
+  .enter()
+  .append("line")
+  .attr("x1", function(d) { return d.source.x })
+  .attr("y1", function(d) { return d.source.y })
+  .attr("x2", function(d) { return d.target.x })
+  .attr("y2", function(d) { return d.target.y })
+  .style("stroke", "#000");
+</script>
+</body>
+</html>
