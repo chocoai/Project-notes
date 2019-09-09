@@ -7,3 +7,11 @@
   </defs>
   <rect width="100" height="100" stroke="#000" stroke-width="2" fill="yellow" filter="url(#f1)"></rect>
 </svg>
+
+<!-- 
+<filter>元素id属性定义一个滤镜的唯一名称
+<feGaussianBlur>元素定义模糊效果
+in="SourceGraphic"这个部分定义了由整个图像创建效果
+stdDeviation属性定义模糊量
+<rect>元素的滤镜属性用来把元素链接到"f1"滤镜
+ -->
