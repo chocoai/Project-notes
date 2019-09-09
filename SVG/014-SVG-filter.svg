@@ -1,0 +1,9 @@
+<!-- 所有的滤镜都在defs 中设置 -->
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <defs>
+    <filter id="f1">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15"></feGaussianBlur>
+    </filter>
+  </defs>
+  <rect width="100" height="100" stroke="#000" stroke-width="2" fill="yellow" filter="url(#f1)"></rect>
+</svg>
