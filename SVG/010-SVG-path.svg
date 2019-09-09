@@ -1,0 +1,20 @@
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <path d="
+    M100 300
+    L250 0
+    L400 300
+    Q250 100 100 300
+    " stroke="red" fill="none">
+  </path>
+  <g>
+    <circle r="5" cx="100" cy="300" fill="#000"></circle>
+    <circle r="5" cx="250" cy="0" fill="#000"></circle>
+    <circle r="5" cx="400" cy="300" fill="#000"></circle>
+  </g>
+  <!-- text-anchor 文本对齐方式 -->
+  <g font-size="30" font="sans-serif" fill="black" stroke="none" text-anchor="middle">
+    <text x="100" y="300" dx="-30">A</text>
+    <text x="250" y="30" dx="30">B</text>
+    <text x="400" y="300" dx="30">C</text>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <path d="M300,0 L120,150 L230,210 Z"></path>
+  <path d="M500,100 L120,210 H19 Z"></path>
+  <path d="M500,100 L120,210 h19 Z" fill="pink"></path>
+  <path d="M1100,500 L100,120 V10 Z"></path>
+  <path d="M1100,500 L100,120 v10 Z" fill="red"></path>
+</svg>
+
+
+<!-- 
+
+  H X相对于画布左侧的距离  (绝对定位)
+  h 相对于上一个点的位置减去h 的值   (相对定位)
+  V Y相对于画布左侧的距离  (绝对定位)
+  v 相对于上一个点的位置减去v (相对定位)
+
+ -->

@@ -1,0 +1,42 @@
+<!-- <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <text x="0" y="100" fill="red">I love SVG</text>
+</svg> -->
+
+<!-- 
+  x 横坐标
+  y 纵坐标
+ -->
+
+
+
+
+
+ <!-- 在路径上写文字 -->
+<!-- defs  重复定义的路径属性 -->
+<!-- 
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <defs>
+    <path id="path1" d="M75,20 a1,1 0 0,0 100,0" fill="none" stroke="red" stroke-width="2"/>
+  </defs>
+  <text fill="red">
+    <textPath xlink:href="#path1">Hello World SVG</textPath>
+  </text>
+</svg> -->
+
+
+
+<!-- 小分组text -->
+<!-- <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <text x="100" y="100" fill="red">
+    <tspan x="100" y="100" fill="pink">text111111111</tspan>
+    <tspan x="100" y="110" fill="yellow">text222222222</tspan>
+  </text>
+</svg> -->
+
+<!-- 链接 -->
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <a xlink:href="http://www.baidu.com" target="_blank">
+    <text x="0" y="15" fill="red">I love SVG</text>
+  </a>
+</svg>

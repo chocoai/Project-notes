@@ -1,0 +1,23 @@
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+
+
+<!-- stroke 定义边框颜色 -->
+  <symbol id="symbolDemo">
+    <path d="M5 300 100 300" stroke="red"></path>
+  </symbol>
+  <defs>
+    <path id="defsDemo" d="M5 200 100 200" stroke="pink"></path>
+    <path d="M5 300 100 300" stroke="red"></path>
+    <path d="M5 400 100 400" stroke="yellow"></path>
+  </defs>
+  <g id="demo">
+    <path d="M5 200 100 200" stroke="#000"></path>
+    <path d="M5 300 100 300" stroke="blue"></path>
+    <path d="M5 400 100 400" stroke="#987654"></path>
+  </g>
+  <use x="100" y="0" xlink:href="#demo" stroke-dasharray="5,5"></use>
+  <use x="250" y="0" xlink:href="#demo" stroke-dasharray="5,10,10,5"></use>
+  <use x="350" y="0" xlink:href="#demo" stroke-dasharray="5,10,5"></use>
+  <use x="450" y="0" xlink:href="#defsDemo"></use>
+  <use x="550" y="0" xlink:href="#symbolDemo"></use>
+</svg>
