@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <rect width="300" height="100" style="fill:red" stroke-width="1" stroke="#000"></rect>
+</svg>
+
+<!-- 
+  width 宽度
+  height 高度
+  style  样式
+  stroke 边框颜色
+  stroke-width 边框宽度
+  fill  背景色
+ -->

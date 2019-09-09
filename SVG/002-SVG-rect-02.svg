@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 边框 内容透明度设置 -->
+<!-- <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <rect x='60' y='60' width="100" height="100" style="fill: red;" fill-opacity='0.1' stroke-opacity='0.1' stroke-width="3px" stroke="#000"></rect>
+</svg> -->
+
+<!-- svg 整体设置透明度 -->
+<!-- <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <rect x='60' y='60' width="100" height="100" style="fill: red;" stroke-width="3px" stroke="#000" opacity='0.2'></rect>
+</svg> -->
+
+<!-- svg 边框圆角 -->
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <rect x='60' y='60' width="100" height="100" style="fill: red;" stroke-width="3px" stroke="#000" rx='20' ry='50'></rect>
+</svg>
+
+
+<!-- 
+  x  横坐标
+  y  纵坐标
+  rx 横向圆角度数
+  ry 纵向圆角度数
+  width 宽度
+  height 高度
+  style  样式
+  fill-opacity  背景透明度
+  stroke-opacity 边框透明度
+  stroke-width   边框宽度
+  stroke 边框颜色
+  opacity 整个svg的透明度
+ -->
