@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>饼图</title>
+</head>
+<body>
+<script src="./dist/d3.js"></script>
+<script>
+// 数据
+let data = [30, 10, 43, 55, 13]
+
+// 布局（数据转换）
+let pie = d3.pie()
+let new_pie = pie(data)
+console.log(new_pie)
+// 如上图所示，5 个整数被转换成了 5 个对象（Object） ，
+// 每个对象都有变量起始角度（startAngle）和终止角度（endAngle），还有原数据（属性名称为 data）。这些都是绘图需要的数据。
+
+
+// 绘制图形
+
+// 为了根据转换后的数据 piedata 来作图，还需要一样工具：生成器。
+
+// SVG 有一个元素，叫做路径 <path>，是 SVG 中功能最强的元素，它可以表示其它任意的图形。顾名思义，路径元素就是通过定义一个段“路径”，来绘制出各种图形。但是，路径是很难计算的，通过布局转换后的数据 piedata 仍然很难手动计算得到路径值。为我们完成这项任务的，就是生成器。
+
+// 这里要用到的叫做弧生成器，能够生成弧的路径，因为饼图的每一部分都是一段弧。
+
+let outerRadius = 150; //外半径
+let innerRadius = 0; //内半径，为0则中间没有空白
+
+let arc = d3.arc()
+  .innerRadius(innerRadius)  // 设置内半径
+  .outerRadius(outerRadius)  // 设置外半径
+  
+console.log(arc)
+</script>
+</body>
+</html>
