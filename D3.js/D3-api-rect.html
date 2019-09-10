@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绘制矩形</title>
+</head>
+<body>
+<script src="./dist/d3.js"></script>
+<script>
+// 添加画布
+const width = 500
+const height = 300
+
+let svg = d3.select('body')
+.append('svg')
+.attr('width', width)
+.attr('height', height)
+
+// 绘制矩形
+svg.append('rect')
+.attr('x', 10)
+.attr('y', 10)
+.attr('width', 100)
+.attr('height', 200)
+.attr('fill', '#000')
+</script>
+</body>
+</html>

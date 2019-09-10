@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>柱状图</title>
+  <style>
+    #chart {
+      position: relative;
+    }
+    #chart > div {
+      display: inline-block;
+      background: #4285F4;
+      width: 20px;
+      margin-right: 3px;
+    }
+  </style>
+</head>
+<body>
+<div id="chart"></div>
+<script src="./dist/d3.js"></script>
+<script>
+// 选择元素
+// select 选择所有指定元素的第一个
+// selectAll 选择指定元素的全部
+
+// 插入元素
+// append()  在选择集的末尾插入元素
+// insert()  在选择集的前端插入元素
+
+// 删除元素
+// remove()  删除指定元素
+
+
+// 绑定数据
+// datum()：绑定一个数据到选择集上
+var str = "China"
+
+var body = d3.select("body")
+var p = body.selectAll("p")
+
+p.datum(str)
+
+p.text(function(d, i){
+  return "第 "+ i + " 个元素绑定的数据是 " + d
+})
+
+
+
+// data()：绑定一个数组到选择集上，数组的各项值分别与选择集的各元素绑定
+var body = d3.select("body")
+var p = body.selectAll("p")
+
+p.data(dataset)
+.text(function(d, i){
+    return d
+})
+
+
+
+
+
+</script>
+</body>
+</html>
