@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>折线图</title>
+</head>
+<body>
+<div id="chart">
+</div>
+<script src="./dist/d3.js"></script>
+<script>
+let data = [
+  {x: 0, y: 32},
+  {x: 50, y: 52},
+  {x: 100, y: 22},
+  {x: 150, y: 12}
+]
+let svg = d3.select('#chart').append('svg')
+console.log(svg)
+svg.append('polyline')
+.attr('points', () => {
+  let d = ''
+  data.forEach(item => {
+    d += item.x + ',' + item.y + ' '
+    svg.append('circle')
+    .attr('cx', item.x + 10)
+    .attr('cy', item.y + 10)
+    .attr('r', 3)
+  })
+  return d
+})
+.attr('fill', 'none')
+.attr('stroke', '#000')
+.attr('stroke-width', '2px')
+// .attr('transform', 'translateX(10)')
+.attr("transform","translate(10,10)")
+
+svg.append('circle')
+</script>
+</body>
+</html>
