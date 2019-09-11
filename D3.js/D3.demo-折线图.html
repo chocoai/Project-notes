@@ -50,8 +50,23 @@ let data_g = svg.append('g')
 data_g.append('polyline').attr('points', () => {
   let d = ''
   data.forEach(item => {
-    console.log(item.x)
     d += xlinear(item.x) + ',' + ylinear(item.y) + ' '
+    data_g.append('circle')
+      .attr('cx', xlinear(item.x))
+      .attr('cy', ylinear(item.y))
+      .attr('r', 3)
+      .attr('fill', '#fff')
+      .attr('stroke', '#000')
+      .attr('stroke-width', 2)
+      .attr("transform","translate(" + 40 + "," + 20 + ")")
+      .on('mouseenter', function () {
+        let that = this
+        d3.select(that).attr('r', 4).attr('fill', 'pink')
+      })
+      .on('mouseout', function () {
+        let that = this
+        d3.select(that).attr('r', 3).attr('fill', '#fff')
+      })
   })
   return d
 })
