@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>折线图-横纵坐标</title>
+</head>
+<body>
+<div id="chart"></div>
+<script src="./dist/d3.js"></script>
+<script>
+let yAxis_data = [2.5, 1, 1.7, 6, 1.2, 3, 5, 10, 2.3]
+let xAxis_data = ['周一', '周二', '周三', '周四', '周五', '周六', '周日', '粥吧', '西周',]
+let width = 600
+let height = 300
+let chart = d3.select('#chart')
+
+xAxis_data.unshift(' ')
+
+// 获取根元素
+let svg = chart.append('svg').attr('width', width).attr('height', height)
+
+// 设置比例尺  (横坐标的比例尺)
+let xlinear = d3.scaleLinear().domain([0, xAxis_data.length - 1]).range([0, width - 60])
+// 定义纵坐标比例尺
+let ylinear = d3.scaleLinear().domain([0, d3.max(yAxis_data) + d3.max(yAxis_data) * 0.2]).range([height - 40, 0])
+
+
+// 定义横坐标轴
+let xAxis = d3.axisBottom(xlinear).ticks(xAxis_data.length)
+// 展示横坐标
+svg.append('g').attr('transform', "translate("+40+","+(height - 20)+")").call(xAxis)
+d3.selectAll('g > text').data(xAxis_data).text(d => d)
+
+// 定义纵坐标
+let yAxis = d3.axisLeft(ylinear).ticks(yAxis_data.length)
+svg.append('g').attr('transform', "translate("+40+","+20+")").call(yAxis)
+
+// 设置数据
+let data = []
+yAxis_data.forEach((item, index) => {
+  data.push({
+    x: index + 1,
+    y: item
+  })
+})
+console.log(data)
+let data_g = svg.append('g')
+data_g.append('polyline').attr('points', () => {
+  let d = ''
+  data.forEach(item => {
+    console.log(item.x)
+    d += xlinear(item.x) + ',' + ylinear(item.y) + ' '
+  })
+  // data_g.append('circle').attr()
+  return d
+})
+.attr('fill', 'none')
+.attr('stroke', '#000')
+.attr('stroke-width', '2px')
+.attr("transform","translate(" + 40 + "," + 20 + ")")
+</script>
+</body>
+</html>

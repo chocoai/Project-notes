@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>折线图坐标轴</title>
+</head>
+<body>
+<div id="chart"></div>
+<script src="./dist/d3.js"></script>
+<script>
+// SVG没有专门的坐标轴元素  所以我们需要使用别的图形去拼装
+// <g>
+//   <!-- 第一个刻度 -->
+//   <g>
+//     <line></line>   <!-- 第一个刻度的直线 -->
+//     <text></text>   <!-- 第一个刻度的文字 -->
+//   </g>
+//   <!-- 第二个刻度 -->
+//   <g>
+//     <line></line>   <!-- 第二个刻度的直线 -->
+//     <text></text>   <!-- 第二个刻度的文字 -->
+//   </g> 
+//   ...
+//   <!-- 坐标轴的轴线 -->
+//   <path></path>
+// </g>
+// 类似上面的结构
+
+
+
+const chart = d3.select('#chart').append('svg').attr('width', 1000)
+console.log(chart)
+
+// 定义坐标轴
+let dataset = [2.5, 2.1, 1.7, 1.3, 0.9, 3.1]
+
+// 定义比例尺
+let linear = d3.scaleLinear().domain([0, d3.max(dataset)]).range([0, d3.max(dataset) * 100])
+
+console.log(linear)
+// 定义坐标轴
+let xAxis = d3.axisBottom(linear).ticks(3) // 设置刻度数目
+console.log(d3)
+chart.append('g').attr('transform', "translate("+20+","+dataset.length+")").call(xAxis)
+</script>
+</body>
+</html>
