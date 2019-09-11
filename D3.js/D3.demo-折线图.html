@@ -11,7 +11,7 @@
 <script src="./dist/d3.js"></script>
 <script>
 let yAxis_data = [2.5, 1, 1.7, 6, 1.2, 3, 5, 10, 2.3]
-let xAxis_data = ['周一', '周二', '周三', '周四', '周五', '周六', '周日', '粥吧', '西周',]
+let xAxis_data = ['周一', '周二', '周三', '周四', '周五', '周六', '周日', '粥吧', '西周']
 let width = 600
 let height = 300
 let chart = d3.select('#chart')
@@ -30,12 +30,12 @@ let ylinear = d3.scaleLinear().domain([0, d3.max(yAxis_data) + d3.max(yAxis_data
 // 定义横坐标轴
 let xAxis = d3.axisBottom(xlinear).ticks(xAxis_data.length)
 // 展示横坐标
-svg.append('g').attr('transform', "translate("+40+","+(height - 20)+")").call(xAxis)
+svg.append('g').attr('class', 'xAxis').attr('transform', "translate("+40+","+(height - 20)+")").call(xAxis)
 d3.selectAll('g > text').data(xAxis_data).text(d => d)
 
 // 定义纵坐标
 let yAxis = d3.axisLeft(ylinear).ticks(yAxis_data.length)
-svg.append('g').attr('transform', "translate("+40+","+20+")").call(yAxis)
+svg.append('g').attr('class', 'yAxis').attr('transform', "translate("+40+","+20+")").call(yAxis)
 
 // 设置数据
 let data = []
@@ -45,7 +45,7 @@ yAxis_data.forEach((item, index) => {
     y: item
   })
 })
-console.log(data)
+
 let data_g = svg.append('g')
 data_g.append('polyline').attr('points', () => {
   let d = ''
@@ -54,25 +54,34 @@ data_g.append('polyline').attr('points', () => {
     data_g.append('circle')
       .attr('cx', xlinear(item.x))
       .attr('cy', ylinear(item.y))
-      .attr('r', 3)
+      .attr('r', 1.5)
       .attr('fill', '#fff')
-      .attr('stroke', '#000')
-      .attr('stroke-width', 2)
+      .attr('stroke', '#2196F3')
+      .attr('stroke-width', 1)
       .attr("transform","translate(" + 40 + "," + 20 + ")")
       .on('mouseenter', function () {
+        /* 
+          transition 过渡
+          duration   过渡时间
+        */
         let that = this
-        d3.select(that).attr('r', 4).attr('fill', 'pink')
+        d3.select(that)
+          .attr('r', 5)
+          .attr('fill', '#fff')
+          .transition()
+          .duration(100)
+          .attr('r', 4)
       })
       .on('mouseout', function () {
         let that = this
-        d3.select(that).attr('r', 3).attr('fill', '#fff')
+        d3.select(that).attr('r', 1.5).attr('fill', '#fff')
       })
   })
   return d
 })
 .attr('fill', 'none')
-.attr('stroke', '#000')
-.attr('stroke-width', '2px')
+.attr('stroke', '#03a9f485')
+.attr('stroke-width', '1px')
 .attr("transform","translate(" + 40 + "," + 20 + ")")
 </script>
 </body>
