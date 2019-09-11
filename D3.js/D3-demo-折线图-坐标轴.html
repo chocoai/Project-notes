@@ -37,10 +37,29 @@ console.log(chart)
 let dataset = [2.5, 2.1, 1.7, 1.3, 0.9, 3.1]
 
 // 定义比例尺
+/* 
+  domain[min, max] 数据范围
+  range[min, max]  展示区域范围（画板范围）
+  *-----------
+  * 通过画板的大小去对应数据在画板的位置
+*/
+
 let linear = d3.scaleLinear().domain([0, d3.max(dataset)]).range([0, d3.max(dataset) * 100])
 
 console.log(linear)
 // 定义坐标轴
+
+/* 
+  axisBottom 刻度方向
+  ticks 刻度数量
+*/
+
+/* 
+  axisTop
+  axisLeft
+  axisRight
+  axisButtom
+*/
 let xAxis = d3.axisBottom(linear).ticks(3) // 设置刻度数目
 console.log(d3)
 chart.append('g').attr('transform', "translate("+20+","+dataset.length+")").call(xAxis)
