@@ -6,9 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>折线图-横纵坐标</title>
   <style>
-    svg {
-      padding-top: 30px;
-    }
   </style>
 </head>
 <body>
@@ -17,6 +14,8 @@
 <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
 <script>
 let titleText = '这是什么折线图的标题'
+let xtitle = '星期'
+let ytitle = '数量'
 let yAxis_data = [2.5, 1, 1.7, 6, 1.2, 3, 5, 10, 2.3]
 let xAxis_data = ['周一', '周二', '周三', '周四', '周五', '周六', '周日', '粥吧', '西周']
 let width = 600
@@ -28,8 +27,10 @@ let chart = d3.select('#chart')
 // 获取根元素
 let svg = chart.append('svg').attr('width', width).attr('height', height + 100)
 
-// 添加图表标题
-svg.append('text').attr('transform', 'translate(17, 25)').text(titleText)
+// 添加图表标题 和 横纵坐标轴title
+svg.append('text').attr('transform', 'translate(10, 25)').text(titleText).attr('style', 'font-weight: 600;').enter()
+svg.append('text').text(xtitle).attr('transform', "translate("+(width - 35)+"," + (height + 20) + ")").attr('style', 'font-size: 14px;')
+svg.append('text').text(ytitle).attr('transform', "translate(17,56)").attr('style', 'font-size: 14px;')
 
 
 // 设置比例尺  (横坐标的比例尺)
@@ -41,12 +42,12 @@ let ylinear = d3.scaleLinear().domain([0, d3.max(yAxis_data) + d3.max(yAxis_data
 // 定义横坐标轴
 let xAxis = d3.axisBottom(xlinear).ticks(xAxis_data.length)
 // 展示横坐标
-svg.append('g').attr('class', 'xAxis').attr('transform', "translate("+40+","+(height)+")").call(xAxis)
+svg.append('g').attr('class', 'xAxis').attr('transform', "translate("+40+","+(height + 30)+")").call(xAxis)
 d3.selectAll('g > text').data(xAxis_data).text(d => d)
 
 // 定义纵坐标
 let yAxis = d3.axisLeft(ylinear).ticks(yAxis_data.length)
-svg.append('g').attr('class', 'yAxis').attr('transform', "translate("+40+","+40+")").call(yAxis)
+svg.append('g').attr('class', 'yAxis').attr('transform', "translate("+40+","+70+")").call(yAxis)
 
 // 设置数据
 let data = []
@@ -69,7 +70,7 @@ data_g.append('polyline').attr('points', () => {
       .attr('fill', '#fff')
       .attr('stroke', '#2196F3')
       .attr('stroke-width', 1)
-      .attr("transform","translate(" + 40 + "," + 40 + ")")
+      .attr("transform","translate(" + 40 + "," + 70 + ")")
       .on('mouseout', function () {
         let that = this
         d3.select(that).attr('r', 1.5).attr('fill', '#fff')
@@ -84,7 +85,7 @@ data_g.append('polyline').attr('points', () => {
           .attr('r', 5)
           .attr('fill', '#fff')
           .transition()
-          .duration(100)
+          .duration(10)
           .attr('r', 4)
       })
       
@@ -94,7 +95,7 @@ data_g.append('polyline').attr('points', () => {
 .attr('fill', 'none')
 .attr('stroke', '#03a9f485')
 .attr('stroke-width', '1px')
-.attr("transform","translate(" + 40 + "," + 40 + ")")
+.attr("transform","translate(" + 40 + "," + 70 + ")")
 </script>
 </body>
 </html>
