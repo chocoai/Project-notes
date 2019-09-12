@@ -6,6 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>折线图-横纵坐标</title>
   <style>
+    circle {
+      r: 1.5;
+      transition: all .4s;
+      fill: '#fff';
+    }
+    circle:hover {
+      r: 5;
+    }
   </style>
 </head>
 <body>
@@ -57,7 +65,7 @@ yAxis_data.forEach((item, index) => {
     y: item
   })
 })
-
+console.log()
 let data_g = svg.append('g')
 data_g.append('polyline').attr('points', () => {
   let d = ''
@@ -71,24 +79,6 @@ data_g.append('polyline').attr('points', () => {
       .attr('stroke', '#2196F3')
       .attr('stroke-width', 1)
       .attr("transform","translate(" + 40 + "," + 70 + ")")
-      .on('mouseout', function () {
-        let that = this
-        d3.select(that).attr('r', 1.5).attr('fill', '#fff')
-      })
-      .on('mouseenter', function () {
-        /* 
-          transition 过渡
-          duration   过渡时间
-        */
-        let that = this
-        d3.select(that)
-          .attr('r', 5)
-          .attr('fill', '#fff')
-          .transition()
-          .duration(10)
-          .attr('r', 4)
-      })
-      
   })
   return d
 })
