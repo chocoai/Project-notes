@@ -9,6 +9,9 @@
     path {
       transition: all .2s;
     }
+    .p_radius {
+      /* opacity: 0; */
+    }
   </style>
 </head>
 <body>
@@ -36,6 +39,56 @@ let arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius)
 
 // 设置颜色区间
 let color = d3.interpolateRgb(d3.rgb('#59dfff'), d3.rgb('#e059ff'))
+
+/* ----- 生成外环 ----- */
+let p_arc = d3.arc().innerRadius(outerRadius).outerRadius(outerRadius + 100)
+
+// 获取外环path路径  
+let p_data = pie(data)
+console.log(p_data)
+p_data.forEach((item, index) => {
+  svg
+    .append('g')
+    .attr('class', 'p_radius')
+    .append('path')
+    .attr('d', p_arc(item))
+    .attr("transform","translate("+ (width/2) +","+ (height/2) +")")
+})
+let end_p_arc = []
+d3.selectAll('.p_radius').append('polyline')
+  .data(p_data)
+  .attr('points', d => {
+    console.log(p_arc.centroid(d))
+    let new_p_arc = p_arc.centroid(d).map((item, index) => {
+      if (index) {
+        item = item + height / 2
+      } else {
+        item = item + width / 2
+      }
+      return item
+    })
+    end_p_arc = p_arc.centroid(d).map((item, index) => {
+      if (!index) {
+        if (item > 0) {
+          item = item + 50 + width / 2
+        } else {
+          item = item - 50 + width / 2
+        }
+      } else {
+        item = item + height / 2
+      }
+      return item
+    })
+    return width / 2 + ',' + height / 2 + ' ' + new_p_arc + ' ' + end_p_arc
+  })
+  .attr('stroke', '#ccc')
+  .attr('stroke-width', 2)
+
+  d3.selectAll('.p_radius').append('text').attr('transform', )
+
+
+console.log(d3.selectAll('.p_radius'))
+// 设置内环属性
 cake_data.forEach((item, index) => {
   svg
     .append('g')
@@ -61,19 +114,7 @@ cake_data.forEach((item, index) => {
   console.log(d3.selectAll('svg > g'))
 })
 
-/* ----- 生成外环 ----- */
-let p_arc = d3.arc().innerRadius(innerRadius).outerRadius(innerRadius + 50)
 
-// 获取外环path路径  
-let p_data = pie(data)
-console.log(p_data)
-p_data.forEach((item, index) => {
-  svg
-    .append('g')
-    .append('path')
-    .attr('d', p_arc(item))
-    .attr("transform","translate("+ (width/2) +","+ (height/2) +")")
-})
 </script>
 </body>
 </html>
