@@ -6,14 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>折线图-横纵坐标</title>
   <style>
-    circle {
+    /* circle {
       r: 1.5;
       transition: all .4s;
       fill: '#fff';
     }
     circle:hover {
       r: 5;
-    }
+    } */
   </style>
 </head>
 <body>
@@ -86,6 +86,13 @@ data_g.append('polyline').attr('points', () => {
 .attr('stroke', '#03a9f485')
 .attr('stroke-width', '1px')
 .attr("transform","translate(" + 40 + "," + 70 + ")")
+
+d3.selectAll('circle').on('mouseover', function () {
+  d3.select(this).attr('r', 5).transition().ease(d3.easeCubicInOut).attr('r', 4).on('end', function () {
+  })
+}).on('mouseout', function () {
+  d3.select(this).transition().ease(d3.easeCubicInOut).attr('r', 1.5)
+})
 </script>
 </body>
 </html>
