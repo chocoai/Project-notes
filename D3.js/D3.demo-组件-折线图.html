@@ -14,6 +14,15 @@
     circle:hover {
       r: 5;
     } */
+    .hover-text {
+      width: 100px;
+      padding: 12px;
+      box-sizing: border-box;
+      height: 60px;
+      fill: rgba(0, 0, 0, 0.6);
+      rx: 5px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -29,11 +38,18 @@ let xAxis_data = ['周一', '周二', '周三', '周四', '周五', '周六', '�
 let width = 600
 let height = 300
 let chart = d3.select('#chart')
+let totalData = []
 
-// xAxis_data.unshift(' ')
+// 遍历横纵坐标 获取总数据
+xAxis_data.forEach((item, index) => {
+  totalData.push({
+    xAxis_data: item,
+    yAxis_data: yAxis_data[index]
+  })
+})
 
 // 获取根元素
-let svg = chart.append('svg').attr('width', width).attr('height', height + 100)
+let svg = chart.append('svg').attr('width', width + 100).attr('height', height + 100)
 
 // 添加图表标题 和 横纵坐标轴title
 svg.append('text').attr('transform', 'translate(10, 25)').text(titleText).attr('style', 'font-weight: 600;').enter()
@@ -51,7 +67,7 @@ let ylinear = d3.scaleLinear().domain([0, d3.max(yAxis_data) + d3.max(yAxis_data
 let xAxis = d3.axisBottom(xlinear).ticks(xAxis_data.length)
 // 展示横坐标
 svg.append('g').attr('class', 'xAxis').attr('transform', "translate("+40+","+(height + 30)+")").call(xAxis)
-d3.selectAll('g > text').data(xAxis_data).text(d => d)
+d3.selectAll('g.tick > text').data(xAxis_data).text(d => d)
 
 // 定义纵坐标
 let yAxis = d3.axisLeft(ylinear).ticks(yAxis_data.length)
@@ -65,7 +81,6 @@ yAxis_data.forEach((item, index) => {
     y: item
   })
 })
-console.log()
 let data_g = svg.append('g')
 data_g.append('polyline').attr('points', () => {
   let d = ''
@@ -87,11 +102,31 @@ data_g.append('polyline').attr('points', () => {
 .attr('stroke-width', '1px')
 .attr("transform","translate(" + 40 + "," + 70 + ")")
 
-d3.selectAll('circle').on('mouseover', function () {
-  d3.select(this).attr('r', 5).transition().ease(d3.easeCubicInOut).attr('r', 4).on('end', function () {
-  })
+// 添加Hover-text
+let rect_g = svg.append('g')
+let rect = rect_g
+.append('rect')
+.attr('class', 'hover-text')
+
+rect_g.append('text').attr('class', 'xAxis_data')
+rect_g.append('text').attr('class', 'yAxis_data')
+
+d3.selectAll('circle').data(totalData).on('mouseover', function (d) {
+  rect.transition().ease(d3.easeCubicInOut).style('display', 'block')
+  rect.attr('x', Number(d3.select(this).attr('cx')) + 50)
+  rect.attr('y', Number(d3.select(this).attr('cy')) + 80)
+  d3.select('text.xAxis_data')
+    .text(xtitle + ' : ' + d.xAxis_data)
+    .attr('fill', '#fff')
+    .attr('transform', "translate("+ (Number(d3.select(this).attr('cx')) + 60) +","+ (Number(d3.select(this).attr('cy')) + 105) +")")
+  d3.select('text.yAxis_data')
+    .text(ytitle + ' : ' + d.yAxis_data)
+    .attr('fill', '#fff')
+    .attr('transform', "translate("+ (Number(d3.select(this).attr('cx')) + 60) +","+ (Number(d3.select(this).attr('cy')) + 125) +")")
+  d3.select(this).attr('r', 5).transition().ease(d3.easeCubicInOut).attr('r', 4).on('end', null)
 }).on('mouseout', function () {
   d3.select(this).transition().ease(d3.easeCubicInOut).attr('r', 1.5)
+  rect.transition().ease(d3.easeCubicInOut).style('display', 'none')
 })
 </script>
 </body>
