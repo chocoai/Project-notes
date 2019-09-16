@@ -51,14 +51,14 @@ p_data.forEach((item, index) => {
     .append('g')
     .attr('class', 'p_radius')
     .append('path')
+    .attr('fill', '#fff')
     .attr('d', p_arc(item))
     .attr("transform","translate("+ (width/2) +","+ (height/2) +")")
 })
-let end_p_arc = []
+let end_p_arc_All = []
 d3.selectAll('.p_radius').append('polyline')
   .data(p_data)
   .attr('points', d => {
-    console.log(p_arc.centroid(d))
     let new_p_arc = p_arc.centroid(d).map((item, index) => {
       if (index) {
         item = item + height / 2
@@ -79,13 +79,17 @@ d3.selectAll('.p_radius').append('polyline')
       }
       return item
     })
+    end_p_arc_All.push(end_p_arc)
     return width / 2 + ',' + height / 2 + ' ' + new_p_arc + ' ' + end_p_arc
   })
   .attr('stroke', '#ccc')
+  .attr('fill', '#fff')
   .attr('stroke-width', 2)
-
-  d3.selectAll('.p_radius').append('text').attr('transform', )
-
+  console.log(end_p_arc_All)
+  d3.selectAll('.p_radius').append('text').data(data).attr('transform', (d, index) => {
+    return "translate("+ end_p_arc_All[index] +")"
+  }).text(d => d)
+  // 生成路径之后 填充的内容就是数据的没一项
 
 console.log(d3.selectAll('.p_radius'))
 // 设置内环属性
