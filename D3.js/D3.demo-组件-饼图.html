@@ -6,12 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>饼图</title>
   <style>
-    path {
-      transition: all .2s;
-    }
-    .p_radius {
-      /* opacity: 0; */
-    }
   </style>
 </head>
 <body>
@@ -20,7 +14,7 @@
 <script>
 let width = 600
 let height = 800
-let data = [10, 40, 27, 48, 12]
+let data = [10, 40, 27, 48, 12,100, 40, 27, 48,2]
 // 外半径
 let outerRadius = 150
 // 内半径
@@ -33,7 +27,7 @@ svg.attr('style', `width: ${width};height: ${height};`)
 // 数据转换 将数据转化为path路径可以用的数据
 let pie = d3.pie()
 let cake_data = pie(data)
-
+console.log(cake_data)
 // 设置元半径  arc 是个函数 可以
 let arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius)
 
@@ -50,8 +44,8 @@ p_data.forEach((item, index) => {
   svg
     .append('g')
     .attr('class', 'p_radius')
-    .append('path')
     .attr('fill', '#fff')
+    .append('path')
     .attr('d', p_arc(item))
     .attr("transform","translate("+ (width/2) +","+ (height/2) +")")
 })
@@ -86,7 +80,7 @@ d3.selectAll('.p_radius').append('polyline')
   .attr('fill', '#fff')
   .attr('stroke-width', 2)
   console.log(end_p_arc_All)
-  d3.selectAll('.p_radius').append('text').data(data).attr('transform', (d, index) => {
+  d3.selectAll('.p_radius').append('text').data(data).attr('fill', '#000').attr('transform', (d, index) => {
     return "translate("+ end_p_arc_All[index] +")"
   }).text(d => d)
   // 生成路径之后 填充的内容就是数据的没一项
@@ -103,11 +97,21 @@ cake_data.forEach((item, index) => {
     .attr('fill', color(item.data / 100))
     .on('mouseover', function () {
       let new_arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius + 15)
-      d3.select(this).attr('d', new_arc(item))
-    })
-    .on('mouseout', function () {
-      d3.select(this).attr('d', arc(item))
-    })
+      d3.select(this)
+        .attr('d', d3.arc().innerRadius(innerRadius).outerRadius(outerRadius + 15)(item))
+        .transition()
+        .duration(100)
+        .ease(d3.easeCubicInOut)
+        .attr('d', d3.arc().innerRadius(innerRadius).outerRadius(outerRadius + 10)(item))
+        .on('end', null)
+      })
+      .on('mouseout', function () {
+        d3.select(this)
+        .transition()
+        .duration(100)
+        .attr('d', arc(item))
+        .on('end', null)
+      })
   // d3.selectAll('svg > g:nth-child(' + (index + 1) + ')')
   //   .append('text')
   //   .text(data[index])
