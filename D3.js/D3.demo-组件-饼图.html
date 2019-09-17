@@ -14,7 +14,10 @@
 <script>
 let width = 600
 let height = 800
-let data = [10, 40, 27, 48, 12,100, 40, 27, 48,2]
+let header = '同名数量统计'
+let title = ''
+let title_data = ['百度', '谷歌', '新浪', '腾讯', '阿里']
+let data = [1100, 100, 1007, 1408, 1120]
 // 外半径
 let outerRadius = 150
 // 内半径
@@ -32,7 +35,7 @@ console.log(cake_data)
 let arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius)
 
 // 设置颜色区间
-let color = d3.interpolateRgb(d3.rgb('#59dfff'), d3.rgb('#e059ff'))
+let color = d3.interpolateRgb(d3.rgb('#e91b1b'), d3.rgb('#06c3ff'))
 
 /* ----- 生成外环 ----- */
 let p_arc = d3.arc().innerRadius(outerRadius).outerRadius(outerRadius + 100)
@@ -45,9 +48,9 @@ p_data.forEach((item, index) => {
     .append('g')
     .attr('class', 'p_radius')
     .attr('fill', '#fff')
-    .append('path')
-    .attr('d', p_arc(item))
-    .attr("transform","translate("+ (width/2) +","+ (height/2) +")")
+    // .append('path')
+    // .attr('d', p_arc(item))
+    // .attr("transform","translate("+ (width/2) +","+ (height/2) +")")
 })
 let end_p_arc_All = []
 d3.selectAll('.p_radius').append('polyline')
@@ -80,7 +83,7 @@ d3.selectAll('.p_radius').append('polyline')
   .attr('fill', '#fff')
   .attr('stroke-width', 2)
   console.log(end_p_arc_All)
-  d3.selectAll('.p_radius').append('text').data(data).attr('fill', '#000').attr('transform', (d, index) => {
+  d3.selectAll('.p_radius').append('text').data(title_data).attr('fill', '#000').attr('transform', (d, index) => {
     return "translate("+ end_p_arc_All[index] +")"
   }).text(d => d)
   // 生成路径之后 填充的内容就是数据的没一项
@@ -94,8 +97,10 @@ cake_data.forEach((item, index) => {
     .append('path')
     .attr('stroke-width', '0px')
     .attr('d', arc(item))
-    .attr('fill', color(item.data / 100))
-    .on('mouseover', function () {
+    .attr('fill', color(item.data / d3.max(data)))
+    .data([data[index]])
+    .on('mouseover', function (d) {
+      console.log(d)
       let new_arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius + 15)
       d3.select(this)
         .attr('d', d3.arc().innerRadius(innerRadius).outerRadius(outerRadius + 15)(item))
