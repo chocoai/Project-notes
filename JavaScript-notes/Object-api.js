@@ -30,3 +30,7 @@ newobj = {
   ...obj
 }
 console.log(newobj)
+
+Object.prototype.hasOwnProperty()
+console.log(newobj.hasOwnProperty('name'))
+console.log(Object.prototype.hasOwnProperty.call(newobj, 'name'))
