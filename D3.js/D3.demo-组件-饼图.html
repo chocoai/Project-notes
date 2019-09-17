@@ -6,6 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>饼图</title>
   <style>
+    .hover-text {
+      width: 100px;
+      padding: 12px;
+      box-sizing: border-box;
+      height: 60px;
+      fill: rgba(0, 0, 0, 0.6);
+      rx: 5px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -14,8 +23,8 @@
 <script>
 let width = 600
 let height = 800
-let header = '同名数量统计'
-let title = ''
+let header = '各互联网公司门卫数量'
+let unit = '数量'
 let title_data = ['百度', '谷歌', '新浪', '腾讯', '阿里']
 let data = [1100, 100, 1007, 1408, 1120]
 // 外半径
@@ -26,6 +35,19 @@ let innerRadius = 0
 let cake = d3.select('#cake')
 let svg = cake.append('svg')
 svg.attr('style', `width: ${width};height: ${height};`)
+
+// 添加标题
+svg.append('text').attr('transform', 'translate(15, 25)').text(header).attr('style', 'font-weight: 600;').enter()
+
+// 添加hover
+let rect_g = svg.append('g')
+let rect = rect_g
+.append('rect')
+.attr('class', 'hover-text')
+.attr('transform', 'translate('+ (width - 100) +')')
+rect_g.append('text').attr('class', 'unit').attr('fill', '#fff').attr('transform', 'translate('+ (width - 90) + ',' + 22 +')')
+rect_g.append('text').attr('class', 'title_data_item').attr('fill', '#fff').attr('transform', 'translate('+ (width - 90) + ',' + 45 +')')
+
 
 // 数据转换 将数据转化为path路径可以用的数据
 let pie = d3.pie()
@@ -93,6 +115,7 @@ console.log(d3.selectAll('.p_radius'))
 cake_data.forEach((item, index) => {
   svg
     .append('g')
+    .attr('class', 'until')
     .attr("transform","translate("+ (width/2) +","+ (height/2) +")")
     .append('path')
     .attr('stroke-width', '0px')
@@ -100,10 +123,15 @@ cake_data.forEach((item, index) => {
     .attr('fill', color(item.data / d3.max(data)))
     .data([data[index]])
     .on('mouseover', function (d) {
-      console.log(d)
+      d3.select('.hover-text').style('display', 'block')
+      d3.select('.unit')
+      .text(title_data[index])
+      d3.select('.title_data_item')
+      .text(unit + ':' + d)
+      // 计算新的外围半径 然后渲染
       let new_arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius + 15)
       d3.select(this)
-        .attr('d', d3.arc().innerRadius(innerRadius).outerRadius(outerRadius + 15)(item))
+      .attr('d', d3.arc().innerRadius(innerRadius).outerRadius(outerRadius + 15)(item))
         .transition()
         .duration(100)
         .ease(d3.easeCubicInOut)
@@ -111,23 +139,20 @@ cake_data.forEach((item, index) => {
         .on('end', null)
       })
       .on('mouseout', function () {
+        d3.select('.hover-text').style('display', 'none')
+        // 恢复原来的半径、
         d3.select(this)
-        .transition()
-        .duration(100)
-        .attr('d', arc(item))
-        .on('end', null)
-      })
-  // d3.selectAll('svg > g:nth-child(' + (index + 1) + ')')
-  //   .append('text')
-  //   .text(data[index])
-  //   .attr("transform",function(d){
-  //     return "translate(" + arc.centroid(item).map(items => items) + ")"
-  //   })
-    // .instance()
-  console.log(d3.selectAll('svg > g'))
+      .transition()
+      .duration(100)
+      .attr('d', arc(item))
+      .on('end', null)
+    })
 })
 
-
+// d3.selectAll('.until').on('mousemove', function (d, i) {
+//   console.log(i)
+//   console.log(d3.mouse(this))
+// })
 </script>
 </body>
 </html>
