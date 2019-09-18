@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>柱状图</title>
+</head>
+<body>
+<div id="column"></div>
+<script src="./dist/d3.js"></script>
+<script>
+let svg = d3.select('#column').append('svg')
+let charTitle = '这是一个柱状图'
+let width = 600
+let height = 400
+let xtitle = '星期'
+let ytitle = '数量'
+let yAxis_data = [2.5, 1, 1.7, 6, 1.2, 3, 5]
+let xAxis_data = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+xAxis_data.unshift(0)
+// 设置SVG的大小
+svg.attr('width', width + 100).attr('height', height + 100)
+
+// 设置比例尺  (横坐标的比例尺)
+let xlinear = d3.scaleLinear().domain([0, xAxis_data.length - 1]).range([0, width - 60])
+// 定义纵坐标比例尺
+let ylinear = d3.scaleLinear().domain([0, d3.max(yAxis_data) + d3.max(yAxis_data) * 0.2]).range([height - 40, 0])
+
+// 定义横坐标轴
+let xAxis = d3.axisBottom(xlinear).ticks(xAxis_data.length)
+svg.append('g').attr('class', 'xAxis').attr('transform', "translate("+40+","+(height + 30)+")").call(xAxis)
+// 定义纵坐标
+let yAxis = d3.axisLeft(ylinear).ticks(yAxis_data.length)
+svg.append('g').attr('class', 'yAxis').attr('transform', "translate("+40+","+70+")").call(yAxis)
+
+// 替换横坐标
+d3.selectAll('.tick > text').data(xAxis_data).text((d, i) => {
+  if (i !== 0) return xAxis_data[i]
+})
+
+// 将图标题固定
+svg.append('text').text(charTitle).attr('transform', 'translate(' + 20 + ',' + 40 + ')')
+</script>
+</body>
+</html>
