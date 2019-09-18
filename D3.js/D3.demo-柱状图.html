@@ -21,9 +21,11 @@ let width = 600
 let height = 400
 let xtitle = '星期'
 let ytitle = '数量'
-let yAxis_data = [2.5, 1, 1.7, 6, 1.2, 3, 5]
-let xAxis_data = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+let yAxis_data = [2.5, 1, 1.7, 6, 1.2]
+let xAxis_data = ['周一', '周二', '周三', '周四', '周五']
 let rectWidth  = 40
+let rectBg = 'rgb(194, 53, 49)'
+let rectBg_hover = 'rgb(213, 58, 53)'
 xAxis_data.unshift(0)
 let myRect = svg.append('g').attr('class', 'MyRect')
 let svgpaddingLeft = 40
@@ -58,17 +60,27 @@ svg.append('text').text(charTitle).attr('transform', 'translate(' + 20 + ',' + 4
 // 将横纵坐标标题展示
 svg.append('text').text(xtitle).attr('class', 'xtitle').attr('transform', 'translate(' + (width - 10) + ',' + (height + 35) + ')')
 svg.append('text').text(ytitle).attr('class', 'ytitle').attr('transform', 'translate(' + 20 + ',' + 65 + ')')
-console.log(xlinear())
+
+// 获取一个横坐标单元格的Px距离
+let spacing = xlinear(1) - xlinear(0)
+
+// 遍历数据 动态添加矩形
 yAxis_data.forEach((item, index) => {
   console.log(item)
   myRect
     .append('rect')
-    .attr('x', xlinear(index) + 60)
+    .attr('fill', rectBg)
+    .attr('x', xlinear(index) + svgpaddingLeft + 20 / 2)
     .attr('y', ylinear(item) + svgpaddingTop)
-    .attr('width', rectWidth)
+    .attr('width', spacing - 20)
     .attr('height', height - ylinear(item) - 40)
 })
-
+d3.selectAll('rect').on('mouseover', function () {
+  d3.select(this).transition().ease(d3.easeCubicInOut).attr('fill', rectBg_hover)
+}).on('mouseout', function () {
+  d3.select(this).transition().ease(d3.easeCubicInOut).attr('fill', rectBg)
+})
+d3.selectAll('.xAxis > g > text').style('position', 'relative').attr('x', -spacing / 2)
 </script>
 </body>
 </html>
