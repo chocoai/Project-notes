@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>柱状图</title>
+  <style>
+    .xtitle,.ytitle {
+      font-size: 12px;
+    }
+  </style>
 </head>
 <body>
 <div id="column"></div>
@@ -41,6 +46,10 @@ d3.selectAll('.tick > text').data(xAxis_data).text((d, i) => {
 
 // 将图标题固定
 svg.append('text').text(charTitle).attr('transform', 'translate(' + 20 + ',' + 40 + ')')
+
+// 将横纵坐标标题展示
+svg.append('text').text(xtitle).attr('class', 'xtitle').attr('transform', 'translate(' + (width - 10) + ',' + (height + 35) + ')')
+svg.append('text').text(ytitle).attr('class', 'ytitle').attr('transform', 'translate(' + 20 + ',' + 65 + ')')
 </script>
 </body>
 </html>
