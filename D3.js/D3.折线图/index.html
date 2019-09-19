@@ -11,8 +11,17 @@
 <script src="../dist/d3.js"></script>
 <script src="./D3.折线图.js"></script>
 <script>
-console.log(line_G_chart)
-line_G_chart([])
+// console.log(line_G_chart)
+line_G_chart({
+  el: '#chart',
+  titleText: '这是一个封装好的折线图',
+  xtitle: '星期几',
+  ytitle: '数量/',
+  yAxis_data: [2.5, 1, 1.7, 6, 1.2, 3, 5, 11],
+  xAxis_data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日', '粥吧'],
+  width: 600,
+  height: 300
+})
 </script>
 </body>
 </html>
