@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>柱状图</title>
+  <style>
+    .xtitle,.ytitle {
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+<div id="column"></div>
+<script src="../dist/d3.js"></script>
+<script src="./D3.柱状图.js">
+</script>
+<script>
+column_G_chart({
+  el: '#column',
+  charTitle: '这是一个柱状图',
+  width: 600,
+  height: 400,
+  xtitle: '星期',
+  ytitle: '数量',
+  yAxis_data: [2.5, 1, 1.7, 6, 1.2, 102, 97, 38],
+  xAxis_data: ['周一', '周二', '周三', '周四', '周五', '周三', '周四', '周五'],
+  rectBg: 'red',
+  rectBg_hover: 'yellow'
+})
+</script>
+</body>
+</html>
