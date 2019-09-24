@@ -21,7 +21,8 @@ let width = 600
 let height = 400
 let xtitle = '星期'
 let ytitle = '数量'
-let yAxis_data = [2.5, 1, 1.7, 6, 1.2, 102, 97, 38]
+let yAxis_data = [2.5, 1, 1.7, 6, 1.2, 12, 7, 3]
+let yAxis_data_II = [12.5, 5, 8.5, 30, 6, 60, 35, 15]
 let xAxis_data = ['周一', '周二', '周三', '周四', '周五', '周三', '周四', '周五']
 let rectBg = 'rgb(194, 53, 49)'
 let rectBg_hover = 'rgb(213, 58, 53)'
@@ -38,10 +39,13 @@ svg.attr('width', width + 100).attr('height', height + 100)
 let xlinear = d3.scaleLinear().domain([0, xAxis_data.length - 1]).range([0, width - 60])
 // 定义纵坐标比例尺
 let ylinear = d3.scaleLinear().domain([0, d3.max(yAxis_data) + d3.max(yAxis_data) * 0.2]).range([height - 40, 0])
+let ylinear_II = d3.scaleLinear().domain([0, d3.max(yAxis_data_II) + d3.max(yAxis_data_II) * 0.2]).range([height - 40, 0])
 
 // 定义纵坐标
 let yAxis = d3.axisLeft(ylinear).ticks(yAxis_data.length)
+let yAxis_II = d3.axisRight(ylinear_II).ticks(yAxis_data_II.length)
 svg.append('g').attr('class', 'yAxis').attr('transform', "translate(" + svgpaddingLeft + "," + svgpaddingTop + ")").call(yAxis)
+svg.append('g').attr('class', 'yAxis_II').attr('transform', "translate(" + (width - svgpaddingLeft + 20) + "," + svgpaddingTop + ")").call(yAxis_II)
 
 // 创建矩形存放的位置  因为需要纵坐标的点的位置  所以要先绘制出Y轴  又因为X轴先绘制会被后来的背景轴线覆盖 
 let myRect = svg.append('g').attr('class', 'MyRect')
