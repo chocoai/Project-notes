@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DOM-API</title>
+</head>
+<body>
+<script>
+/**
+ * 事件对象 ----------------------------------------------------------------------------------------------
+ */
+// --------------------------------getBoundingClientRect
+// getBoundingClientRect 获取当期元素在页面中的 上下左右的位置
+// rectObject.top：      元素上边到视窗上边的距离;
+// rectObject.right：    元素右边到视窗左边的距离;
+// rectObject.bottom：   元素下边到视窗上边的距离;
+// rectObject.left：     元素左边到视窗左边的距离;
+// rectObject.width：    是元素自身的宽
+// rectObject.height     是元素自身的高
+e.target.getBoundingClientRect()
+
+/**
+ * DOM操作 
+ */
+// ------------------------------document.documentElement
+// 获取<html></html>标签
+document.documentElement
+// ------------------------------创建XML元素
+document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+</script>
+</body>
+</html>
