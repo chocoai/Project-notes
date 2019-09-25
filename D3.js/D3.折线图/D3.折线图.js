@@ -39,16 +39,9 @@ function line_G_chart (demoData) {
   const xAxis_data = demoData.xAxis_data
   const width = demoData.width
   const height = demoData.height
-  const totalData = []
+  let totalData = []
   const chart = d3.select(demoData.el)
-
-  // 遍历横纵坐标 获取总数据
-  xAxis_data.forEach((item, index) => {
-    totalData.push({
-      xAxis_data: item,
-      yAxis_data: yAxis_data[index]
-    })
-  })
+  const colorArr = ['#c23531', '#2f4554','#009966','#d48265','#ff9933','#3fa7dc','#e4b19f','#b0aa95','#90e5e7','#6fbae1', '#91c7ae', '#ffdb5c', '#d53a35']
 
   let svgLeft = 40
   let svgTop = 70
@@ -58,20 +51,20 @@ function line_G_chart (demoData) {
 
   // 添加图表标题 和 横纵坐标轴title
   svg.append('text').attr('transform', 'translate(10, 25)').text(titleText).attr('style', 'font-weight: 600;').enter()
-  svg.append('text').text(xtitle).attr('transform', "translate("+(width - svgLeft)+"," + (height - 25) + ")").attr('style', 'font-size: 12px;')
+  svg.append('text').text(xtitle).attr('transform', "translate("+(width - 10)+"," + (height - 20) + ")").attr('style', 'font-size: 12px;')
   svg.append('text').text(ytitle).attr('transform', "translate(" + svgLeft / 4 + ",56)").attr('style', 'font-size: 12px;')
 
 
   // 设置比例尺  (横坐标的比例尺)
   let xlinear = d3.scaleLinear().domain([0, xAxis_data.length - 1]).range([0, width - svgLeft - 20])
   // 定义纵坐标比例尺
-  let ylinear = d3.scaleLinear().domain([0, d3.max(yAxis_data) + d3.max(yAxis_data) * 0.2]).range([height - svgTop - 20, 0])
+  let ylinear = d3.scaleLinear().domain([0, getMax(yAxis_data) + getMax(yAxis_data) * 0.2]).range([height - svgTop - 20, 0])
 
 
   // 定义横坐标轴
   
   // 绘制纵坐标
-  let yAxis = d3.axisLeft(ylinear).ticks(yAxis_data.length)
+  let yAxis = d3.axisLeft(ylinear).ticks(yAxis_data[0].length)
   svg.append('g').attr('class', 'yAxis').attr('transform', "translate("+ svgLeft + "," + svgTop +")").call(yAxis)
   
   // 绘制背景轴线
@@ -81,43 +74,48 @@ function line_G_chart (demoData) {
   let xAxis = d3.axisBottom(xlinear).ticks(xAxis_data.length)
   svg.append('g').attr('class', 'xAxis').attr('transform', "translate("+ svgLeft + "," + (height - 20) + ")").call(xAxis)
   d3.selectAll('.xAxis > .tick > text').data(xAxis_data).text(d => d)
-  // 设置数据
-  let data = []
+  
+  // 循环二维数组 将每一组数据去绘制
   yAxis_data.forEach((item, index) => {
-    data.push({
-      x: index,
-      y: item
-    })
+    drawSVG(item, index)
   })
-  let data_g = svg.append('g')
-  data_g.append('polyline').attr('points', () => {
+  function drawSVG (y_item, color_index) {
+    let data = []
+    y_item.forEach((item, index) => {
+      data.push({
+        x: index,
+        y: item
+      })
+    })
+    let data_g = svg.append('g')
+    data_g.append('polyline').attr('points', () => {
     let d = ''
-    data.forEach(item => {
+    data.forEach((item, index) => {
       d += xlinear(item.x) + ',' + ylinear(item.y) + ' '
-        data_g.append('circle')
-          .attr('cx', xlinear(item.x))
-          .attr('cy', ylinear(item.y))
-          .attr('r', 1.5)
-          .attr('fill', '#fff')
-          .attr('stroke', '#2196F3')
-          .attr('stroke-width', 1)
-          .attr("transform","translate(" + svgLeft + "," + svgTop + ")")
+      data_g.append('circle')
+        .attr('cx', xlinear(item.x))
+        .attr('cy', ylinear(item.y))
+        .attr('r', 1.5)
+        .attr('fill', '#fff')
+        .attr('stroke', colorArr[color_index])
+        .attr('stroke-width', 1)
+        .attr("transform","translate(" + 40 + "," + 70 + ")")
+      })
+      return d
     })
-    return d
-  })
-  .attr('fill', 'none')
-  .attr('stroke', '#03a9f485')
-  .attr('stroke-width', '1px')
-  .attr("transform","translate(" + svgLeft + "," + svgTop + ")")
-
-  // 添加Hover-text
+    .attr('fill', 'none')
+    .attr('stroke', colorArr[color_index])
+    .attr('stroke-width', '1px')
+    .attr("transform","translate(" + 40 + "," + 70 + ")")
+  
+  }
+  // 添加Hover-text 添加一次就够了
   let rect_g = svg.append('g')
   let rect = rect_g
   .append('rect')
   .attr('class', 'hover-text')
   let xAxis_data_title = rect_g.append('text').attr('class', 'xAxis_data').attr('style', 'font-size: 12px;')
   let yAxis_data_title = rect_g.append('text').attr('class', 'yAxis_data').attr('style', 'font-size: 12px;')
-
   d3.selectAll('circle').data(totalData).on('mouseover', function (d) {
     rect.transition().ease(d3.easeCubicInOut).style('display', 'block')
     xAxis_data_title.transition().ease(d3.easeCubicInOut).style('display', 'block')
@@ -139,7 +137,23 @@ function line_G_chart (demoData) {
     xAxis_data_title.transition().ease(d3.easeCubicInOut).style('display', 'none')
     yAxis_data_title.transition().ease(d3.easeCubicInOut).style('display', 'none')
   })
+  function getMax (arr) {
+    let maxArr = 0
+    for (let i = 0; i < arr.length; i++) {
+      maxArr = maxArr > d3.max(arr[i]) ? maxArr : d3.max(arr[i])
+      arr[i].forEach((item, index) => {
+        totalData.push({
+          xAxis_data: xAxis_data[index],
+          yAxis_data: yAxis_data[i][index]
+        })
+      })
+    }
+    return maxArr
+  }
 }
 function isType (obj) {
   return Object.prototype.toString.call(obj).slice(8, -1)
+}
+function getRandom () {
+  return Math.floor(Math.random() * 10)
 }
