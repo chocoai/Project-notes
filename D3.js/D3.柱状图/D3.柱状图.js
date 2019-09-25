@@ -88,6 +88,7 @@ function column_G_chart (demoData) {
   // 将横纵坐标标题展示
   svg.append('text').text(xtitle).attr('class', 'xtitle').attr('transform', 'translate(' + width + ',' + (height + 35) + ')')
   svg.append('text').text(ytitle).attr('class', 'ytitle').attr('transform', 'translate(' + 20 + ',' + 65 + ')')
+  svg.append('text').text(demoData.ytitle_II).attr('class', 'ytitle_II').attr('transform', 'translate(' + (width - 20) + ',' + 65 + ')')
 
 
   // 获取一个横坐标单元格的Px距离
