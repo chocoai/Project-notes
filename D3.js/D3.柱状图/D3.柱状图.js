@@ -69,7 +69,14 @@ function column_G_chart (demoData) {
   let xAxis = d3.axisBottom(xlinear).ticks(xAxis_data.length)
   svg.append('g').attr('class', 'xAxis').attr('transform', "translate(" + svgpaddingLeft + "," + (height + 30) + ")").call(xAxis)
 
-
+  if (demoData.ytitle_II.length && demoData.yAxis_data.length === demoData.yAxis_data.length) {
+    // 定义比例尺
+    let ylinear_II = d3.scaleLinear().domain([0, d3.max(demoData.yAxis_data) + d3.max(demoData.yAxis_data) * 0.2]).range([height - 40, 0])
+    // 定义第二个坐标轴
+    let yAxis_II = d3.axisRight(ylinear_II).ticks(demoData.yAxis_data.length)
+    // 绘制坐标轴
+    svg.append('g').attr('class', 'yAxis_II').attr('transform', "translate(" + (width - svgpaddingLeft + 20) + "," + svgpaddingTop + ")").call(yAxis_II)
+  }
   // 替换横坐标
   d3.selectAll('.xAxis > .tick > text').data(xAxis_data).text((d, i) => {
     if (i !== 0) return xAxis_data[i]
