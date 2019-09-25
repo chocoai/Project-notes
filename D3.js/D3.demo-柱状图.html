@@ -22,7 +22,7 @@ let height = 400
 let xtitle = '星期'
 let ytitle = '数量'
 let yAxis_data = [2.5, 1, 1.7, 6, 1.2, 12, 7, 3]
-let yAxis_data_II = [12.5, 5, 8.5, 30, 6, 60, 35, 15]
+let yAxis_data_II = [3, 1.2, 2.04, 7.2, 1.44, 14.4, 8.4, 3.6]
 let xAxis_data = ['周一', '周二', '周三', '周四', '周五', '周三', '周四', '周五']
 let rectBg = 'rgb(194, 53, 49)'
 let rectBg_hover = 'rgb(213, 58, 53)'
@@ -38,8 +38,8 @@ svg.attr('width', width + 100).attr('height', height + 100)
 // 设置比例尺  (横坐标的比例尺)
 let xlinear = d3.scaleLinear().domain([0, xAxis_data.length - 1]).range([0, width - 60])
 // 定义纵坐标比例尺
-let ylinear = d3.scaleLinear().domain([0, d3.max(yAxis_data) + d3.max(yAxis_data) * 0.2]).range([height - 40, 0])
-let ylinear_II = d3.scaleLinear().domain([0, d3.max(yAxis_data_II) + d3.max(yAxis_data_II) * 0.2]).range([height - 40, 0])
+let ylinear = d3.scaleLinear().domain([0, d3.max(yAxis_data) + d3.max(yAxis_data) * 0.02]).range([height - 40, 0])
+let ylinear_II = d3.scaleLinear().domain([0, d3.max(yAxis_data_II) + d3.max(yAxis_data_II) * 0.02]).range([height - 40, 0])
 
 // 定义纵坐标
 let yAxis = d3.axisLeft(ylinear).ticks(yAxis_data.length)

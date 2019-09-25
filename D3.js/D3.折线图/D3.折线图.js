@@ -53,6 +53,7 @@ function line_G_chart (demoData) {
   svg.append('text').attr('transform', 'translate(10, 25)').text(titleText).attr('style', 'font-weight: 600;').enter()
   svg.append('text').text(xtitle).attr('transform', "translate("+(width - 10)+"," + (height - 20) + ")").attr('style', 'font-size: 12px;')
   svg.append('text').text(ytitle).attr('transform', "translate(" + svgLeft / 4 + ",56)").attr('style', 'font-size: 12px;')
+  svg.append('text').text(demoData.ytitle_II).attr('class', 'ytitle_II').attr('transform', 'translate(' + (width - 20) + ',' + 65 + ')')
 
 
   // 设置比例尺  (横坐标的比例尺)
@@ -60,6 +61,14 @@ function line_G_chart (demoData) {
   // 定义纵坐标比例尺
   let ylinear = d3.scaleLinear().domain([0, getMax(yAxis_data) + getMax(yAxis_data) * 0.2]).range([height - svgTop - 20, 0])
 
+  if (demoData.ytitle_II.length && demoData.yAxis_data_II.length === demoData.yAxis_data[0].length) {
+    // 定义比例尺
+    let ylinear_II = d3.scaleLinear().domain([0, d3.max(demoData.yAxis_data_II) + d3.max(demoData.yAxis_data_II) * 0.2]).range([height - svgTop - 20, 0])
+    // 定义第二个坐标轴
+    let yAxis_II = d3.axisRight(ylinear_II).ticks(demoData.yAxis_data_II.length)
+    // 绘制坐标轴
+    svg.append('g').attr('class', 'yAxis_II').attr('transform', "translate(" + (width - svgLeft + 20) + "," + svgTop + ")").call(yAxis_II)
+  }
 
   // 定义横坐标轴
   
