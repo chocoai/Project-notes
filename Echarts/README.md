@@ -32,7 +32,22 @@
   ]
 ```
 **&#x1F4DA; 折线图**
-
++ 折线虚线
+```js
+  {
+    name:'行业均值',
+    type:'line',
+    smooth:false,  //关键点，为true是不支持虚线的，实线就用true
+    itemStyle:{
+      normal:{
+        lineStyle:{ 
+          type:'dotted' //'dotted'虚线 'solid'实线 
+        } 
+      } 
+    },
+    data:[120, 132, 101, 134, 90, 230, 210]
+  }
+```
 **&#x1F4DA; hover效果内容**
 + tooltip.formatter 设置hover显示内容 自定义回调函数
 ```js
