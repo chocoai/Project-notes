@@ -21,3 +21,8 @@ arr.pop()
 arr.splice(1, 1)
 // -------  从索引1开始删除  删除一个元素 并且用另个一个元素替换----------
 arr.splice(1, 1, 3)
+
+
+// filter   返回一个新数组 不影响原数组
+let new_arr = arr.filter( item => item > 2)
+console.log(new_arr)
