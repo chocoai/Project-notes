@@ -24,5 +24,9 @@ arr.splice(1, 1, 3)
 
 
 // filter   返回一个新数组 不影响原数组
-let new_arr = arr.filter( item => item > 2)
+let new_arr = arr.filter(item => item > 2)
 console.log(new_arr)
+
+// find  返回数组中满足条件的第一项    下面获取数组arr中大于0的   返回了1
+let new_index = arr.find(item => item > 0)
+console.log(new_index) // 1
