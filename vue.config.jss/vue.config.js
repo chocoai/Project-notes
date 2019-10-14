@@ -1,5 +1,7 @@
 const path = require('path')
 module.exports = {
+  // 动态路由渲染会报错  删除就好了
+  publicPath: '',
   configureWebpack: {
     performance: {
       hints: 'warning',
