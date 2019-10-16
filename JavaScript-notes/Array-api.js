@@ -30,3 +30,7 @@ console.log(new_arr)
 // find  返回数组中满足条件的第一项    下面获取数组arr中大于0的   返回了1
 let new_index = arr.find(item => item > 0)
 console.log(new_index) // 1
+
+// map 返回一个新数组
+let news_Arr = arr.map(item => item + 1)
+console.log(arr, news_Arr)
