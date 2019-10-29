@@ -54,6 +54,16 @@
   formatter: function (params) {
     console.log(1)
     console.log(params)
+    // params是一个数组  数组的每一项是当前移动点的数据 数据展示的有
+    {
+      marker: '',   // 小圆点
+      data: ,   // 当前数据点的值  可能是字符串  可能是对象  看下面数据设置的格式
+      dataIndex: Number  // 所在当前数据中的索引 
+      color: ''         // 当前点位设定的颜色   
+      seriesType: ''    //  当前数据设置的类型  和 series.type对应
+    }
+
+    // 如果要自己写  建议直接for params 拼接字符串 最后返回  可以直接用marker形成的原点
     return '区间：' + '1284756.212223~2284756.212223(元)' +'<br>' + '频数：' + 52
     }
   },
