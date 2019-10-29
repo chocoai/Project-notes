@@ -203,3 +203,11 @@ vue+JavaScript
   ]
 }
 ```
+
+
+# 8.  &#x1F9EE; 项目八   财报分析
+
+## 项目时间 2019-10-14  ----  2019-10-30
+## &#x1F3A8; 项目过程
+&#x1F3C5; vue-cli,vue-router,Echarts,EventBus,Axios
++ 整体设计

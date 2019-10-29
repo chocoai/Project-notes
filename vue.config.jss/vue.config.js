@@ -1,7 +1,52 @@
+const CompressionPlugin = require('compression-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const path = require('path')
 module.exports = {
   // 动态路由渲染会报错  删除就好了
   publicPath: '',
+  outputDir: 'dist',
+  productionSourceMap: false,
+  chainWebpack: config => {
+    // 生成report
+    if (process.env.NODE_ENV === 'production') {
+      if (process.env.npm_config_report) {
+        config
+          .plugin('webpack-bundle-analyzer')
+          .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+          .end()
+        config.plugins.delete('prefetch')
+      }
+    }
+    // 解决ie11兼容ES6
+    // 生产环境是否生成 sourceMap 文件
+    config.entry('main').add('babel-polyfill')
+    // 开启图片压缩
+    config.module
+      .rule('images')
+      .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+      .use('image-webpack-loader')
+      .loader('image-webpack-loader')
+      .options({ bypassOnDebug: true })
+    // 开启js、css压缩
+    if (process.env.NODE_ENV === 'production') {
+      // 删除预加载
+      config.plugins.delete('preload')
+      config.plugins.delete('prefetch')
+      // 压缩代码
+      config.optimization.minimize(true)
+      // 分割代码
+      config.optimization.splitChunks({
+        chunks: 'all'
+      })
+      config.plugin('compressionPlugin').use(
+        new CompressionPlugin({
+          test: /\.js$|\.html$|.\css/, // 匹配文件名
+          threshold: 10240, // 对超过10k的数据压缩
+          deleteOriginalAssets: false // 不删除源文件
+        })
+      )
+    }
+  },
   configureWebpack: {
     performance: {
       hints: 'warning',
@@ -12,6 +57,23 @@ module.exports = {
       assetFilter: function (assetFilename) {
         return assetFilename.endsWith('.js')
       }
+    }
+  },
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins.push(
+        // 生产环境自动删除console
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            compress: {
+              drop_debugger: true,
+              drop_console: true
+            }
+          },
+          sourceMap: false,
+          parallel: true
+        })
+      )
     }
   },
   devServer: {
@@ -27,6 +89,9 @@ module.exports = {
       errors: false
     }
   },
+  transpileDependencies: [
+    // 指定对第三方依赖包进行babel-polyfill处理
+  ],
   // 这是一个不进行任何 schema 验证的对象，因此它可以用来传递任何第三方插件选项
   pluginOptions: {
     // 引入 vue add style-resources-loader 因为脚手架自带  所以可以直接使用脚手架安装 安装之后自动在vue.config.js中配置  只需要补充要全局的less文件路径即可
