@@ -211,3 +211,11 @@ vue+JavaScript
 ## &#x1F3A8; 项目过程
 &#x1F3C5; vue-cli,vue-router,Echarts,EventBus,Axios
 + 整体设计
+>  1. echarts 样式的修改，hover的重写
+>  2. 对Axios封装的重构
+>  3. EventBus的使用
+>  4. 联动锚点的实现
+>  5. 搜索关键词的高亮和跳转（仿Vue官网的搜索）
+>  6. element tree的修改
+>  7. less函数的封装 使用style-resources-loader引入
+>  8. 配置了config文件夹  打包自动清除console
