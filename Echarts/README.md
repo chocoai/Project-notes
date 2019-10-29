@@ -8,11 +8,51 @@
 ```txt
   刻度线和标签对齐方式
 ```
++ nameLocation('end')
+```txt
+  坐标轴名称的位置
+```
++ nameGap(Number)
+```txt
+  坐标轴名称和坐标轴的距离
+```
++ axisLabel(Object)
+```txt
+  坐标游标样式
+```
+```js
+  axisLabel: {
+    interval: 0,
+    rotate: 45,  // 旋转角度
+    textStyle: {
+      fontSize: 10
+    }
+  },
+```
++ axioLine(Object)
+```txt
+  坐标轴颜色，样式
+```
+```js
+  axisLine: {
+    lineStyle: {
+      color: '#424858',
+      width: 1
+    }
+  }
+```
++ boundaryGap(boolean)
+```txt
+  坐标轴两边留白政策
+```
 
 **&#x1F4DA; 纵坐标 yAxis**
 + name()
 ```txt
   刻度线和标签对齐方式
+```
+```txt
+  同X轴API相同
 ```
 **&#x1F4DA; 柱状图**
 + 改变指定颜色的柱子
@@ -48,6 +88,30 @@
     data:[120, 132, 101, 134, 90, 230, 210]
   }
 ```
+**&#x1F4DA; 散点图**
++ 散点大小
+```js
+  {
+    type: 'scatter',
+    symbolSize: 4,
+    data: newData
+  }
+```
++ 散点颜色
+```js
+  {
+    type: 'effectScatter',
+    symbolSize: 6,
+    data: [
+      {
+        value: datas.series_data_i,
+        itemStyle: {
+          color: 'rgba(255,113,113,.9)' // 单独设置散点颜色
+        }
+      }
+    ]
+  }
+```
 **&#x1F4DA; hover效果内容**
 + tooltip.formatter 设置hover显示内容 自定义回调函数
 ```js
@@ -79,4 +143,29 @@
       type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
     }
   }
+```
+
+
+**&#x1F4DA; 背景网格**
++ splitLine X Y 需要单独设置
+```js
+  splitLine: {
+    show: true,    // 是否显示
+    lineStyle: {
+      color: ['#e2e7e8'], // 网格颜色
+      width: 1,        //  宽度
+      type: 'solid' // 网格类型
+    }
+  }
+```
+
+
+**&#x1F4DA; 图例**
++ legend(Object)
+```js
+  legend: {
+    data: datas.legend,
+    x: '214px',
+    y: '10px'
+  },
 ```
