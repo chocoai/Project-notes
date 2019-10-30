@@ -3,8 +3,11 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const path = require('path')
 module.exports = {
   // 动态路由渲染会报错  删除就好了
+  /* 部署应用包的baseURL */
   publicPath: '',
+  /* 打包生成的生产环境构建的目录 */
   outputDir: 'dist',
+  assetsDir: '',
   productionSourceMap: false,
   chainWebpack: config => {
     // 生成report
