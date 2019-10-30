@@ -1,4 +1,4 @@
-let arr = [1, 2, 3]
+let arr = [1, 2, 3, 4]
 let arr_new = ['a', 'b', 'c']
 
 // 不改变原数组=======================================
@@ -34,3 +34,11 @@ console.log(new_index) // 1
 // map 返回一个新数组
 let news_Arr = arr.map(item => item + 1)
 console.log(arr, news_Arr)
+
+// reduce   x 累加值（第一次直接拿到数组的第一项）  y 是每次传入的值
+let new_reduceArr = arr.reduce((x, y) => { 
+  console.log(x)
+  console.log(y)
+  return x + y
+})
+console.log(new_reduceArr)
