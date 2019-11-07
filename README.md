@@ -231,3 +231,4 @@ vue+JavaScript
 + less函数的封装 使用style-resources-loader引入
 
 + 配置了config文件夹  打包自动清除console
+
