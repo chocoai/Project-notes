@@ -1,11 +1,11 @@
-# Vue-TypeString项目工程化
+# Vue-TypeScript项目工程化
 ## vue-cli + TS脚手架
 **Axios二次封装**
-- 基于TypeString对[Axios](https://www.kancloud.cn/yunye/axios/234845)进行二次封装
-  
+- 基于TypeScript对[Axios](https://www.kancloud.cn/yunye/axios/234845)进行二次封装
+
 ## vue-cli + TS插件
 **vue-bus-ts**
-- [基于vue支持TypeString的vue-bus-ts]()
+- [基于vue支持TypeScript的vue-bus-ts]()
 
 - 安装
   ```
