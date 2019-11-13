@@ -205,3 +205,18 @@
     let defaults = { food: "spicy", price: "$$", ambiance: "noisy" }
     let search = { ...defaults, food: "rich" }
   ```
+
+## [ &#x1F6A9; 接口](https://www.tslang.cn/docs/handbook/interfaces.html)
+- 介绍
+- 接口初探
+- 可选属性
+- 只读属性
+- 额外的属性检查
+- 函数类型
+- 可索引的类型
+- 类类型
+  - 实现接口
+  - 类静态部分与实例部分的区别
+- 继承接口
+- 混合类型
+- 接口继承类
