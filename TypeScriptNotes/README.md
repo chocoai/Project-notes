@@ -392,3 +392,20 @@
       select() { }
     }
   ```
+
+## [ &#x1F6A9; 类](https://www.tslang.cn/docs/handbook/classes.html)
+- 介绍
+- 类
+- 继承
+- 公共，私有与受保护的修饰符
+  - public
+  - private
+  - protected
+  - readonly
+  - 参数属性
+- 存取器
+- 静态属性
+- 抽象类
+- 高级技巧
+  - 构造函数
+  - 把类当做接口使用
