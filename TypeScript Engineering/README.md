@@ -32,3 +32,13 @@
 
     })
   ```
+
+## vue-TypeScript 项目踩坑
+- this.$refs 获取DOM时提示类型错误
+  ```ts
+
+  ```
+
+- Echarts  绘制图标的时候提示类型错误
+  ```ts
+  ```
