@@ -15,6 +15,12 @@ console.log(arr.concat(1, 2, 3, arr_new))
 console.log([...arr, ...arr_new])
 console.log([...arr_new, ...arr])
 
+// ------ every 遍历数组 返回一个Boolean值-------
+function isBigEnough(element, index, array) {
+  return element >= 10;
+}
+[12, 5, 8, 130, 44].every(isBigEnough);   // false
+[12, 54, 18, 130, 44].every(isBigEnough); // true
 
 // 改变原数组===========================================================================================================================
 
