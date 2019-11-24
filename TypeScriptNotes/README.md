@@ -411,10 +411,69 @@
     }
     let greeter = new Greeter("world");
   ```
+  ```txt
+    如果你使用过C#或Java，你会对这种语法非常熟悉。 我们声明一个 Greeter类。这个类有3个成员：一个叫做 greeting的属性，一个构造函数和一个 greet方法。
+
+    你会注意到，我们在引用任何一个类成员的时候都用了 this。 它表示我们访问的是类的成员。
+
+    最后一行，我们使用 new构造了 Greeter类的一个实例。 它会调用之前定义的构造函数，创建一个 Greeter类型的新对象，并执行构造函数初始化它。
+  ```
 - 继承
+  ```ts
+    class Animal {
+      name: string;
+      constructor(theName: string) { this.name = theName; }
+      move(distanceInMeters: number = 0) {
+        console.log(`${this.name} moved ${distanceInMeters}m.`);
+      }
+    }
+
+    class Snake extends Animal {
+      constructor(name: string) { super(name); }
+      move(distanceInMeters = 5) {
+        console.log("Slithering...");
+        super.move(distanceInMeters);
+      }
+    }
+
+    class Horse extends Animal {
+      constructor(name: string) { super(name); }
+      move(distanceInMeters = 45) {
+        console.log("Galloping...");
+        super.move(distanceInMeters);
+      }
+    }
+
+    let sam = new Snake("Sammy the Python");
+    let tom: Animal = new Horse("Tommy the Palomino");
+
+    sam.move();
+    tom.move(34);
+  ```
+  ```txt
+    这个例子展示了一些上面没有提到的特性。 这一次，我们使用 extends关键字创建了 Animal的两个子类： Horse和 Snake。
+
+    与前一个例子的不同点是，派生类包含了一个构造函数，它 必须调用 super()，它会执行基类的构造函数。 而且，在构造函数里访问 this的属性之前，我们 一定要调用 super()。 这个是TypeScript强制执行的一条重要规则。
+
+    这个例子演示了如何在子类里可以重写父类的方法。 Snake类和 Horse类都创建了 move方法，它们重写了从 Animal继承来的 move方法，使得 move方法根据不同的类而具有不同的功能。 注意，即使 tom被声明为 Animal类型，但因为它的值是 Horse，调用 tom.move(34)时，它会调用 Horse里重写的方法
+  ```
 - 公共，私有与受保护的修饰符
   - public
+    ```txt
+      在上面的例子里，我们可以自由的访问程序里定义的成员。 如果你对其它语言中的类比较了解，就会注意到我们在之前的代码里并没有使用 public来做修饰；例如，C#要求必须明确地使用 public指定成员是可见的。 在TypeScript里，成员都默认为 public。
+    ```
   - private
+    ```txt
+      当成员被标记成 private时，它就不能在声明它的类的外部访问。比如：
+    ```
+    ```ts
+      class Animal {
+        private name: string;
+        constructor(theName: string) { this.name = theName; }
+      }
+
+      new Animal("Cat").name; // 错误: 'name' 是私有的.
+    ```
   - protected
   - readonly
   - 参数属性
