@@ -8,6 +8,10 @@ module.exports = {
   /* 打包生成的生产环境构建的目录 */
   outputDir: 'dist',
   assetsDir: '',
+  // 是否在保存的时候使用 `eslint-loader` 进行检查。
+  // 有效的值：`ture` | `false` | `"error"`
+  // 当设置为 `"error"` 时，检查出的错误会触发编译失败
+  lintOnSave: true,
   productionSourceMap: false,
   chainWebpack: config => {
     // 生成report
