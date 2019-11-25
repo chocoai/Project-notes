@@ -1,0 +1,17 @@
+{
+  "name": "mywebpack",
+  "version": "0.0.0",
+  "description": "mywebpack",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "build_self_config": "webpack --config config_name"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}

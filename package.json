@@ -1,0 +1,44 @@
+{
+  "name": "zhhnotes",
+  "version": "0.0.0",
+  "description": "zhh notes",
+  "main": "D3.js",
+  "dependencies": {
+    "mongodb": "^3.3.0-beta2",
+    "webpack": "^4.41.2"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GGupzHH/Project-notes.git"
+  },
+  "keywords": [
+    "node",
+    "vue",
+    "webpack",
+    "css",
+    "less",
+    "vue-cli",
+    "vue-router",
+    "axios",
+    "javascript",
+    "md",
+    "html"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GGupzHH/Project-notes/issues"
+  },
+  "homepage": "https://github.com/GGupzHH/Project-notes#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
