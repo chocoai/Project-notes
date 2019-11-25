@@ -176,3 +176,39 @@
     y: '10px'
   },
 ```
+
+
+**&#x1F4DA; 图表标线**
++ series.markLine(Object)
+```js
+  // 可以自定义标线的位置  也可以通过内置函数自动设置 均值 最大值 最小值等 同时可以设置实线和虚线 
+  markLine: {
+    symbol: 'none',
+    label: {
+      position: 'end',
+    },
+    data: [{
+      xAxis: 437180,
+      lineStyle: {
+        color: '#4CD964',
+        type: 'solid'
+      },
+      label: {
+        show: true,
+        position: 'end',
+        formatter: '最小值'
+      }
+    },{
+      xAxis: 636780,
+      lineStyle: {
+        color: '#FF3B30',
+        type: 'dotted'
+      },
+      label: {
+        show: true,
+        position: 'end',
+        formatter: '最大值'
+      }
+    }
+  },
+```
