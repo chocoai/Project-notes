@@ -224,6 +224,16 @@
 
     let myObj = {size: 10, label: "Size 10 Object"};
     printLabel(myObj)
+
+    let arr:Array<number> = []
+    let arr:Array<string> = []
+    let newArr: Array<Array<number>> = []
+
+    interface InewObj {
+      name: string,
+      age: number
+    }
+    let newObj: InewObj[]
   ```
 
 - 可选属性
