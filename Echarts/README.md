@@ -71,6 +71,32 @@
     }
   ]
 ```
++ 柱子渐变色
+```js
+  series : [{
+    type:'bar',
+    barWidth: '60%',
+    data:[10, 
+      {
+        value:52,
+        itemStyle: {
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+              {
+                offset: 0,
+                color: '#FF9891'
+              }, {
+                offset: 1,
+                color: '#FF3A31'
+              }
+            ])
+          },
+        }
+      }, 12, 10, 22
+      ]
+    }
+  ]
+```
 **&#x1F4DA; 折线图**
 + 折线虚线
 ```js
@@ -148,6 +174,29 @@
     trigger: 'axis',
     axisPointer : {            // 坐标轴指示器，坐标轴触发有效
       type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+    }
+  }
+```
+
+**&#x1F4DA; hover背景渐变**
++ tooltip.axisPointer 设置背景线条还是条状
+```js
+  tooltip : {
+    trigger: 'axis',
+    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+      type : 'shadow',        // 默认为直线，可选为：'line' | 'shadow'
+      shadowStyle: {
+        color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+            {
+              offset: 0,
+              color: 'rgba(227, 232, 236, 0.5)'
+            }, {
+              offset: 1,
+              color: 'rgba(196, 225, 241, 0.21)'
+            }
+          ])
+        },
+      }
     }
   }
 ```

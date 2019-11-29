@@ -14,4 +14,4 @@
 - 或者直接设置别的名称的配置文件 执行命令使用 npx webpack --config 配置文件名
 - 或者npm run build -- --config webpack.config.my.js 
   -  package.json -> script -> "build": "webpack"
-  -  --后面的会被识别成参数传入 
+  -  --后面的会被识别成参数传入
