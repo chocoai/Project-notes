@@ -60,6 +60,8 @@ let new_reduceArr = arr.reduce((x, y) => {
 console.log(new_reduceArr)
 
 
+let new_r_arr = news_Arr.reverse()
+console.log(new_r_arr, 1)
 // Array===========================================================================================================================
 /**
  * return Boolean
