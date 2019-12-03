@@ -32,5 +32,17 @@ module.exports = {
       // 加一个hash戳  避免缓存的问题
       hash: true
     })
-  ]
+  ],
+  // 模块
+  moduel: {
+    // 规则
+    rules: [
+      {
+        test: /\.css/,
+        use: [
+          
+        ]
+      }
+    ]
+  }
 }
