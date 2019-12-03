@@ -7,7 +7,7 @@ module.exports = {
     filename: 'bundle.js', // 打包后的文件名
     path:  path.resolve(__dirname,'dist')// 路径必须是绝对路径
   },
-  devServer: {
+  devServer: { // 开发服务器的配置
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000
