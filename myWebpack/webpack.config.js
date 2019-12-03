@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // webpack  是  node写的    node的写法
 module.exports = {
@@ -31,16 +32,15 @@ module.exports = {
       },
       // 加一个hash戳  避免缓存的问题
       hash: true
-    })
+    }),
   ],
-  // 模块
-  moduel: {
-    // 规则
+  module: {
     rules: [
-      {
-        test: /\.css/,
+      { 
+        test: /\.css$/,
         use: [
-          
+          'style-loader',
+          'css-loader'
         ]
       }
     ]
