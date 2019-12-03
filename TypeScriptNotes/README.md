@@ -485,8 +485,74 @@
       new Animal("Cat").name; // 错误: 'name' 是私有的.
     ```
   - protected
+    ```txt
+      protected修饰符与 private修饰符的行为很相似，但有一点不同， protected成员在派生类中仍然可以访问。
+    ```
+    ```ts
+      class Person {
+        protected name: string
+        constructor(name: string) this.name = name
+      }
+      class Emply extends Person {
+        private devname:string
+        constructor(name:string) {
+          super(name)
+          this.devname = name
+        }
+      }
+      let emply = new Emply('zs')
+      //注意，我们不能在 Person类外使用 name，但是我们仍然可以通过 Employee类的实例方法访问，因为 Employee是由 Person派生而来的。
+    ```
+    ```txt
+      构造函数也可以被标记成 protected。 这意味着这个类不能在包含它的类外被实例化，但是能被继承。
+    ```
+    ```ts
+      class Person {
+        protected name: string;
+        protected constructor(theName: string) { this.name = theName; }
+      }
+
+      // Employee 能够继承 Person
+      class Employee extends Person {
+        private department: string;
+
+        constructor(name: string, department: string) {
+          super(name);
+          this.department = department;
+        }
+
+        public getElevatorPitch() {
+          return `Hello, my name is ${this.name} and I work in ${this.department}.`;
+        }
+      }
+
+      let howard = new Employee("Howard", "Sales");
+      let john = new Person("John"); // 错误: 'Person' 的构造函数是被保护的.
+    ```
   - readonly
+    ```txt
+      你可以使用 readonly关键字将属性设置为只读的。 只读属性必须在声明时或构造函数里被初始化。
+    ```
+    ```ts
+      class Octopus {
+        readonly name: string;
+        readonly numberOfLegs: number = 8;
+        constructor (theName: string) {
+          this.name = theName;
+        }
+      }
+      let dad = new Octopus("Man with the 8 strong legs");
+      dad.name = "Man with the 3-piece suit"; // 错误! name 是只读的.
+    ```
   - 参数属性
+    ```ts
+      // 就是制度属性的默认值
+      class Octopus {
+        readonly numberOfLegs: number = 8;
+      }
+      let a = new Octopus()
+      console.log(a)
+    ```
 - 存取器
 - 静态属性
 - 抽象类
