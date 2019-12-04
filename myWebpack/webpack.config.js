@@ -34,13 +34,36 @@ module.exports = {
       hash: true
     }),
   ],
+  // 模块
   module: {
+    // 规则
     rules: [
+      // css-loader 处理@import这种语法的
+      // style-loader 将处理后的css动态的插入head标签中
+      // 如果只是一个loader可以使用字符串直接使用  如果是多个loader则需要数组
+      // loader的执行顺序是 从右往左 从下往上
       { 
         test: /\.css$/,
         use: [
-          'style-loader',
+          {
+            loader: 'style-loader',
+            options: {
+              insert: 'head'
+            }
+          },
           'css-loader'
+        ]
+      }, {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              insert: 'head'
+            }
+          },
+          'css-loader',
+          'less-loader'
         ]
       }
     ]

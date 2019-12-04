@@ -8,7 +8,9 @@
     "webpack": "^4.41.2"
   },
   "devDependencies": {
-    "cz-conventional-changelog": "^3.0.2"
+    "cz-conventional-changelog": "^3.0.2",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
