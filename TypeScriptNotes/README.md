@@ -554,6 +554,9 @@
       console.log(a)
     ```
 - 存取器
+  ```txt
+    TypeScript支持通过getters/setters来截取对对象成员的访问。 它能帮助你有效的控制对对象成员的访问。
+  ```
 - 静态属性
 - 抽象类
 - 高级技巧
