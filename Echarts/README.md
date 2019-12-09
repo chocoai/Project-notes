@@ -59,6 +59,7 @@
 ```js
   series : [{
     type:'bar',
+    // 柱子的宽度 可以直接设置像素值大小
     barWidth: '60%',
     data:[10, 
       {
