@@ -45,6 +45,15 @@
 ```txt
   坐标轴两边留白政策
 ```
++ nameRotate(number)
+```txt
+  坐标轴名称旋转
+```
+
++ 坐标轴名称换行
+```txt
+  \n
+```
 
 **&#x1F4DA; 纵坐标 yAxis**
 + name()
