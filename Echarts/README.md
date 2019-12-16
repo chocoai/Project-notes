@@ -250,7 +250,10 @@
       xAxis: 437180,
       lineStyle: {
         color: '#4CD964',
-        type: 'solid'
+        type: 'solid',
+        shadowOffsetX: 3,
+        shadowColor: '#ff950052',
+        shadowBlur: 3
       },
       label: {
         show: true,
@@ -261,7 +264,10 @@
       xAxis: 636780,
       lineStyle: {
         color: '#FF3B30',
-        type: 'dotted'
+        type: 'dotted',
+        shadowOffsetX: 3,
+        shadowColor: '#ff950052',
+        shadowBlur: 3
       },
       label: {
         show: true,
@@ -271,3 +277,14 @@
     }
   },
 ```
+
+**&#x1F4DA; 图表标线阴影-虚化程度**
++ series.markLine.data.lineStyle.shadowBlur
+
+
+**&#x1F4DA; 图表标线阴影-颜色**
++ series.markLine.data.lineStyle.shadowColor
+
+
+**&#x1F4DA; 图表标线阴影-水平偏移距离**
++ series.markLine.data.lineStyle.shadowOffsetX
