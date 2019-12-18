@@ -300,8 +300,93 @@ vue+JavaScript
 + element tree的修改
 
 + less函数的封装 使用style-resources-loader引入
+  + 封装内容
+    ```less
+      /*
+        TODO Less function 
+        GGupZhh less encapsulation
+      */
 
+
+      /*-------------------------------------
+      ├   布局                              ┆
+      └------------------------------------*/
+      // 盒子宽高
+      .size(@w, @h) {
+        width: @w;
+        height: @h;
+      }
+
+      // 最小尺寸 兼容IE
+      .min-width(@min-w) {
+        min-width: @min-w;
+        _width: @min-w;
+      }
+
+      .min-height(@min-h) {
+        min-height: @min-h;
+        _height: @min-h;
+      }
+
+      // 块级元素垂直水平居中
+      .v_l_cen() {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+
+      // 文字图片居中
+      .center(text-x) {
+        text-align: center;
+      }
+      .center(text-y) {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+
+
+      /*-------------------------------------
+      ├   字体                              ┆
+      └------------------------------------*/
+      // 字体大小
+      .fz(@fz) { font-size: @fz; }
+
+      // 字体大小、行高、高度
+      .fz(@fz, @h, @lh: @h) { font-size: @fz; height: @h; line-height: @lh; }
+
+      // 文本溢出省略号显示
+      .ellipis() {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      // 文字样式
+      .fzs(@fz, @color, @fw, @lh, @ta) {
+        font-size: @fz;
+        color: @color;
+        font-weight: @fw;
+        line-height: @lh;
+        text-align: @ta;
+      }
+    ```
+  + config配置插件全局引入
+    ```js
+      // vue add style-resources-loader
+      
+      pluginOptions: {
+        'style-resources-loader': {
+          preProcessor: 'less',
+          patterns: [path.resolve(__dirname, './src/style/encapsulation.less')]
+        }
+      }
+    ```
 + 配置了config文件夹  打包自动清除console
 
 
 # 9.  &#x1F9EE; 项目九   房地产行业纳税评估系统
+
+## 项目时间 2019-11-16  ----  2019-12-18
+## &#x1F3A8; 项目过程
+&#x1F3C5; vue-cli, vue-router, Echarts, TypeScript, Axios, Element, webpack-merge
