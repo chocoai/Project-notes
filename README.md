@@ -250,7 +250,29 @@ vue+JavaScript
     1. 小型项目增加了代码量
 
 + EventBus的使用
-
+  + 作用: 组件通信传值
+  + 创建EventBus
+    ```js
+     // EventBus.js
+      import Vue from 'vue'
+      const EventBus = new Vue()
+      export default EventBus
+    ```
+  + 使用
+    + 引入
+      ```js
+        import EventBus from 'EventBus'
+      ```
+    + 存入
+      ```js
+        EventBus.$emit('data', data)
+      ```
+    + 获取
+      ```js
+        EventBus.$on('data', (data) => {
+          console.log(data)
+        })
+      ```
 + 联动锚点的实现
 
 + 搜索关键词的高亮和跳转（仿Vue官网的搜索）
