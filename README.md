@@ -310,10 +310,18 @@ vue+JavaScript
     ```
   + 实现思路
     ```txt
-      
+      I. 获取input值，当输入值发生改变的时候去遍历data（所有数据）将含有input值的数据转存到一个新的数据中（newdata）。
+      II. 在存入新数据的同时，将当前含有关键字的字符串遍历以关键字切割（split）切割之后得到一个新数组（newArr）
+      III. 遍历newArr拼接成新的字符串并且数组的每一项两端都拼接 `<span style="color: red;">《切割项》</span>`
+      IV. 覆盖newdata中的对饮的数据渲染
+      V. 渲染使用v-html渲染 （能将字符串中拼接的span标签渲染出来）
+      VI. 每次输入新的字符，都使用最开始的数据(data)去替换掉上一次搜索的数据(newdata)
+      VII. 后面就是各种状态的维护
     ```
-
-+ element tree的修改
+    + 技能要点
+      ```txt
+        v-html
+      ```
 
 + less函数的封装 使用style-resources-loader引入
   + 封装内容
