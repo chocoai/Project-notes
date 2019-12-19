@@ -213,7 +213,7 @@ vue+JavaScript
 
 ## 项目时间 2019-10-14  ----  2019-10-30
 ## &#x1F3A8; 项目过程
-&#x1F3C5; vue-cli,vue-router,Echarts,EventBus,Axios
+&#x1F3C5; vue-cli,vue-router,Echarts,EventBus,Axios,Jest
 + echarts 样式的修改，hover的重写
   ```txt
     折线图，散点图，柱状图
@@ -411,6 +411,7 @@ vue+JavaScript
   + [打包自动清除console](https://juejin.im/post/5c84b709e51d4578ca71dde4)
   + [webpack-TerserWebpackPlugin](https://webpack.js.org/plugins/terser-webpack-plugin/#terseroptions)
     ```js
+    // vue.condig.js
       module.exports = {
         configureWebpack: config => {
           // production
@@ -426,7 +427,106 @@ vue+JavaScript
         }
       }
     ```
++ Jest 单元测试
+  + jest.config.js
+    ```js
+      module.exports = {
+        preset: '@vue/cli-plugin-unit-jest',
+        // 测试的文件类型
+        moduleFileExtensions: ['js', 'jsx', 'json', 'vue'],
+        // loader configuration
+        transform: {
+          '^.+\\vue$': 'vue-jest',
+          '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$':
+            'jest-transform-stub',
+          '^.+\\.jsx?$': 'babel-jest'
+        },
+        transformIgnorePatterns: ['/node_modules/'],
+        // 路径映射
+        moduleNameMapper: {
+          '^@/(.*)$': '<rootDir>/src/$1'
+        },
+        //快照
+        snapshotSerializers: ['jest-serializer-vue'],
+        testMatch: [
+          '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)'
+        ],
+        // 代码覆盖率,默认是关闭的
+        // collectCoverage: true,
+        // collectCoverageFrom: ['**/*.{js,vue}', '!**/node_modules/**'],
+        // js dom 使用
+        testURL: 'http://localhost/'
+      }
+    ```
+  + 测试Dadata.vue
+    ```js
+      // 引入需要的api
+      import { mount, createLocalVue } from '@vue/test-utils'
+      //  引入组件
+      import Dadata from '@/views/Dadata.vue'
+      import VueRouter from 'vue-router'
+      // 创建独立作用域 Vue ，避免影响全局
+      const localVue = createLocalVue()
+      localVue.use(VueRouter)
+      // 模拟路由
+      const routes = [{
+        path: '/',
+        name: 'index'
+      }]
+      const router = new VueRouter({
+        routes
+      })
+      // 分组测试
+      describe('Dadata.vue', () => {
+        // 生成组件实例wrapper
+        const wrapper = mount(Dadata, {
+          mocks: {
+            $route
+          }
+        })
 
+        // 生成快照
+        // 快照会保存到当前目录的__snapshots__文件下面 
+        // 生成dadata.spec.js.snap文件
+        it('render counter html ', () => {
+          expect(wrapper.html()).toMatchSnapshot()
+        })
+        // it 测试
+        // 两个参数，第一个是字符串，对这个测试进行描述，需要什么条件，达到什么效果。第二个是函数，函数体就是真正的测试代码
+        it('create route', () => {
+          // router.push 模拟路由触发并携带参数
+          router.push({
+            path: '/DA_data/risk',
+            query: {
+              code: '000001',
+              year: '2012',
+              category_type: '证监会行业分类'
+            }
+          })
+        })
+        // 当测试通过时， 会将注释打印到控制台
+        it('title_header', () => {
+          // 通过组件实例wrapper 获取组件内部定义的值headet_title
+          // expect 断言方法
+          // 断言  wrapper.vm.headet_title 的值 等于  '平安银行公司'
+          expect(wrapper.vm.headet_title).toBe('平安银行公司')
+          // vm实例中改变header_title 的值。
+          wrapper.vm.headet_title = 'DOM'
+          expect(wrapper.vm.headet_title).toBe('DOM')
+        })
+        // toBe使用 === 来测试全等于，如果我们想检查一个对象object中的值，使用toEqual来替代，toEqual递归遍历检查对象或数组里的每一个领域。
+        it('item show Array', () => {
+          // console.log(expect(wrapper.vm.showData))
+          // expect(wrapper.vm.showData).toEqual([1, 1, 1, 1, 1, 1])
+          // expect.arrayContaining(array):匹配一个测试返回的数组，它包含所有预期的元素。就是说，这个预期数组是测试返回数组的一个子集。
+          expect(wrapper.vm.showData).toEqual(expect.arrayContaining([1, 1, 1, 1, 1, 1]))
+          // kaggle
+          expect(wrapper.vm._renderProxy.getItem(3))
+          expect(wrapper.vm.showData).toEqual(expect.arrayContaining([1, 1, 1, 0, 1, 1]))
+          // expect(wrapper.vm.showData).toEqual([1, 1, 1, 0, 1, 1])
+        })
+      })
+    ```
 
 # 9.  &#x1F9EE; 项目九   房地产行业纳税评估系统
 
