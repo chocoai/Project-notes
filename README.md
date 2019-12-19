@@ -409,6 +409,7 @@ vue+JavaScript
 + 配置了config文件  打包自动清除console
 
   + [打包自动清除console](https://juejin.im/post/5c84b709e51d4578ca71dde4)
+  + [webpack-TerserWebpackPlugin](https://webpack.js.org/plugins/terser-webpack-plugin/#terseroptions)
     ```js
       module.exports = {
         configureWebpack: config => {
