@@ -406,7 +406,25 @@ vue+JavaScript
         }
       }
     ```
-+ 配置了config文件夹  打包自动清除console
++ 配置了config文件  打包自动清除console
+
+  + [打包自动清除console](https://juejin.im/post/5c84b709e51d4578ca71dde4)
+    ```js
+      module.exports = {
+        configureWebpack: config => {
+          // production
+          if (process.env.NODE_ENV === 'production') {
+            //
+            config.optimization.minimizer[0].options.terserOptions.compress.warnings = false
+            config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+            config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true
+            config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = [
+              'console.log'
+            ]
+          }
+        }
+      }
+    ```
 
 
 # 9.  &#x1F9EE; 项目九   房地产行业纳税评估系统
