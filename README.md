@@ -532,4 +532,4 @@ vue+JavaScript
 
 ## 项目时间 2019-11-16  ----  2019-12-18
 ## &#x1F3A8; 项目过程
-&#x1F3C5; vue-cli, vue-router, Echarts, TypeScript, Axios, Element, webpack-merge
+&#x1F3C5; vue-cli, vue-router, Echarts, TypeScript, Axios, Element, webpack-merge, Nightwatch
