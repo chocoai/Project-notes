@@ -52,3 +52,44 @@
   ```txt
     plugin是用于扩展webpack的功能，各种各样的plugin几乎可以让webpack做任何与构建先关的事情。 plugin的配置很简单，plugins配置项接收一个数组，数组里的每一项都是一个要使用的plugin的实例，plugin需要的参数通过构造函数传入。
   ```
+  + clean-webpack-plugin
+    ```
+      npm install clean-webpack-plugin --save-dev
+    ```
+    ```
+      生产环境编译文件的时候，先把 build或dist (就是放生产环境用的文件) 目录里的文件先清除干净，再生成新的。
+      我们要在 build 之前把它们全清空，这正是 clean-webpack-plugin 发挥的作用。
+    ```
+    ```javascript
+
+      // webpack.config.js
+      const CleanWebpackPlugin = require('clean-webpack-plugin') 
+      plugins: [
+        new CleanWebpackPlugin(['*.*'], {
+          root: path.join(__dirname, 'dist')
+        }), 
+      ]
+      
+    ```
+  
+  + Terser-webpack-plugin
+    ```
+      npm install terser-webpack-plugin --save-dev
+    ```
+    ```
+      转换器 清除console
+    ```
+    ```javascript
+
+      configureWebpack: config => {
+        if (process.env.NODE_ENV === 'production') {
+          config.optimization.minimizer[0].options.terserOptions.compress.warnings = false
+          config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+          config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true
+          config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = [
+            'console.log'
+          ]
+        }
+      }
+
+    ```
