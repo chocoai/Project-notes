@@ -562,23 +562,74 @@
     到目前为止，我们只讨论了类的实例成员，那些仅当类被实例化的时候才会被初始化的属性。 我们也可以创建类的静态成员，这些属性存在于类本身上面而不是类的实例上。 在这个例子里，我们使用 static定义 origin，因为它是所有网格都会用到的属性。 每个实例想要访问这个属性的时候，都要在 origin前面加上类名。 如同在实例属性上使用 this.前缀来访问属性一样，这里我们使用 Grid.来访问静态属性。
   ```
   ```ts
-  class Grid {
-  static origin = {x: 0, y: 0};
-  calculateDistanceFromOrigin(point: {x: number; y: number;}) {
-    let xDist = (point.x - Grid.origin.x);
-    let yDist = (point.y - Grid.origin.y);
-    return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
-  }
-  constructor (public scale: number) { }
-}
+    class Grid {
+      static origin = {x: 0, y: 0};
+      calculateDistanceFromOrigin(point: {x: number; y: number;}) {
+        let xDist = (point.x - Grid.origin.x);
+        let yDist = (point.y - Grid.origin.y);
+        return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
+      }
+      constructor (public scale: number) { }
+    }
 
-let grid1 = new Grid(1.0);  // 1x scale
-let grid2 = new Grid(5.0);  // 5x scale
+    let grid1 = new Grid(1.0);  // 1x scale
+    let grid2 = new Grid(5.0);  // 5x scale
 
-console.log(grid1.calculateDistanceFromOrigin({x: 10, y: 10}));
-console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10}));
+    console.log(grid1.calculateDistanceFromOrigin({x: 10, y: 10}));
+    console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10}));
   ```
 - 抽象类
+  ```txt
+    抽象类做为其它派生类的基类使用。 它们一般不会直接被实例化。 不同于接口，抽象类可以包含成员的实现细节。 abstract关键字是用于定义抽象类和在抽象类内部定义抽象方法。
+  ```
+  ```ts
+    abstract class Animal {
+      abstract makeSound(): void;
+      move(): void {
+        console.log('roaming the earch...');
+      }
+    }
+  ```
+  ```ts
+    抽象类中的抽象方法不包含具体实现并且必须在派生类中实现。 抽象方法的语法与接口方法相似。 两者都是定义方法签名但不包含方法体。 然而，抽象方法必须包含 abstract关键字并且可以包含访问修饰符。也就是定义了可以重写的方法名
+  ```
+  ```ts
+    abstract class Department {
+
+      constructor(public name: string) {
+      }
+
+      printName(): void {
+        console.log('Department name: ' + this.name);
+      }
+
+      abstract printMeeting(): void; // 必须在派生类中实现
+    }
+
+    class AccountingDepartment extends Department {
+
+        constructor() {
+            super('Accounting and Auditing'); // 在派生类的构造函数中必须调用 super()
+        }
+
+        printMeeting(): void {
+            console.log('The Accounting Department meets each Monday at 10am.');
+        }
+
+        generateReports(): void {
+            console.log('Generating accounting reports...');
+        }
+    }
+
+    let department: Department; // 允许创建一个对抽象类型的引用
+    // department = new Department(); // 错误: 不能创建一个抽象类的实例
+    department = new AccountingDepartment(); // 允许对一个抽象子类进行实例化和赋值
+    department.printName();
+    department.printMeeting();
+    // department.generateReports(); // 错误: 方法在声明的抽象类中不存在
+    // 因为department是抽象类的引用 所以不存在派生类的方法的
+    // 要想使用派生类中的方法需要重新new一个实例出来调用
+  ```
 - 高级技巧
   - 构造函数
   - 把类当做接口使用
