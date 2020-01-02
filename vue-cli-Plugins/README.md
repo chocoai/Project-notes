@@ -105,7 +105,7 @@
     expect('123').not.toContain('4')
     })
   ```
-## vue-cli plugins
+## vue-cli plugins 
 + http-server
   - effect 
     ```txt
@@ -136,4 +136,20 @@
     ```
       git add .
       git cz
+    ```
++ nprogress
+  - effect
+    ```txt
+      加载、切换页面，地址栏下方进度条
+    ```
+  - Toconfig
+    ```
+      npm install --save nprogress
+    ```
+  - apply
+    ```js
+      import nprogress from 'nprogress'
+      import 'nprogress/nprogress.css'
+      nprogress.start()
+      nprogress.done()
     ```
