@@ -105,7 +105,7 @@
     expect('123').not.toContain('4')
     })
   ```
-## vue-cli plugins 
+## vue-cli plugins Tool
 + http-server
   - effect 
     ```txt
@@ -137,6 +137,8 @@
       git add .
       git cz
     ```
+
+## vue-cli plugins style
 + nprogress
   - effect
     ```txt
