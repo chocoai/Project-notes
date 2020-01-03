@@ -22,6 +22,25 @@ function isBigEnough(element, index, array) {
 [12, 5, 8, 130, 44].every(isBigEnough);   // false
 [12, 54, 18, 130, 44].every(isBigEnough); // true
 
+// ------ Set -------
+// Set
+// 去重  数组 字符串
+// return SetObject
+new Set()
+
+let minArr = [1, 2, 3, 4, 2, 3]
+let newArr = new Set(minArr)
+// Set  返回的是Set的一个伪数组
+console.log(newArr)
+// 需要合并之后才是正产的数组
+console.log([...newArr])
+// 也可以去重字符串
+let minStr = 'abcdefgaaccssdd'
+let newStr = new Set(minStr)
+console.log(newStr)
+console.log([...newStr])
+console.log([...newStr].join())
+
 // 改变原数组===========================================================================================================================
 
 // ------ 栈方法 先进先出 ------
@@ -62,6 +81,8 @@ console.log(new_reduceArr)
 
 let new_r_arr = news_Arr.reverse()
 console.log(new_r_arr, 1)
+
+
 // Array===========================================================================================================================
 /**
  * return Boolean
