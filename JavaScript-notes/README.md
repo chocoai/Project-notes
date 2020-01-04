@@ -130,4 +130,22 @@
     ```
     
 ## &#x1F4EF; String
+  + &#x1F334; indexOf 从前往后查找字符串指定字符的索引
+    ```js
+      // return IndexItem
+      str.indexOf('.')
+    ```
+
+  + &#x1F334; lastIndexOf 从后往前查找字符串指定字符的索引
+    ```js
+      // return IndexItem
+      str.lastIndexOf('.')
+    ```
+
+  + &#x1F334; split 按照指定字符串切割成数组
+    ```js
+      // return Array
+      str.split('.')
+    ```
+    
 ## &#x1F4EF; Object
