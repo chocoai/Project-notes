@@ -147,5 +147,82 @@
       // return Array
       str.split('.')
     ```
-    
+
 ## &#x1F4EF; Object
+  + &#x1F334; keys 返回对象的key的一个集合（数组）
+    ```js
+      // return Array
+      let obj = {
+        name: 'zs',
+        age: 12
+      }
+      Object.keys(obj) // ['name', 'age']
+    ```
+  
+  + &#x1F334; values 返回对象的value的一个集合（数组）
+    ```js
+      // return Array
+      let obj = {
+        name: 'zs',
+        age: 12
+      }
+      Object.values(obj) // ['zs', 12]
+    ```
+  
+  + &#x1F334; entries 返回一个二维数组
+    ```js
+      // return Array
+      let obj = {
+        name: 'zs',
+        age: 12
+      }
+      Object.values(obj) // [['name', 'zs'], ['age', 12]]
+    ```
+  
+  + &#x1F334; freeze 冻结一个对象
+    ```js
+      // return ObjectSelf
+      let obj = {
+        name: 'zs',
+        age: 12
+      }
+      Object.values(obj) // obj Self
+    ```
+  
+  + &#x1F334; ... 扩展运算符
+    ```js
+      // return Object
+      let obj = {
+        name: 'zs',
+        age: 12
+      }
+      let newObj = {
+        pages: 12,
+        ...obj
+      }
+    ```
+
+  + &#x1F334; hasOwnProperty 方法返回一个布尔值，判断对象是否包含特定的自身（非继承）属性。
+    ```js
+      // return Object
+      let obj = {
+        name: 'zs',
+        age: 12
+      }
+      obj.hasOwnProperty('name') // true
+      obj.hasOwnProperty('pages') // false
+    ```
+
+  + &#x1F334; assign 对象合并（多对象合并）返回新的对象
+    ```js
+      // return Object
+      let obj = {
+        name: 'zs',
+        age: 12
+      }
+      let newObj = { age: 13, gender: 'male' }
+      let mergeObj = Object.values(obj, newObj)
+      // 合并对象 将从第二个往后的的对象合并到第一个上面， 重复的覆盖 没有的添加 原有的保留
+      // assign(Obj1, obj2, obj3, ...)
+      // mergeObj { name: 'zs', age: 13, gender: 'male' } 
+    ```
