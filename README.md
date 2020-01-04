@@ -533,3 +533,10 @@ vue+JavaScript
 ## 项目时间 2019-11-16  ----  2019-12-18
 ## &#x1F3A8; 项目过程
 &#x1F3C5; vue-cli, vue-router, Echarts, TypeScript, Axios, Element, webpack-merge, Nightwatch
++ vue-cli 工程化配置
++ webpack-merge 动态修改URL参数状态保持
++ Echarts 新增掌握的设置
++ TypeScript使用
++ Axios 简单使用
++ 数据展示部分整体的设计
++ 跳转的整体设计
