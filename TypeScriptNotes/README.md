@@ -1177,3 +1177,52 @@
         };
         // 这个例子会得到一个类型错误，TypeScript类型检查器使用Window.onmousedown函数的类型来推断右边函数表达式的类型。 因此，就能推断出 mouseEvent参数的类型了。 如果函数表达式不是在上下文类型的位置， mouseEvent参数的类型需要指定为any，这样也不会报错了。
       ```
+## [ &#x1F6A9; 类型兼容性](https://www.tslang.cn/docs/handbook/type-compatibility.html)
+- 介绍
+  ```ts
+    TypeScript里的类型兼容性是基于结构子类型的。 结构类型是一种只使用其成员来描述类型的方式。 它正好与名义（nominal）类型形成对比。
+  ```
+  - 开始
+    - TypeScript结构化类型系统的基本规则是，如果x要兼容y，那么y至少具有与x相同的属性。比如：
+      ```ts
+        interface Named {
+          name: string;
+        }
+
+        let x: Named;
+        // y's inferred type is { name: string; location: string; }
+        let y = { name: 'Alice', location: 'Seattle' };
+        x = y;
+        // 这里要检查y是否能赋值给x，编译器检查x中的每个属性，看是否能在y中也找到对应属性。 在这个例子中，y必须包含名字是name的string类型成员。y满足条件，因此赋值正确。
+      ```
+    - 检查函数参数时使用相同的规则：
+      ```ts
+        function greet(n: Named) {
+          console.log('Hello, ' + n.name);
+        }
+        greet(y); // OK
+        // 注意，y有个额外的location属性，但这不会引发错误。 只有目标类型（这里是Named）的成员会被一一检查是否兼容。
+        // 这个比较过程是递归进行的，检查每个成员及子成员。
+      ```
+  - 比较两个函数
+    - 相对来讲，在比较原始类型和对象类型的时候是比较容易理解的，问题是如何判断两个函数是兼容的。 下面我们从两个简单的函数入手，它们仅是参数列表略有不同：
+      ```ts
+        let x = (a: number) => 0;
+        let y = (b: number, s: string) => 0;
+
+        y = x; // OK
+        x = y; // Error
+        // 要查看x是否能赋值给y，首先看它们的参数列表。 x的每个参数必须能在y里找到对应类型的参数。 注意的是参数的名字相同与否无所谓，只看它们的类型。 这里，x的每个参数在y中都能找到对应的参数，所以允许赋值。
+        // 第二个赋值错误，因为y有个必需的第二个参数，但是x并没有，所以不允许赋值。
+      ```
+    - 函数重载
+      - 对于有重载的函数，源函数的每个重载都要在目标函数上找到对应的函数签名。 这确保了目标函数可以在所有源函数可调用的地方调用。
+  - 枚举
+    - 枚举类型与数字类型兼容，并且数字类型与枚举类型兼容。不同枚举类型之间是不兼容的。比如，
+      ```ts
+        enum Status { Ready, Waiting };
+        enum Color { Red, Blue, Green };
+
+        let status = Status.Ready;
+        status = Color.Green;  // Error
+      ```
