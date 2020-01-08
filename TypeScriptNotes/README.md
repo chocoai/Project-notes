@@ -1396,3 +1396,136 @@
         }
         // 这些* typeof类型保护*只有两种形式能被识别： typeof v === "typename"和 typeof v !== "typename"， "typename"必须是 "number"， "string"， "boolean"或 "symbol"。 但是TypeScript并不会阻止你与其它字符串比较，语言不会把那些表达式识别为类型保护。
       ```
+    
+    - instanceof类型保护
+       - 这以节后面的内容会后修改
+
+  - 可以为null的类型
+    - TypeScript具有两种特殊的类型， null和 undefined，它们分别具有值null和undefined. 我们在[基础类型](./Basic Types.md)一节里已经做过简要说明。 默认情况下，类型检查器认为 null与 undefined可以赋值给任何类型。 null与 undefined是所有其它类型的一个有效值。 这也意味着，你阻止不了将它们赋值给其它类型，就算是你想要阻止这种情况也不行。 null的发明者，Tony Hoare，称它为 价值亿万美金的错误。
+      - --strictNullChecks标记可以解决此错误：当你声明一个变量时，它不会自动地包含 null或 undefined。 你可以使用联合类型明确的包含它们：
+        ```TS
+          let s = "foo";
+          s = null; // 错误, 'null'不能赋值给'string'
+          let sn: string | null = "bar";
+          sn = null; // 可以
+
+          sn = undefined; // error, 'undefined'不能赋值给'string | null'
+          // 注意，按照JavaScript的语义，TypeScript会把 null和 undefined区别对待。 string | null， string | undefined和 string | undefined | null是不同的类型。
+        ```
+  - 可选参数和可选属性
+    - 使用了 --strictNullChecks，可选参数会被自动地加上 | undefined:
+      ```ts
+        function f(x: number, y?: number) {
+          return x + (y || 0);
+        }
+        f(1, 2);
+        f(1);
+        f(1, undefined);
+        f(1, null); // error, 'null' is not assignable to 'number | undefined'
+      ```
+    - 可选属性也会有同样的处理：
+      ```ts
+        class C {
+          a: number;
+          b?: number;
+        }
+        let c = new C();
+        c.a = 12;
+        c.a = undefined; // error, 'undefined' is not assignable to 'number'
+        c.b = 13;
+        c.b = undefined; // ok
+        c.b = null; // error, 'null' is not assignable to 'number | undefined'
+      ```
+    - 类型保护和类型断言
+      - 由于可以为null的类型是通过联合类型实现，那么你需要使用类型保护来去除 null。 幸运地是这与在JavaScript里写的代码一致
+        ```ts
+          function f(sn: string | null): string {
+            if (sn == null) {
+                return "default";
+            }
+            else {
+                return sn;
+            }
+          }
+        ```
+      - 这里很明显地去除了 null，你也可以使用短路运算符：
+        ```ts
+          function f(sn: string | null): string {
+            return sn || "default";
+          }
+        ```
+      - 如果编译器不能够去除 null或 undefined，你可以使用类型断言手动去除。 语法是添加 !后缀： identifier!从 identifier的类型里去除了 null和 undefined：
+        ```ts
+          function broken(name: string | null): string {
+            function postfix(epithet: string) {
+              return name.charAt(0) + '.  the ' + epithet; // error, 'name' is possibly null
+            }
+            name = name || "Bob";
+            return postfix("great");
+          }
+
+          function fixed(name: string | null): string {
+            function postfix(epithet: string) {
+              return name!.charAt(0) + '.  the ' + epithet; // ok
+            }
+            name = name || "Bob";
+            return postfix("great");
+          }
+          // 本例使用了嵌套函数，因为编译器无法去除嵌套函数的null（除非是立即调用的函数表达式）。 因为它无法跟踪所有对嵌套函数的调用，尤其是你将内层函数做为外层函数的返回值。 如果无法知道函数在哪里被调用，就无法知道调用时 name的类型。
+        ```
+- 类型别名
+  - 类型别名会给一个类型起个新名字。 类型别名有时和接口很像，但是可以作用于原始值，联合类型，元组以及其它任何你需要手写的类型。
+    ```ts
+      type Name = string;
+      type NameResolver = () => string;
+      type NameOrResolver = Name | NameResolver;
+      function getName(n: NameOrResolver): Name {
+        if (typeof n === 'string') {
+            return n;
+        }
+        else {
+            return n();
+        }
+      }
+      // 起别名不会新建一个类型 - 它创建了一个新 名字来引用那个类型。 给原始类型起别名通常没什么用，尽管可以做为文档的一种形式使用。
+      // 同接口一样，类型别名也可以是泛型 - 我们可以添加类型参数并且在别名声明的右侧传入：
+      type Container<T> = { value: T };
+      function test<Container> (tests: Container):Container {
+        return tests
+      }
+      
+      // 我们也可以使用类型别名来在属性里引用自己：
+      type Tree<T> = {
+        value: T;
+        left: Tree<T>;
+        right: Tree<T>;
+      }
+      let 
+      // 与交叉类型一起使用，我们可以创建出一些十分稀奇古怪的类型。
+      type LinkedList<T> = T & { next: LinkedList<T> };
+
+      interface Person {
+        name: string;
+      }
+
+      var people: LinkedList<Person>;
+      var s = people.name;
+      var s = people.next.name;
+      var s = people.next.next.name;
+      var s = people.next.next.next.name;
+      // 然而，类型别名不能出现在声明右侧的任何地方。
+      type Yikes = Array<Yikes>; // error
+    ```
+- 接口 vs. 类型别名
+  - 差别
+    - 其一，接口创建了一个新的名字，可以在其它任何地方使用。 类型别名并不创建新名字—比如，错误信息就不会使用别名。 在下面的示例代码里，在编译器中将鼠标悬停在 interfaced上，显示它返回的是 Interface，但悬停在 aliased上时，显示的却是对象字面量类型
+      ```ts
+        type Alias = { num: number }
+        interface Interface {
+          num: number;
+        }
+        declare function aliased(arg: Alias): Alias;
+        declare function interfaced(arg: Interface): Interface;
+        // 另一个重要区别是类型别名不能被 extends和 implements（自己也不能 extends和 implements其它类型）。 因为 软件中的对象应该对于扩展是开放的，但是对于修改是封闭的，你应该尽量去使用接口代替类型别名。
+        // 另一方面，如果你无法通过接口来描述一个类型并且需要使用联合类型或元组类型，这时通常会使用类型别名。
+      ```
