@@ -1350,4 +1350,49 @@
         function isFish(pet: Fish | Bird): pet is Fish {
           return (<Fish>pet).swim !== undefined;
         }
+        // 在这个例子里， pet is Fish就是类型谓词。 谓词为 parameterName is Type这种形式， parameterName必须是来自于当前函数签名里的一个参数名。
+      ```
+    - 每当使用一些变量调用 isFish时，TypeScript会将变量缩减为那个具体的类型，只要这个类型与变量的原始类型是兼容的。
+      ```ts
+        // 'swim' 和 'fly' 调用都没有问题了
+
+        if (isFish(pet)) {
+          pet.swim();
+        }
+        else {
+          pet.fly();
+        }
+        // 注意TypeScript不仅知道在 if分支里 pet是 Fish类型； 它还清楚在 else分支里，一定 不是 Fish类型，一定是 Bird类型。
+      ```
+  - typeof类型保护
+    - 现在我们回过头来看看怎么使用联合类型书写 padLeft代码。 我们可以像下面这样利用类型断言来写：
+      ```ts
+        function isNumber(x: any): x is number {
+          return typeof x === "number";
+        }
+
+        function isString(x: any): x is string {
+          return typeof x === "string";
+        }
+
+        function padLeft(value: string, padding: string | number) {
+          if (isNumber(padding)) {
+              return Array(padding + 1).join(" ") + value;
+          }
+          if (isString(padding)) {
+              return padding + value;
+          }
+          throw new Error(`Expected string or number, got '${padding}'.`);
+        }
+        // 然而，必须要定义一个函数来判断类型是否是原始类型，这太痛苦了。 幸运的是，现在我们不必将 typeof x === "number"抽象成一个函数，因为TypeScript可以将它识别为一个类型保护。 也就是说我们可以直接在代码里检查类型了。
+        function padLeft(value: string, padding: string | number) {
+          if (typeof padding === "number") {
+            return Array(padding + 1).join(" ") + value;
+          }
+          if (typeof padding === "string") {
+            return padding + value;
+          }
+          throw new Error(`Expected string or number, got '${padding}'.`);
+        }
+        // 这些* typeof类型保护*只有两种形式能被识别： typeof v === "typename"和 typeof v !== "typename"， "typename"必须是 "number"， "string"， "boolean"或 "symbol"。 但是TypeScript并不会阻止你与其它字符串比较，语言不会把那些表达式识别为类型保护。
       ```
