@@ -1563,3 +1563,87 @@
         // ... code goes here ...
       }
     ```
+- 数字字面量类型
+  - TypeScript还具有数字字面量类型。
+    ```ts
+      function rollDie(): 1 | 2 | 3 | 4 | 5 | 6 {
+        // ...
+      }
+    ```
+  - 我们很少直接这样使用，但它们可以用在缩小范围调试bug的时候：
+    ```ts
+      function foo(x: number) {
+        if (x !== 1 || x !== 2) {
+          //         ~~~~~~~
+          // Operator '!==' cannot be applied to types '1' and '2'.
+        }
+      }
+      // 换句话说，当 x与 2进行比较的时候，它的值必须为 1，这就意味着上面的比较检查是非法的。
+    ```
+- 枚举成员类型
+  - 如我们在 枚举一节里提到的，当每个枚举成员都是用字面量初始化的时候枚举成员是具有类型的。
+  - 在我们谈及“单例类型”的时候，多数是指枚举成员类型和数字/字符串字面量类型，尽管大多数用户会互换使用“单例类型”和“字面量类型”。
+- 可辨识联合（Discriminated Unions）
+  - 你可以合并单例类型，联合类型，类型保护和类型别名来创建一个叫做 可辨识联合的高级模式，它也称做 标签联合或 代数数据类型。 可辨识联合在函数式编程很有用处。 一些语言会自动地为你辨识联合；而TypeScript则基于已有的JavaScript模式。 它具有3个要素：
+    1. 具有普通的单例类型属性— 可辨识的特征。
+
+    2. 一个类型别名包含了那些类型的联合— 联合。
+
+    3. 此属性上的类型保护。
+    ```ts
+      interface Square {
+        kind: "square";
+        size: number;
+      }
+      interface Rectangle {
+        kind: "rectangle";
+        width: number;
+        height: number;
+      }
+      interface Circle {
+        kind: "circle";
+        radius: number;
+      }
+    ```
+    - 首先我们声明了将要联合的接口。 每个接口都有 kind属性但有不同的字符串字面量类型。 kind属性称做 可辨识的特征或 标签。 其它的属性则特定于各个接口。 注意，目前各个接口间是没有联系的。 下面我们把它们联合到一起：
+      ```ts
+        type Shape = Square | Rectangle | Circle;
+      ```
+    - 现在我们使用可辨识联合:
+      ```ts
+        function area(s: Shape) {
+          switch (s.kind) {
+            case "square": return s.size * s.size;
+            case "rectangle": return s.height * s.width;
+            case "circle": return Math.PI * s.radius ** 2;
+          }
+        }
+      ```
+  - 完整性检查 当没有涵盖所有可辨识联合的变化时，我们想让编译器可以通知我们。 比如，如果我们添加了 Triangle到 Shape，我们同时还需要更新 area:
+    ```ts
+      type Shape = Square | Rectangle | Circle | Triangle;
+      function area(s: Shape) {
+        switch (s.kind) {
+          case "square": return s.size * s.size;
+          case "rectangle": return s.height * s.width;
+          case "circle": return Math.PI * s.radius ** 2;
+        }
+        // should error here - we didn't handle case "triangle"
+      }
+    ```
+  - 使用 never类型，编译器用它来进行完整性检查：
+    ```ts
+      // never 任意类型的子类型
+      function assertNever(x: never): never {
+        throw new Error("Unexpected object: " + x);
+      }
+      function area(s: Shape) {
+        switch (s.kind) {
+          case "square": return s.size * s.size;
+          case "rectangle": return s.height * s.width;
+          case "circle": return Math.PI * s.radius ** 2;
+          default: return assertNever(s); // error here if there are missing cases
+        }
+      }
+      // 这里， assertNever检查 s是否为 never类型—即为除去所有可能情况后剩下的类型。 如果你忘记了某个case，那么 s将具有一个真实的类型并且你会得到一个错误。 这种方式需要你定义一个额外的函数，但是在你忘记某个case的时候也更加明显。
+    ```
