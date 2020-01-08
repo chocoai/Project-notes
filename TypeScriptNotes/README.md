@@ -1647,3 +1647,45 @@
       }
       // 这里， assertNever检查 s是否为 never类型—即为除去所有可能情况后剩下的类型。 如果你忘记了某个case，那么 s将具有一个真实的类型并且你会得到一个错误。 这种方式需要你定义一个额外的函数，但是在你忘记某个case的时候也更加明显。
     ```
+- 多态的this类型
+  - 多态的 this类型表示的是某个包含类或接口的 子类型。 这被称做 F-bounded多态性。 它能很容易的表现连贯接口间的继承，比如。 在计算器的例子里，在每个操作之后都返回 this类型：
+    ```ts
+      class BasicCalculator {
+        public constructor(protected value: number = 0) { }
+        public currentValue(): number {
+          return this.value;
+        }
+        public add(operand: number): this {
+          this.value += operand;
+          return this;
+        }
+        public multiply(operand: number): this {
+          this.value *= operand;
+          return this;
+        }
+        // ... other operations go here ...
+      }
+
+      let v = new BasicCalculator(2)
+                  .multiply(5)
+                  .add(1)
+                  .currentValue();
+      // 由于这个类使用了 this类型，你可以继承它，新的类可以直接使用之前的方法，不需要做任何的改变。
+      class ScientificCalculator extends BasicCalculator {
+        public constructor(value = 0) {
+          super(value);
+        }
+        public sin() {
+          this.value = Math.sin(this.value);
+          return this;
+        }
+        // ... other operations go here ...
+      }
+
+      let v = new ScientificCalculator(2)
+          .multiply(5)
+          .sin()
+          .add(1)
+          .currentValue();
+      // 如果没有 this类型， ScientificCalculator就不能够在继承 BasicCalculator的同时还保持接口的连贯性。 multiply将会返回 BasicCalculator，它并没有 sin方法。 然而，使用 this类型， multiply会返回 this，在这里就是 ScientificCalculator。
+    ```
