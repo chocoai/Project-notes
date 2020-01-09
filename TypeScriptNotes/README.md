@@ -1487,7 +1487,7 @@
             return n();
         }
       }
-      // 起别名不会新建一个类型 - 它创建了一个新 名字来引用那个类型。 给原始类型起别名通常没什么用，尽管可以做为文档的一种形式使用。
+      // 起别名不会新建一个类型 - 它创建了一个新 名字来引用那个类型。 给原始类型起别名通常��什么用，尽管可以做为文档的一种形式使用。
       // 同接口一样，类型别名也可以是泛型 - 我们可以添加类型参数并且在别名声明的右侧传入：
       type Container<T> = { value: T };
       function test<Container> (tests: Container):Container {
@@ -1688,4 +1688,105 @@
           .add(1)
           .currentValue();
       // 如果没有 this类型， ScientificCalculator就不能够在继承 BasicCalculator的同时还保持接口的连贯性。 multiply将会返回 BasicCalculator，它并没有 sin方法。 然而，使用 this类型， multiply会返回 this，在这里就是 ScientificCalculator。
+    ```
+- 索引类型（Index types）
+  - 使用索引类型，编译器就能够检查使用了动态属性名的代码。 例如，一个常见的JavaScript模式是从对象中选取属性的子集。
+    ```ts
+      function pluck(o, names) {
+        return names.map(n => o[n]);
+      }
+    ```
+  - 下面是如何在TypeScript里使用此函数，通过 索引类型查询和 索引访问操作符
+    ```ts
+      function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {
+        return names.map(n => o[n]);
+      }
+
+      interface Person {
+        name: string;
+        age: number;
+      }
+      let person: Person = {
+        name: 'Jarid',
+        age: 35
+      };
+      let strings: string[] = pluck(person, ['name']); // ok, string[]
+    ```
+  - 首先是 keyof T， 索引类型查询操作符。
+  - 编译器会检查 name是否真的是 Person的一个属性。 本例还引入了几个新的类型操作符。 首先是 keyof T， 索引类型查询操作符。 对于任何类型 T， keyof T的结果为 T上已知的公共属性名的联合。 例如：
+    ```ts
+      let personProps: keyof Person; // 'name' | 'age'
+    ```
+  - keyof Person是完全可以与 'name' | 'age'互相替换的。 不同的是如果你添加了其它的属性到 Person，例如 address: string，那么 keyof Person会自动变为 'name' | 'age' | 'address'。 你可以在像 pluck函数这类上下文里使用 keyof，因为在使用之前你并不清楚可能出现的属性名。 但编译器会检查你是否传入了正确的属性名给 pluck：
+    ```ts
+      pluck(person, ['age', 'unknown']); // error, 'unknown' is not in 'name' | 'age'
+    ```
+  - 第二个操作符是 T[K]， 索引访问操作符。 在这里，类型语法反映了表达式语法。 这意味着 person['name']具有类型 Person['name'] — 在我们的例子里则为 string类型。 然而，就像索引类型查询一样，你可以在普通的上下文里使用 T[K]，这正是它的强大所在。 你只要确保类型变量 K extends keyof T就可以了。 例如下面 getProperty函数的例子：
+    ```ts
+      function getProperty<T, K extends keyof T>(o: T, name: K): T[K] {
+        return o[name]; // o[name] is of type T[K]
+      }
+    ```
+  - getProperty里的 o: T和 name: K，意味着 o[name]: T[K]。 当你返回 T[K]的结果，编译器会实例化键的真实类型，因此 getProperty的返回值类型会随着你需要的属性改变。
+    ```ts
+      let name: string = getProperty(person, 'name');
+      let age: number = getProperty(person, 'age');
+      let unknown = getProperty(person, 'unknown'); // error, 'unknown' is not in 'name' | 'age'
+    ```
+  - 索引类型和字符串索引签名
+    - keyof和 T[K]与字符串索引签名进行交互。 如果你有一个带有字符串索引签名的类型，那么 keyof T会是 string。 并且 T[string]为索引签名的类型：
+      ```ts
+        interface Map<T> {
+          [key: string]: T;
+        }
+        let keys: keyof Map<number>; // string
+        let value: Map<number>['foo']; // number
+      ```
+- 映射类型
+  - 一个常见的任务是将一个已知的类型每个属性都变为可选的： 
+    ```ts
+      interface PersonPartial {
+        name?: string;
+        age?: number;
+      }
+      // 或者我们想要一个只读版本：
+      interface PersonReadonly {
+        readonly name: string;
+        readonly age: number;
+      }
+    ```
+  - 这在JavaScript里经常出现，TypeScript提供了从旧类型中创建新类型的一种方式 — 映射类型。 在映射类型里，新类型以相同的形式去转换旧类型里每个属性。 例如，你可以令每个属性成为 readonly类型或可选的。 下面是一些例子：
+    ```ts
+      type Readonly<T> = {
+        readonly [P in keyof T]: T[P];
+      }
+      let a: sReadonly<number>  = 1
+      // --------------------------------
+      type Partial<T> = {
+        [P in keyof T]?: T[P];
+      }
+      let b: aPartial<string> = '1'
+      // 像下面这样使用：
+      type PersonPartial = Partial<Person>;
+      type ReadonlyPerson = Readonly<Person>;
+      // 下面来看看最简单的映射类型和它的组成部分：
+      type Keys = 'option1' | 'option2';
+      type Flags = { [K in Keys]: boolean };
+      // ----------> 
+      let a: Flags = {
+        option1: false,
+        option2: false,
+      }
+    ```
+  - 它的语法与索引签名的语法类型，内部使用了 for .. in。 具有三个部分：
+    1. 类型变量 K，它会依次绑定到每个属性。
+    2. 字符串字面量联合的 Keys，它包含了要迭代的属性名的集合。
+    3. 属性的结果类
+  - 在真正的应用里，可能不同于上面的 Readonly或 Partial。 它们会基于一些已存在的类型，且按照一定的方式转换字段。 这就是 keyof和索引访问类型要做的事情：
+    ```ts
+      type NullablePerson = { [P in keyof Person]: Person[P] | null }
+      type PartialPerson = { [P in keyof Person]?: Person[P] }
+      // 但它更有用的地方是可以有一些通用版本。
+      type Nullable<T> = { [P in keyof T]: T[P] | null }
+      type Partial<T> = { [P in keyof T]?: T[P] }
     ```
