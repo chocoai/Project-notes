@@ -1886,6 +1886,9 @@
 ## [ &#x1F6A9; 迭代器和生成器](https://www.tslang.cn/docs/handbook/iterators-and-generators.html)
 - 可迭代性
   - 当一个对象实现了Symbol.iterator属性时，我们认为它是可迭代的。 一些内置的类型如 Array，Map，Set，String，Int32Array，Uint32Array等都已经实现了各自的Symbol.iterator。 对象上的 Symbol.iterator函数负责返回供迭代的值。
+    ```txt
+      也就是说任意的数据类型的原型上都有各自的Symbol.iterator 方法， 都实现了对数据的遍历
+    ```
     - for..of 语句
       ```ts
         // for..of会遍历可迭代的对象，调用对象上的Symbol.iterator方法。 下面是在数组上使用 for..of的简单例子：
