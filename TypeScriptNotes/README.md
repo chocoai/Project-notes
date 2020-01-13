@@ -1907,6 +1907,7 @@
           console.log(i); // "0", "1", "2",
         }
 
+        // for of 只能遍历数组
         for (let i of list) {
           console.log(i); // "4", "5", "6"
         }
