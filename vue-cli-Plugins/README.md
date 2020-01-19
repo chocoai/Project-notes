@@ -120,6 +120,20 @@
       cd dist
       http-server
     ```
++ serve
+  - effect
+    ```txt
+      运行打包之后的dist文件
+    ```
+  - Toconfig
+    ```
+      npm install -g serve
+    ```
+  - apply
+    ```
+      cd dist
+      serve
+    ```
 + commitizen
   - effect
     ```txt
