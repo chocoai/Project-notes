@@ -132,8 +132,27 @@ module.exports = {
       warnings: false,
       errors: false
     },
+    // 配置代理
+    // 开发服务器使用了强大的 http 代理中间件包。 查看它的文档了解更多高级用法。 请注意，http-proxy-middleware 的一些特性不需要目标密钥，例如它的路由器特性，但是您仍然需要在配置中包含目标密钥，否则 webpack-dev-server 不会将其传递给 http-proxy-middleware)。
+    // 在 localhost: 3000上有一个后端，你可以使用它来启用代理:
     proxy: {
-
+      '/api': 'http://localhost:3000'
+      // 一个对 / api / 用户的请求现在将代理这个请求到 http://localhost:3000/api/users。
+    },
+    // 如果你不希望 / api 被传递，我们需要重写路径:
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        pathRewrite: {
+          '^/api': ''
+        },
+        // 默认情况下，在 HTTPS 上运行的带有无效证书的后端服务器将不被接受。 如果你愿意，可以这样修改你的配置:
+        secure: false,
+        // 有时候你不想代理所有的事情。 可以根据函数的返回值绕过代理。
+        bypass: function (req, res, proxyOptions) {
+          return ''
+        }
+      }
     }
   },
   transpileDependencies: [
