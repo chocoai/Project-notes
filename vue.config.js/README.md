@@ -134,8 +134,19 @@
         errors: false
       },
       proxy: {
-
+      '/api': {
+        target: 'http://localhost:3000',
+        pathRewrite: {
+          '^/api': ''
+        },
+        // 默认情况下，在 HTTPS 上运行的带有无效证书的后端服务器将不被接受。 如果你愿意，可以这样修改你的配置:
+        secure: false,
+        // 有时候你不想代理所有的事情。 可以根据函数的返回值绕过代理。
+        bypass: function (req, res, proxyOptions) {
+          return ''
+        }
       }
+    }
     },
     transpileDependencies: [
       // 指定对第三方依赖包进行babel-polyfill处理
