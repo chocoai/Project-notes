@@ -304,3 +304,18 @@
         之前未保存到工作区的代码需要再次保存
 
       ```
+**&#x1F381; 同时将本地仓库的修改提交到不同的线上仓库**
+  +  使用 git remote add 命令
+    ```txt
+      1. 本地仓库与远程仓库关联起来，再查看一下远程仓库情况
+        git remote add origin https://xxxxx1.git
+        git remote -v
+      2. 使用如下命令再添加另一个远程仓库
+        git remote add sudnyn https://xxxxx2.git
+        git remote -v
+      3. 之后就是push  但是要Push两次
+        git push origin master:master
+        git push sudnyn master:master
+      
+      上面的方法可以修改为只提交一次 将仓库名都修改为origin 这样默认提交origin 只需要一次
+    ```
