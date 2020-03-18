@@ -300,3 +300,17 @@
 
 **&#x1F4DA; 图表标线阴影-水平偏移距离**
 + series.markLine.data.lineStyle.shadowOffsetX
+
+
+
+# &#x1F3AC; Echarts 常见问题
+**&#x1F4DA; 切换echarts图表 绑定的点击事件多次触发**
++ 解决方案
+```js
+  // 实例化echarts对象
+  let echarts = echarts.init('#echarts')
+  // 使用off方法清除上一次的click事件
+  echarts.off("click);
+  // 绑定这次的点击事件
+  echarts.on("click", function () {})
+```
