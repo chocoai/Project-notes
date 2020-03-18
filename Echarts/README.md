@@ -211,7 +211,19 @@
   }
 ```
 
-
+**&#x1F4DA; tooltip坐标轴高亮**
++ tooltip.axisPointer 设置坐标轴高亮显示
+```js
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross',
+      label: {
+        backgroundColor: "red" // 游标背景色
+      }
+    }
+  }
+```
 **&#x1F4DA; 背景网格**
 + splitLine X Y 需要单独设置
 ```js
