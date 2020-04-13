@@ -544,4 +544,52 @@ vue+JavaScript
 ## 项目时间 2020-01-30  ----  2020-04-09
 ## &#x1F3A8; 项目过程
 &#x1F3C5; vue-cli, vue-router, vue-class-component, vue-property-decorator, Vuex, vuex-class, Echarts, TypeScript,  Axios, Element, webpack-merge
++ vuex 使用
+  + module 模块化
+    ```js
+      // store/mutation-types
+      // 使用常量替代 Mutation 事件类型
+      export const STATISTICS = {
+        LOGIN: "login",
+        LOGOUT: "logout",
+        MODIFY_USERNAME: "modifyUserName",
+        ADD_ROUTER: "addRouter"
+      };
+    ```
+    ```js
+      // store/modules/statistics.ts
+      // 导入常量方法名
+      import { STATISTICS } from "../mutation-types";
+      const state: {};
+      const getter: {};
+      const mutations: {};
+      const actions: {};
+      const modules: {};
+      // namespaced 带命名空间的模块
+      export default {
+        namespaced: true,
+        state,
+        getter,
+        mutations,
+        actions
+      };
+    ```
+    ```js
+      // store/index.ts
+      import Vue from "vue";
+      import Vuex from "vuex";
+      // 导入指定模块
+      import statistics from "./modules/statistics";
+
+      Vue.use(Vuex);
+
+      export default new Vuex.Store({
+        state: {},
+        mutations: {},
+        actions: {},
+        modules: {
+          statistics
+        }
+      })
+    ```
 
