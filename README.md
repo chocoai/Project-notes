@@ -593,3 +593,11 @@ vue+JavaScript
       })
     ```
 
+  + vue 装饰器写法
+    + [vue-class-component](https://www.jianshu.com/p/2f65e9dea4f3)
+    + [vue-property-decorator](https://www.jianshu.com/p/d8ed3aa76e9b)
+
+  + vuex-class
+  
+
+
