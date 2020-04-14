@@ -598,6 +598,35 @@ vue+JavaScript
     + [vue-property-decorator](https://www.jianshu.com/p/d8ed3aa76e9b)
 
   + vuex-class
+    - 第一种使用方法（推荐）
+      ```js
+        import { namespace } from "vuex-class";
+        // 后面的字符串就是在vuex modules定义的模块名字
+        const accountManagementModule = namespace("accountManagement");
+        @accountManagementModule.State("roleChecked") roleCheckeds: boolean;
+        @statisticsModule.Mutation(STATISTICS.ACTIVE_TREE)
+        activeTree!: Function;
+        @statisticsModule.Action("getCommon")
+        getCommons!: Function;
+      ```
+    - 第二种使用方法
+      ```js
+        import {
+          State,
+          Getter,
+          Action,
+          Mutation,
+          namespace
+        } from 'vuex-class'
+        const accountManagementModule = namespace("accountManagement");
+        @State("roleChecked") roleCheckeds: boolean;
+        @Mutation(STATISTICS.ACTIVE_TREE)
+        activeTree!: Function;
+        @Action("getCommon")
+        getCommons!: Function;
+      ```
+
+
   
 
 
