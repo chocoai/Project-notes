@@ -1,4 +1,9 @@
 # &#x1F3AC; Echarts 各种配置
+
+```txt
+  换行一般是字符串拼接<br>
+  或者是\n拼接
+```
 **&#x1F4DA; 横坐标 xAxis**
 + name(String)
 ```txt
