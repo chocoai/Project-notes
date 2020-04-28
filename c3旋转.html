@@ -1,51 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        nav {
-            width: 100px;
-        }
-        div {
-            margin-top: 35px;
-            width: 100px;
-            height: 10px;
-            background-color: pink;
-            
-            transition: .5s;
-        }
-        .one {
-            transform-origin: right bottom;
-        }
-        .two {
-            margin: 35px auto;
-        }
-        .three {
-            transform-origin: right top;
-        }
-        nav:hover div {
-            margin-top: 21px; 
-        }
-        nav:hover .one{
-            transform: rotate(-45deg);
-        }
-        nav:hover .two{
-            width: 0;
-            background-color: #fff;
-        }
-        nav:hover .three{
-            transform: rotate(45deg);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    nav {
+      width: 100px;
+    }
+
+    div {
+      margin-top: 35px;
+      width: 100px;
+      height: 10px;
+      background-color: pink;
+
+      transition: .5s;
+    }
+
+    .one {
+      transform-origin: right bottom;
+    }
+
+    .two {
+      margin: 35px auto;
+    }
+
+    .three {
+      transform-origin: right top;
+    }
+
+    nav:hover div {
+      margin-top: 21px;
+    }
+
+    nav:hover .one {
+      transform: rotate(-45deg);
+    }
+
+    nav:hover .two {
+      width: 0;
+      background-color: #fff;
+    }
+
+    nav:hover .three {
+      transform: rotate(45deg);
+    }
+  </style>
 </head>
+
 <body>
-   <nav>
-        <div class="one"></div>
-        <div class="two"></div>
-        <div class="three"></div>
-   </nav>
+  <nav>
+    <div class="one"></div>
+    <div class="two"></div>
+    <div class="three"></div>
+  </nav>
 </body>
+
 </html>
