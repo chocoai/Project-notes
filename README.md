@@ -604,9 +604,9 @@ vue+JavaScript
         // 后面的字符串就是在vuex modules定义的模块名字
         const accountManagementModule = namespace("accountManagement");
         @accountManagementModule.State("roleChecked") roleCheckeds: boolean;
-        @statisticsModule.Mutation(STATISTICS.ACTIVE_TREE)
+        @accountManagementModule.Mutation(STATISTICS.ACTIVE_TREE)
         activeTree!: Function;
-        @statisticsModule.Action("getCommon")
+        @accountManagementModule.Action("getCommon")
         getCommons!: Function;
       ```
     - 第二种使用方法
