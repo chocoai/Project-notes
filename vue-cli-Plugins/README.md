@@ -169,3 +169,10 @@
       nprogress.start()
       nprogress.done()
     ```
+
+# vue-cli + TypeScript plugins
+
++ vue plugins TypeScript
+  ```txt
+    一般的vue插件在TypeScript环境中引入，都需要安装对应的@types类型文件，但是不需要引入
+  ```
