@@ -39,3 +39,29 @@ watch: {
         background-color: #fff;
       }
     ```
+## this.$router.push 和 this.$router.replace 区别
+  + history模式
+    + this.$router.push
+      ```txt
+        这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL
+      ```
+
+    + this.$router.replace
+      ```txt
+        不会向 history 添加新记录，而是跟它的方法名一样 —— 替换掉当前的 history 记录。
+      ```
+
+## this.$router.go()
+  + history模式
+    + go(1)
+      ```txt
+        在浏览器记录中前进一步，等同于 history.forward()
+      ```
+    + go(-1)
+      ```txt
+        后退一步记录，等同于 history.back()
+      ```
+    + go(100)
+      ```txt
+        如果 history 记录不够用，那就默默地失败呗
+      ```
