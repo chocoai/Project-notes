@@ -31,6 +31,7 @@ console.log(nums)
  * new Promise属于宏任务
  * 宏任务 -> 微任务
  * 微任务 -> nextTick -> Promise -> setTimeout
+ * 1 7 6 8 2 4 3 5 9 11 10 12
  */
 console.log('1');
 
