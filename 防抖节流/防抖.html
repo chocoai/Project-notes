@@ -11,6 +11,7 @@
 <script>
 
 let btn = document.querySelector(".btn");
+let args = {a:1, b: 2}
 function clickBtn(fn) {
   let index = null;
   // 箭头函数  不然获取的不是最外层的arguments
@@ -19,6 +20,7 @@ function clickBtn(fn) {
     clearInterval(index);
     index = setTimeout(() => {
       fn.apply(this, arguments)
+      arguments[1] = [1, 2, 3]
     }, 500);
   }
 } 
@@ -28,12 +30,13 @@ function saiHi() {
   console.log(arguments);
 }
 
-btn.addEventListener("click", clickBtn(saiHi, '1', '2'))
+btn.addEventListener("click", clickBtn(saiHi, args))
 
 /**
  * 适用场景
  * 表单提交
  * 上传文件
+ * input连续输入
 */
 </script>
 </body>
