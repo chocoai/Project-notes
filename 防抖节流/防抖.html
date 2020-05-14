@@ -9,21 +9,32 @@
 <body>
   <button class="btn">防抖</button>
 <script>
-let btn = document.querySelector('.btn')
-function debounce (fn) {
-  let settim = null
-  return function () {
-    clearTimeout(settim)
-    settim = setTimeout(() => {
+
+let btn = document.querySelector(".btn");
+function clickBtn(fn) {
+  let index = null;
+  // 箭头函数  不然获取的不是最外层的arguments
+  // 适用闭包 让定时器的索引一直存在
+  return () => {
+    clearInterval(index);
+    index = setTimeout(() => {
       fn.apply(this, arguments)
     }, 500);
   }
-}
+} 
+
 function saiHi() {
-  console.log('发送请求')
+  console.log("防抖");
+  console.log(arguments);
 }
-btn.addEventListener('click', debounce(saiHi, 'a', 'b'))
-// 无法传入参数
+
+btn.addEventListener("click", clickBtn(saiHi, '1', '2'))
+
+/**
+ * 适用场景
+ * 表单提交
+ * 上传文件
+*/
 </script>
 </body>
 </html>
