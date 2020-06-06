@@ -229,8 +229,58 @@
 // }
 
 
+/**
+ * @param {string} s
+ * @return {string}
+ */
 
+ function isPalindrome (x) {
+    let xlen = x.length
+    for (let i = 0; i < ((xlen + 1) / 2) | 0; i++) {
+        if (x[i] != x[xlen - i - 1]) {
+            return false
+        }
+    }
+    return true
+};
+function clearLastIndex(s, indexstr) {
+  let lastIndex = s.lastIndexOf(indexstr)
+  if (lastIndex === s.indexOf(indexstr)) {
+    return indexstr
+  }
+  let pal = s.slice(0, lastIndex + 1)
+  if (isPalindrome(pal)) {
+    return pal
+  } else {
+    return clearLastIndex(pal.substr(0, pal.substr(0, lastIndex).lastIndexOf(indexstr) + 1), indexstr)
+  }
+}
+var longestPalindrome = function(s) {
+    if (!s) {
+        return ''
+    }
+    if (s.length === 1) {
+       return s
+    }
+    if (s.length === 2) {
+        if (s[0] == s[1]) {
+            return s
+        } else {
+            return s[0]
+        }
+    }
+    if (isPalindrome(s)) {
+      return s
+    }
+    let maxLen = '';
+    for (let i = 0; i < s.length; i++) {
+      let  nextLen = clearLastIndex(s.slice(i), s[i])
+      maxLen = nextLen.length > maxLen.length ? nextLen : maxLen
+    }
+    return maxLen;
+};
 
+longestPalindrome("cbbd")
 // scrollBbar('.box')
 </script>
 </html>
