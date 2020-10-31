@@ -656,3 +656,28 @@ vue+JavaScript
         // echarts实例对象绑定on("click")点击事件
         // 在实践中判断当前点击的点是否要求的点 不是就return
       ```
+
+
+# 11.  &#x1F9EE; 项目十一   [汇算清缴SaaS服务](http://test.cits.shinewingdigital.com:3000/login)
+## 项目时间 2020-07-26  ----  2020-10-09
+## &#x1F3A8; 项目过程
+&#x1F3C5; vue-cli, vue-router, vue-class-component, vue-property-decorator, Vuex, vuex-class, TypeScript,  Axios, Element, js-cookie, token
++ 汇算清缴 SaaS 服务
+
+  - 介绍
+    - 协助税审现场工作和报告出具的作业流程支持的系统
+
+  - 权限
+    - 超级管理员: 创建公司、指定公司管理员、新建模板、模板更新
+    - 管理员: 创建项目
+    - 用户:
+
+  - 权限对应功能
+    - 超级管理员
+    - 管理员
+    - 用户
+    
+
+# 12.  &#x1F9EE; 项目十二   [前端中台服务](https://github.com/GGupzHH/vue-element-admin)
+## 项目时间 2020-10-09 --->
+## &#x1F3A8; 功能实现
