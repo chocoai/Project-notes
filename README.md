@@ -663,20 +663,43 @@ vue+JavaScript
 ## &#x1F3A8; 项目过程
 &#x1F3C5; vue-cli, vue-router, vue-class-component, vue-property-decorator, Vuex, vuex-class, TypeScript,  Axios, Element, js-cookie, token
 + 汇算清缴 SaaS 服务
-
   - 介绍
     - 协助税审现场工作和报告出具的作业流程支持的系统
 
-  - 权限
-    - 超级管理员: 创建公司、指定公司管理员、新建模板、模板更新
-    - 管理员: 创建项目
-    - 用户:
-
-  - 权限对应功能
+  - 权限类别
     - 超级管理员
     - 管理员
     - 用户
-    
+
+  - 权限对应功能
+    - 超级管理员: 创建公司，指定公司管理员，更换公司管理员，指定公司人员数量、模板数量，新建模板，模板更新
+    - 管理员: 创建项目，指定项目负责人，公司团队设置，增加、删除公司成员，生成税务鉴证报告
+    - 用户：生成税务鉴证报告
+
++ axios.interceptors.request 实现
+  ```js
+
+  ```
++ axios.interceptors.response 实现
+  ```js
+
+  ```
+
++ SlotInput 组件 实现
+  ```js
+
+  ```
+
++ 自定义指令（复制功能） 实现
+  ```js
+
+  ```
+  
++ 团队设置拖拽功能 实现
+  ```js
+
+  ```
+
 
 # 12.  &#x1F9EE; 项目十二   [前端中台服务](https://github.com/GGupzHH/vue-element-admin)
 ## 项目时间 2020-10-09 --->
