@@ -677,12 +677,84 @@ vue+JavaScript
     - 用户：生成税务鉴证报告
 
 + axios.interceptors.request 实现
-  ```js
-
+  ```ts
+    import axios from "axios";
+    import { AxiosRequestConfig, AxiosResponse } from "axios/index";
+    import cookie from "js-cookie";
+    axios.interceptors.request.use(
+      (onFulfilled: AxiosRequestConfig) => {
+        const AUTH_TOKEN = cookie.get("token");
+        if (AUTH_TOKEN) {
+          onFulfilled.auth = {
+            username: AUTH_TOKEN,
+            password: ""
+          };
+        } else {
+          cookie.remove("token");
+        }
+        return onFulfilled;
+      },
+      (onRejected: any) => {
+        Promise.reject(onRejected);
+      }
+    );
   ```
+  
 + axios.interceptors.response 实现
-  ```js
+  ```ts
+    import axios from "axios";
+    import { AxiosRequestConfig, AxiosResponse } from "axios/index";
+    import cookie from "js-cookie";
+    const codeMessage: any = {
+      200: "服务器成功返回请求的数据。",
+      201: "新建或修改数据成功。",
+      202: "一个请求已经进入后台排队（异步任务）。",
+      204: "删除数据成功。",
+      400: "发出的请求有错误，服务器没有进行新建或修改数据的操作。",
+      401: "用户没有权限（令牌、用户名、密码错误）。",
+      403: "用户得到授权，但是访问是被禁止的。",
+      404: "发出的请求针对的是不存在的记录，服务器没有进行操作。",
+      406: "请求的格式不可得。",
+      410: "请求的资源被永久删除，且不会再得到的。",
+      422: "当创建一个对象时，发生一个验证错误。",
+      500: "服务器发生错误，请检查服务器。",
+      502: "网关错误。",
+      503: "服务不可用，服务器暂时过载或维护。",
+      504: "网关超时。"
+    };
 
+    axios.interceptors.response.use(
+      (onFulfilled: AxiosResponse) => {
+        return onFulfilled;
+      },
+      (onRejected: any) => {
+        // 判断当前是否存在 http code
+        if (onRejected.response) {
+          if (onRejected.response.status === 401) {
+            cookie.remove("token");
+            cookie.remove("roleId");
+            location.reload();
+          }
+          return {
+            data: {
+              data: {},
+              error: onRejected.response.status,
+              msg:
+                codeMessage[onRejected.response.status] ||
+                onRejected.response.data.message
+            }
+          };
+        } else {
+          return {
+            data: {
+              data: {},
+              error: 100,
+              msg: "服务请求不可用，请重试或检查您的网络。"
+            }
+          };
+        }
+      }
+    );
   ```
 
 + SlotInput 组件 实现
