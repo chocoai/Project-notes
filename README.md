@@ -758,7 +758,161 @@ vue+JavaScript
   ```
 
 + SlotInput 组件 实现
-  ```js
+  ```vue
+    <template>
+      <div class="wrap-slot-input">
+        <div :class="wrapTitle" @click="handleFocus">{{ title }}</div>
+        <div class="wrap-input" :id="error ? 'err' : ''">
+          <input
+            ref="logon_input"
+            :class="
+              wrapTitle === 'wrap-title focus' ? 'input-show' : 'input-no-show'
+            "
+            :type="type"
+            @blur="onBlurInput"
+            @focus="handleFocus"
+            @keyup.enter="keyUpEnter"
+            v-model="value"
+            :disabled="disabled"
+            :maxlength="maxLen"
+          />
+          <slot></slot>
+        </div>
+        <div class="error-msg" v-if="error">
+          <img src="../../assets/image/login/error_icon.png" alt="" class="left" />
+          <span class="left">{{ errorMsg }}</span>
+        </div>
+      </div>
+    </template>
+
+    <script lang="ts">
+    import { Vue, Component, Prop, Watch } from "vue-property-decorator";
+
+    @Component({
+      name: "Slotinput"
+    })
+    export default class Slotinput extends Vue {
+      @Prop({ default: "" }) title!: string;
+      @Prop({ default: "text" }) type!: string;
+      @Prop({ default: false }) disabled!: boolean;
+      @Prop({ default: "" }) propValue!: string;
+      @Prop({ default: "" }) errorMsg!: string;
+      @Prop({ default: false }) error!: boolean;
+      @Prop({ default: 50 }) maxLen!: number;
+      @Watch("propValue", { immediate: true })
+      onWatchpropValue(val: string) {
+        this.value = val;
+      }
+      @Watch("value", { immediate: true })
+      onWatchValue(val: string) {
+        this.$emit("input", val);
+      }
+      wrapTitle = this.propValue ? "wrap-title focus" : "wrap-title no-focus";
+      private value = this.propValue ? this.propValue : "";
+      private handleFocus() {
+        if (this.wrapTitle === "wrap-title no-focus") {
+          this.wrapTitle = "wrap-title focus";
+        }
+        const dom: any = this.$refs.logon_input;
+        dom.focus();
+      }
+      private onFocusInput() {
+        console.log("失去焦点校验函数 子传父");
+      }
+      private onBlurInput() {
+        if (!this.value) {
+          if (this.wrapTitle === "wrap-title focus") {
+            this.wrapTitle = "wrap-title no-focus";
+          }
+        }
+        this.$emit("onBlur", this.value);
+      }
+      private keyUpEnter() {
+        this.$emit("keyUpEnter", this.value);
+      }
+    }
+    </script>
+
+    <style lang="less" scoped>
+    .wrap-slot-input {
+      width: 250px;
+      position: relative;
+      box-sizing: border-box;
+      // border-bottom: 1px solid #D6D6D6;
+      .wrap-title {
+        text-align: left;
+        color: #c1c1c1;
+        transition: all 0.2s;
+      }
+      .wrap-title.focus {
+        position: absolute;
+        .size(100%, 16px);
+        line-height: 16px;
+        font-size: 12px;
+        color: #c1c1c1;
+      }
+      .wrap-title.no-focus {
+        position: absolute;
+        padding-top: 16px;
+        .size(100%, 33px);
+        line-height: 33px;
+        background-color: #fff;
+        font-size: 14px;
+        color: #e7e7e7;
+        cursor: text;
+        z-index: 1;
+      }
+      .wrap-input {
+        padding-top: 16px;
+        position: relative;
+        border-bottom: 1px solid #d6d6d6;
+        input {
+          .size(100%, 33px);
+          line-height: 33px;
+          outline: none;
+          color: #333;
+          font-size: 14px;
+          border: none;
+          padding: 0px;
+          transition: all 0.2s;
+        }
+        .input-show {
+          opacity: 1;
+        }
+        .input-no-show {
+          opacity: 0;
+        }
+        // chome
+        input:disabled {
+          background-color: #fff;
+          color: #bebebe;
+        }
+        // IE
+        input[disabled] {
+          background-color: #fff;
+          color: #bebebe;
+        }
+      }
+      .wrap-input#err {
+        border-bottom: 1px solid #ff4545;
+      }
+      .error-msg {
+        height: 18px;
+        color: #ff4545;
+        margin-top: 4px;
+        img {
+          .size(14px, 14px);
+          margin-right: 4px;
+          padding-top: 2px;
+        }
+        span {
+          font-size: 12px;
+          line-height: 18px;
+        }
+      }
+    }
+    </style>
+
 
   ```
 
@@ -775,4 +929,9 @@ vue+JavaScript
 
 # 12.  🐾 项目十二   [前端中台服务](https://github.com/GGupzHH/vue-element-admin)
 ## 项目时间 2020-10-09 --->
+## &#x1F3A8; 功能实现
+
+
+# 13.  🐾 项目十二   [celonis]()
+## 项目时间 2020-11-09 --->
 ## &#x1F3A8; 功能实现
